@@ -1,0 +1,11 @@
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="150.0" prefWidth="250.0"
+            fx:controller="sample.PasswordLöschenController">
+    <Button fx:id="button_betaetigen_acc_loeschen" layoutX="50.0" layoutY="110.0" mnemonicParsing="false"
+            onAction="#accLoeschenOk" text="Bestätigen"/>
+    <Button fx:id="button_abbrechen_acc_loeschen" layoutX="130.0" layoutY="110.0" mnemonicParsing="false"
+            onAction="#accLoeschenNo" text="Abbrechen"/>
+    <PasswordField fx:id="textfeld_passwort1" layoutX="51.0" layoutY="50.0" promptText="Passwort eingeben"/>
+</AnchorPane>

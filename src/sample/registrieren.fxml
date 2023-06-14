@@ -1,0 +1,12 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RegistrierenController">
+    <children>
+        <TextField fx:id="nutzername" layoutX="226.0" layoutY="103.0" promptText="Nutzername" />
+        <PasswordField fx:id="passwort" layoutX="225.0" layoutY="152.0" promptText="Passwort" />
+        <PasswordField fx:id="passwort_2" layoutX="225.0" layoutY="200.0" promptText="Passwort wiederholen" />
+        <Button fx:id="button_registrieren" defaultButton="true" layoutX="260.0" layoutY="266.0" mnemonicParsing="false"  onAction = "#RegisterUser" text="Registrieren" />
+        <Button fx:id="button_zurueck" layoutX="452.0" layoutY="266.0" mnemonicParsing="false" onAction = "#ReturnToStartseite" text="Zurück" />
+    </children>
+</AnchorPane>

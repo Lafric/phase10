@@ -1,4 +1,4 @@
-package sample;
+package Control;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,7 +35,7 @@ public class MenuController {
     @FXML
     void showBestenliste(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("bestenliste.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/bestenliste.fxml"));
         Parent root = loader.load();
 
         //Todo: bestenliste Controller
@@ -48,7 +48,7 @@ public class MenuController {
     }
 
     public void delAccount(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Account_löschen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/Account_löschen.fxml"));
         Parent root1 = loader.load();
 
         // Todo: controller of Account-löschen
@@ -62,7 +62,7 @@ public class MenuController {
     }
 
     public void abmelden(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("startseite.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/startseite.fxml"));
         Parent root = loader.load();
 
         //TODO: Startseite Controller
@@ -78,6 +78,26 @@ public class MenuController {
 
         stage.show();
         Stage start = (Stage) button_abmelden.getScene().getWindow();
+        start.close();
+    }
+
+    public void raumBeitreten(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gameField.fxml"));
+        Parent root = loader.load();
+
+        //TODO: Startseite Controller
+
+        //next scene öffnen
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Spieldfeld");
+
+        stage.setOnCloseRequest(e -> {
+            // TODO: disconnect user
+        });
+
+        stage.show();
+        Stage start = (Stage) button_beitreten.getScene().getWindow();
         start.close();
     }
 }

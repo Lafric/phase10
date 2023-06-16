@@ -4,7 +4,7 @@ import Control.LoginManager;
 import Control.MenuManager;
 import Model.DatabaseProvider;
 import Model.LoginResult;
-
+// MainGui ist die neue Main... sollte gelöscht werden.
 /**
  * The Main class is the initial starting point.
  *

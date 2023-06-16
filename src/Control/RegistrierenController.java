@@ -1,5 +1,7 @@
-package sample;
+package Control;
 
+import Model.AuthResult;
+import Model.DatabaseProvider;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,15 +20,22 @@ public class RegistrierenController {
     public PasswordField passwort_2;
     public PasswordField passwort;
     public TextField nutzername;
+    private DatabaseProvider databaseProvider;
+
+    public void setParams(DatabaseProvider databaseProvider) {
+        this.databaseProvider = databaseProvider;
+    }
 
     public void RegisterUser(ActionEvent event) throws IOException {
         //2 pwds stimmen ? gehe zu Menu
         if (!passwort.getText().equals("")) {
             if (passwort.getText().length() > 3 && !passwort.getText().contains(" ")){
                 if(passwort.getText().equals(passwort_2.getText())){
-                    // Todo: registrierung erfolgreich ? (keine Duplikate, keine Fehler)
-                    if(true){
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
+                    //registrierung erfolgreich ? (keine Duplikate, keine Fehler)
+                    //AuthResult registrationres = performRegistration(nutzername.getText(), passwort.getText());
+                    AuthResult registrationres = performDummyRegistration(nutzername.getText(), passwort.getText());
+                    if(registrationres.success){
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/menu.fxml"));
                         Parent root = loader.load();
 
                         //Todo: Menu Controller
@@ -46,7 +55,7 @@ public class RegistrierenController {
                     }else{
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Name .");
-                        alert.setHeaderText("Fehler bei Anmeldung");
+                        alert.setHeaderText("Fehler beim Registrierung");
                         alert.showAndWait();
                     }
                 }else{
@@ -74,7 +83,7 @@ public class RegistrierenController {
     }
 
     public void ReturnToStartseite(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("startseite.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/startseite.fxml"));
         Parent root = loader.load();
 
         //TODO: Startseite Controller
@@ -91,5 +100,22 @@ public class RegistrierenController {
         stage.show();
         Stage start = (Stage) button_zurueck.getScene().getWindow();
         start.close();
+    }
+
+    public AuthResult performRegistration(String name, String pw) {
+        System.out.println("Registrating..");
+        if (this.databaseProvider.checkUser(name, pw)) {
+            return new AuthResult(false, "User already exists");
+        } else {
+            this.databaseProvider.addUser(name, pw);
+            return new AuthResult(true, "");
+        }
+    }
+
+     // zum Löschen wenn performRegistration gut funktionniert
+    public AuthResult performDummyRegistration(String name, String pw) {
+        System.out.println("Registrating..");
+        return new AuthResult(true, "");
+
     }
 }

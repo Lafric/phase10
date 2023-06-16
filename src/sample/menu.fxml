@@ -9,21 +9,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.MenuController">
     <children>
         <SplitPane dividerPositions="0.12349397590361447" layoutX="121.0" layoutY="14.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                <AnchorPane  minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                     <children>
-                        <ButtonBar layoutX="40.0" layoutY="3.0" prefHeight="46.4" prefWidth="599.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <buttons>
-                                <Button fx:id="botHinzufuegenButton" mnemonicParsing="false" text="Bot hinzufügen" visible="false" /><!-- onAction="#bot_hinzufuegen""-->
+                        <ButtonBar  prefWidth="599.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+                            <buttons >
+                                <Button  fx:id="botHinzufuegenButton" mnemonicParsing="false" text="Bot hinzufügen" visible="false" /><!-- onAction="#bot_hinzufuegen""-->
                                 <Button fx:id="botEntfernenButton" mnemonicParsing="false"  text="Bot entfernen" visible="false" /><!-- "onAction="#abmelden"-->
-                                <Button fx:id="raumErstellenButton" mnemonicParsing="false"  text="Raum erstellen" /><!-- onAction = "onAction="#abmelden"-->
-                                <Button fx:id="raumLadenButton" mnemonicParsing="false"  prefHeight="26.0" text="Räume laden" /> <!-- onAction="#abmelden"-->
-                                <Button fx:id="button_abmelden" mnemonicParsing="false"  onAction="#abmelden" text="Abmelden" />
+                                <Button fx:id="raumErstellenButton" mnemonicParsing="false"  text="Raum erstellen" /><!-- onAction = "onAction="#raumErstellen"-->
+                                <Button fx:id="button_abmelden" mnemonicParsing="false"  onAction="#abmelden" text="Abmelden" /><!-- onAction="#abmelden"-->
                                 <Button fx:id="button_AccountDel" mnemonicParsing="false" onAction="#delAccount"  text="Account löschen" />
                                 <Button mnemonicParsing="false" onAction = "#showBestenliste" text="Bestenliste" />
+                                <Button mnemonicParsing="false" onAction = "#showBestenliste" text="SpielRegeln" />
                             </buttons>
                         </ButtonBar>
                     </children>
@@ -32,44 +32,37 @@
                     <children>
                         <SplitPane dividerPositions="0.6096287703016242" layoutX="122.0" layoutY="73.0" orientation="VERTICAL" prefHeight="346.4" prefWidth="599.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="100.0">
+                                    <children>
+                                        <ComboBox fx:id="dropdwn_Rooms" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="134.0" promptText="Raum Auswählen" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                                        <Button fx:id="button_beitreten" onAction="#raumBeitreten" layoutX="191.0" layoutY="15.0" mnemonicParsing="false"  text="Beitreten" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0" />
+                                        <Label fx:id="spieler1" layoutX="12.0" layoutY="68.0" text="Spieler1" visible="false">
+                                            <font>
+                                                <Font name="System Bold" size="12.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="spieler2" layoutX="14.0" layoutY="94.0" text="Spieler2" visible="false" />
+                                        <Label fx:id="spieler3" layoutX="14.0" layoutY="121.0" text="Spieler3" visible="false" />
+                                        <Label fx:id="spieler4" layoutX="148.0" layoutY="68.0" text="Spieler4" visible="false" />
+                                        <Label fx:id="spieler5" layoutX="148.0" layoutY="94.0" text="Spieler5" visible="false" />
+                                        <Label fx:id="spieler6" layoutX="148.0" layoutY="121.0" text="Spieler6" visible="false" />
+                                        <Button fx:id="spiel_starten" layoutX="19.0" layoutY="151.0" mnemonicParsing="false"  prefHeight="26.0" prefWidth="262.0" text="Spiel starten" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" /> <!-- onAction="#start_Game"-->
+                                        <Button fx:id="raumVerlassenButton" layoutX="208.0" layoutY="56.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="82.0" text="Raum verlassen" visible="false" /> <!-- onAction="#raumVerlassen"-->
+                                    </children>
+                                </AnchorPane>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                     <children>
                                         <SplitPane dividerPositions="0.5180965147453083" layoutX="51.0" layoutY="14.0" prefHeight="207.2" prefWidth="598.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <items>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                     <children>
-                                                        <ComboBox fx:id="dropdwn_Rooms" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="134.0" promptText="Raum Auswählen" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
-                                                        <Button fx:id="button_beitreten" layoutX="191.0" layoutY="15.0" mnemonicParsing="false"  text="Beitreten" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0" /> <!-- onAction="#raumBeitreten"-->
-                                                        <Label fx:id="spieler1" layoutX="12.0" layoutY="68.0" text="Spieler1" visible="false">
-                                                            <font>
-                                                                <Font name="System Bold" size="12.0" />
-                                                            </font>
-                                                        </Label>
-                                                        <Label fx:id="spieler2" layoutX="14.0" layoutY="94.0" text="Spieler2" visible="false" />
-                                                        <Label fx:id="spieler3" layoutX="14.0" layoutY="121.0" text="Spieler3" visible="false" />
-                                                        <Label fx:id="spieler4" layoutX="148.0" layoutY="68.0" text="Spieler4" visible="false" />
-                                                        <Label fx:id="spieler5" layoutX="148.0" layoutY="94.0" text="Spieler5" visible="false" />
-                                                        <Label fx:id="spieler6" layoutX="148.0" layoutY="121.0" text="Spieler6" visible="false" />
-                                                        <Button fx:id="spiel_starten" layoutX="19.0" layoutY="151.0" mnemonicParsing="false"  prefHeight="26.0" prefWidth="262.0" text="Spiel starten" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" /> <!-- onAction="#start_Game"-->
-                                                        <Button fx:id="raumVerlassenButton" layoutX="208.0" layoutY="56.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="82.0" text="Raum verlassen" visible="false" /> <!-- onAction="#raumVerlassen"-->
-                                                    </children>
-                                                </AnchorPane>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                                    <children>
-                                                        <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Raum Chat" />
-                                                        <TextField fx:id="raumChat_eingabe" editable="false" layoutX="14.0" layoutY="167.0"  AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" /> <!-- onKeyPressed="#senden_RaumChat"-->
-                                                        <TextArea fx:id="raumChat" editable="false" focusTraversable="false" layoutX="20.0" layoutY="47.0" prefHeight="89.0" prefWidth="236.0" wrapText="true" />
+                                                        <Text layoutX="20.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Global Chat" />
+                                                        <TextField fx:id="globalChat_eingabe" layoutX="26.0" layoutY="93.0"  AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" /> <!-- onKeyPressed="#senden_GlobalChat"-->
+                                                        <TextArea fx:id="globalChat_ausgabe" editable="false"  focusTraversable="false" layoutX="20.0" layoutY="30.0" prefHeight="90.0" prefWidth="556.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
                                                     </children>
                                                 </AnchorPane>
                                             </items>
                                         </SplitPane>
-                                    </children>
-                                </AnchorPane>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                    <children>
-                                        <Text layoutX="20.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Global Chat" />
-                                        <TextField fx:id="globalChat_eingabe" layoutX="26.0" layoutY="93.0"  AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" /> <!-- onKeyPressed="#senden_GlobalChat"-->
-                                        <TextArea fx:id="globalChat_ausgabe" editable="false" layoutX="20.0" layoutY="30.0" prefHeight="46.0" prefWidth="556.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
                                     </children>
                                 </AnchorPane>
                             </items>

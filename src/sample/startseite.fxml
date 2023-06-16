@@ -1,17 +1,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16"
-            fx:controller="sample.StartseiteController">
+            fx:controller="Control.StartseiteController">
     <children>
         <TextField fx:id="nutzername" layoutX="226.0" layoutY="67.0" promptText="Nutzername"/>
         <PasswordField fx:id="passwort" layoutX="227.0" layoutY="119.0" promptText="Passwort"/>
-        <Button fx:id="anmeldeButton" defaultButton="true" layoutX="265.0" layoutY="196.0" mnemonicParsing="false"
+        <Button fx:id="anmeldeButton"  layoutX="265.0" layoutY="196.0" mnemonicParsing="false"
                 onAction = "#AnmeldenGotoMenu" text="Anmelden"/>
         <Button fx:id="registerButton" layoutX="260.0" layoutY="245.0" mnemonicParsing="false"
                 onAction = "#gotoRegister" text="Registrieren"/>
-        <Label layoutX="59.0" layoutY="236.0" text="Neu Hier?"/>
-        <Label layoutX="59.0" layoutY="262.0" text="Registrier dich doch einfach!"/>
-        <TextField fx:id="servername" layoutX="225.0" layoutY="161.0" promptText="Server" text="localhost"/>
-
+        <Label layoutX="59.0" layoutY="236.0" text="Kein Account?"/>
+        <Label layoutX="59.0" layoutY="262.0" text="Weiter zur Registrierung!"/>
     </children>
 </AnchorPane>

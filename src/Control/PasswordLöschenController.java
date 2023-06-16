@@ -1,4 +1,4 @@
-package sample;
+package Control;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +20,7 @@ public class PasswordLöschenController {
         // Todo: close the Menu Stage
         // password stimmen
         if(textfeld_passwort1.getText().equals("dump")){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("startseite.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/startseite.fxml"));
             Parent root = loader.load();
 
             //TODO: Startseite Controller

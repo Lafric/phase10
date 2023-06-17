@@ -1,6 +1,5 @@
 package Control;
 
-import Graphics.DummyDialog;
 import Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,8 +12,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
+
+/**
+ * The StartseiteController handles the login process, including account creation,
+ * password checking and so on.
+ *
+ * @author Billy Dongmo
+ * @version 1.0
+ */
 
 public class StartseiteController {
     @FXML
@@ -26,7 +32,6 @@ public class StartseiteController {
     @FXML
     public TextField nutzername;
     private DatabaseProvider databaseProvider;
-    private DummyDialog dialogFrame;
 
     /**
      * to set up the LoginManager parameters such as DatabaseProvider and more
@@ -46,7 +51,7 @@ public class StartseiteController {
         AuthResult loginres = performDummyLogin(nutzername.getText(), passwort.getText()); //zu löschen, wenn PerformLogin gut funktionniert
         //Todo: user credential stimmenn ?
         if(loginres.success){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/menu.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/menu.fxml"));
             Parent root = loader.load();
 
             // TODO: Menu Controller params Übergeben
@@ -77,7 +82,7 @@ public class StartseiteController {
 
 
         //load registrieren
-        FXMLLoader root = new FXMLLoader(getClass().getResource("/sample/registrieren.fxml"));
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/Graphics/registrieren.fxml"));
         Scene scene = new Scene(root.load());
 
         // set params

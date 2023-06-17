@@ -35,7 +35,7 @@ public class RegistrierenController {
                     //AuthResult registrationres = performRegistration(nutzername.getText(), passwort.getText());
                     AuthResult registrationres = performDummyRegistration(nutzername.getText(), passwort.getText());
                     if(registrationres.success){
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/menu.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/menu.fxml"));
                         Parent root = loader.load();
 
                         //Todo: Menu Controller
@@ -83,7 +83,7 @@ public class RegistrierenController {
     }
 
     public void ReturnToStartseite(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/startseite.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/startseite.fxml"));
         Parent root = loader.load();
 
         //TODO: Startseite Controller

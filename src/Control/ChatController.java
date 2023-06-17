@@ -1,6 +1,4 @@
 package Control;
-
-import Graphics.DummyChatFrame;
 import Model.Identity;
 import javax.swing.*;
 
@@ -9,7 +7,6 @@ import javax.swing.*;
  * logic.
  */
 public class ChatController extends Thread {
-    private DummyChatFrame chatGUI;
     private Identity identity;
 
     /**
@@ -27,9 +24,6 @@ public class ChatController extends Thread {
      */
     @Override
     public void run() {
-        this.chatGUI = new DummyChatFrame(this, identity);
-        this.chatGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Closes the application on close of this window
-        this.chatGUI.setVisible(true);
         System.err.println("CHAT SETUP NOT IMPLEMENTED");
     }
 
@@ -41,7 +35,6 @@ public class ChatController extends Thread {
     public synchronized void displayIncomingMessage(String message) {
         // Display in GUI
         System.err.println("CHAT CONTROLLER NOT IMPLEMENTED");
-        chatGUI.displayIncomingMessage(message);
     }
 
     /**

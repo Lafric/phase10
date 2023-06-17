@@ -1,6 +1,5 @@
 package Control;
 
-import Graphics.DummyFrame;
 import Model.Identity;
 import javax.swing.*;
 
@@ -40,7 +39,6 @@ public class MenuManager extends Thread {
      * This method sets up the menu GUI.
      */
     private void displayGUI() {
-        this.menu = new DummyFrame(this, identity);
         this.menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.menu.setVisible(true);
         System.err.println("MENU GUI NOT IMPLEMENTED");

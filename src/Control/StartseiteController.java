@@ -15,7 +15,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * The StartseiteController handles the login process, including account creation,
+ * The StartseiteController handles the login process, including account
+ * creation,
  * password checking and so on.
  *
  * @author Billy Dongmo
@@ -42,21 +43,20 @@ public class StartseiteController {
         this.databaseProvider = databaseProvider;
     }
 
-
     public void AnmeldenGotoMenu(ActionEvent event) throws IOException {
-        //perform something with server or Database zum Anmeldung/Verbindung
+        // perform something with server or Database zum Anmeldung/Verbindung
 
-        //AuthResult loginres = performLogin(nutzername.getText(), passwort.getText());
+        AuthResult loginres = performLogin(nutzername.getText(), passwort.getText());
 
-        AuthResult loginres = performDummyLogin(nutzername.getText(), passwort.getText()); //zu löschen, wenn PerformLogin gut funktionniert
-        //Todo: user credential stimmenn ?
-        if(loginres.success){
+        // passwort.getText()); //zu löschen, wenn PerformLogin gut funktionniert
+        // Todo: user credential stimmenn ?
+        if (loginres.success) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/menu.fxml"));
             Parent root = loader.load();
 
             // TODO: Menu Controller params Übergeben
 
-            //next scene öffnen
+            // next scene öffnen
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Menu");
@@ -78,10 +78,9 @@ public class StartseiteController {
     }
 
     public void gotoRegister(ActionEvent event) throws IOException {
-        // TODO: perform something with server or Database zum Anmeldung/Verbindung
+        // TODO: use RMI to connect to DB server
 
-
-        //load registrieren
+        // load registrieren
         FXMLLoader root = new FXMLLoader(getClass().getResource("/Graphics/registrieren.fxml"));
         Scene scene = new Scene(root.load());
 
@@ -106,13 +105,5 @@ public class StartseiteController {
         } else {
             return new AuthResult(false, "Invalid name or password");
         }
-    }
-
-
-
-    // Todo: zum löschen, wenn PerformLogin gut funktionniert
-    public AuthResult performDummyLogin(String name, String pw) {
-        System.out.println("Logging in..");
-        return new AuthResult(true, "");
     }
 }

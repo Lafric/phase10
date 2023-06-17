@@ -27,20 +27,20 @@ public class RegistrierenController {
     }
 
     public void RegisterUser(ActionEvent event) throws IOException {
-        //2 pwds stimmen ? gehe zu Menu
+        // 2 pwds stimmen ? gehe zu Menu
         if (!passwort.getText().equals("")) {
-            if (passwort.getText().length() > 3 && !passwort.getText().contains(" ")){
-                if(passwort.getText().equals(passwort_2.getText())){
-                    //registrierung erfolgreich ? (keine Duplikate, keine Fehler)
-                    //AuthResult registrationres = performRegistration(nutzername.getText(), passwort.getText());
-                    AuthResult registrationres = performDummyRegistration(nutzername.getText(), passwort.getText());
-                    if(registrationres.success){
+            if (passwort.getText().length() > 3 && !passwort.getText().contains(" ")) {
+                if (passwort.getText().equals(passwort_2.getText())) {
+                    // registrierung erfolgreich ? (keine Duplikate, keine Fehler)
+                    AuthResult registrationres = performRegistration(nutzername.getText(), passwort.getText());
+                    // passwort.getText());
+                    if (registrationres.success) {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/menu.fxml"));
                         Parent root = loader.load();
 
-                        //Todo: Menu Controller
+                        // Todo: Menu Controller
 
-                        //next scene öffnen
+                        // next scene öffnen
                         Stage stage = new Stage();
                         stage.setScene(new Scene(root));
                         stage.setTitle("Menu");
@@ -52,13 +52,13 @@ public class RegistrierenController {
                         stage.show();
                         Stage start = (Stage) button_registrieren.getScene().getWindow();
                         start.close();
-                    }else{
+                    } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Name .");
-                        alert.setHeaderText("Fehler beim Registrierung");
+                        alert.setHeaderText("Fehler beim Registrierung:\n" + registrationres.error);
                         alert.showAndWait();
                     }
-                }else{
+                } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Fehler");
                     alert.setHeaderText("Die Passw\u00f6rter stimmen nicht \u00dcberein.");
@@ -70,7 +70,8 @@ public class RegistrierenController {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Name .");
                 alert.setHeaderText("Ihr Passwort ist zu kurz.");
-                alert.setContentText("Ihr Passwort muss mindestens 4 Zeichen enthalten, davon darf keines ein Leerzeichen sein!");
+                alert.setContentText(
+                        "Ihr Passwort muss mindestens 4 Zeichen enthalten, davon darf keines ein Leerzeichen sein!");
                 alert.showAndWait();
             }
         } else {
@@ -79,16 +80,17 @@ public class RegistrierenController {
             alert.setHeaderText("kein Passwort wurde gesetzt");
             alert.setContentText("Bitte geben sie ein Passwort, mit mindestens 4 Zeichen");
             alert.showAndWait();
-        };
+        }
+        ;
     }
 
     public void ReturnToStartseite(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/startseite.fxml"));
         Parent root = loader.load();
 
-        //TODO: Startseite Controller
+        // TODO: Startseite Controller
 
-        //next scene öffnen
+        // next scene öffnen
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Startseite");
@@ -110,12 +112,5 @@ public class RegistrierenController {
             this.databaseProvider.addUser(name, pw);
             return new AuthResult(true, "");
         }
-    }
-
-     // zum Löschen wenn performRegistration gut funktionniert
-    public AuthResult performDummyRegistration(String name, String pw) {
-        System.out.println("Registrating..");
-        return new AuthResult(true, "");
-
     }
 }

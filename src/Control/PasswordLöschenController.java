@@ -19,13 +19,13 @@ public class PasswordLöschenController {
     public void accLoeschenOk(ActionEvent event) throws IOException {
         // Todo: close the Menu Stage
         // password stimmen
-        if(textfeld_passwort1.getText().equals("dump")){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/startseite.fxml"));
+        if (textfeld_passwort1.getText().equals("dump")) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/startseite.fxml"));
             Parent root = loader.load();
 
-            //TODO: Startseite Controller
+            // TODO: Startseite Controller
 
-            //next scene öffnen
+            // next scene öffnen
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Startseite");
@@ -37,7 +37,7 @@ public class PasswordLöschenController {
             stage.show();
             Stage start = (Stage) button_betaetigen_acc_loeschen.getScene().getWindow();
             start.close();
-        }else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Fehler");
             alert.setHeaderText("Passwort ist falsch.");

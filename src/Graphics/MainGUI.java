@@ -20,18 +20,22 @@ public class MainGUI extends Application {
     /**
      * Erzeugt das GUIfenster der Startseite.
      *
-     * @throws IOException wird geworfen, falls startseite.fxml nicht gelesen werden konnte
+     * @throws IOException wird geworfen, falls startseite.fxml nicht gelesen werden
+     *                     konnte
      */
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        DatabaseProvider databaseProvider = new DatabaseProvider(false);
+    public void start(Stage primaryStage) throws Exception {
+        DatabaseProvider databaseProvider = new DatabaseProvider(true);
 
         FXMLLoader root = new FXMLLoader((getClass().getResource("startseite.fxml")));
         Scene scene = new Scene(root.load());
 
-        /** Hinweis über JavaFx:
-         * Übergebe Parameter, die von StartseiteController benutzt werden, um die Funtionen zu laufen (DatabaseProvider /Server ).
-         * Alle andere Aufrufe von neu Seiten werden die gleiche logik folgen. Die parameters werden durch set order get übergeben.
+        /**
+         * Hinweis über JavaFx:
+         * Übergebe Parameter, die von StartseiteController benutzt werden, um die
+         * Funtionen zu laufen (DatabaseProvider /Server ).
+         * Alle andere Aufrufe von neu Seiten werden die gleiche logik folgen. Die
+         * parameters werden durch set order get übergeben.
          */
         StartseiteController startseiteController = root.getController(); // get the controller of the running Gui page
         startseiteController.setParams(databaseProvider);// set(get) the params that are needed
@@ -40,7 +44,6 @@ public class MainGUI extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);

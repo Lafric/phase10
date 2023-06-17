@@ -20,8 +20,9 @@ public class MainGUI extends Application {
     /**
      * Erzeugt das GUIfenster der Startseite.
      *
-     * @throws IOException wird geworfen, falls startseite.fxml nicht gelesen werden
-     *                     konnte
+     * @throws IOException
+     *             wird geworfen, falls startseite.fxml nicht gelesen werden
+     *             konnte
      */
     @Override
     public void start(Stage primaryStage) throws Exception {

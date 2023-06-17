@@ -2,6 +2,7 @@ package Control;
 
 import Model.AuthResult;
 import Model.DatabaseProvider;
+import Model.Identity;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,6 +38,9 @@ public class RegistrierenController {
                     if (registrationres.success) {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/menu.fxml"));
                         Parent root = loader.load();
+
+                        MenuController controller = loader.getController();
+                        controller.changeNameLabel(new Identity(nutzername.getText()));
 
                         // Todo: Menu Controller
 

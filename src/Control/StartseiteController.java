@@ -37,7 +37,8 @@ public class StartseiteController {
     /**
      * to set up the LoginManager parameters such as DatabaseProvider and more
      *
-     * @param databaseProvider is the database provider to use
+     * @param databaseProvider
+     *            is the database provider to use
      */
     public void setParams(DatabaseProvider databaseProvider) {
         this.databaseProvider = databaseProvider;
@@ -53,6 +54,9 @@ public class StartseiteController {
         if (loginres.success) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/menu.fxml"));
             Parent root = loader.load();
+
+            MenuController controller = loader.getController();
+            controller.changeNameLabel(new Identity(nutzername.getText()));
 
             // TODO: Menu Controller params Übergeben
 

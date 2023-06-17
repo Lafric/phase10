@@ -9,6 +9,20 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.ArrayList;
+
+import Communication.Message;
+import Communication.RMIServer;
+import Communication.ServerFuncs;
+import Communication.ServerFuncsImpl;
+import Model.DatabaseProvider;
+import Model.Identity;
 
 public class MenuController {
     public Button botHinzufuegenButton;
@@ -19,6 +33,8 @@ public class MenuController {
     public Button button_AccountDel;
     public ComboBox dropdwn_Rooms;
     public Button button_beitreten;
+    public Label nameLabel;
+    public Label chatLabel;
     public Label spieler1;
     public Label spieler2;
     public Label spieler3;
@@ -31,6 +47,21 @@ public class MenuController {
     public TextArea raumChat;
     public TextField globalChat_eingabe;
     public TextArea globalChat_ausgabe;
+    public Identity identity;
+
+    @FXML
+    public void initialize() {
+        Thread chatserver = new Thread(new RMIServer());
+        chatserver.start();
+        System.out.println("Chatserver gestartet");
+    }
+
+    @FXML
+    public void changeNameLabel(Identity identity) {
+        this.identity = identity;
+        nameLabel.setText("Willkommen, " + identity.getUsername());
+        chatLabel.setText("Chatten als: " + identity.getUsername());
+    }
 
     @FXML
     void showBestenliste(ActionEvent event) throws IOException {
@@ -38,7 +69,7 @@ public class MenuController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/bestenliste.fxml"));
         Parent root = loader.load();
 
-        //Todo: bestenliste Controller
+        // Todo: bestenliste Controller
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
@@ -53,8 +84,7 @@ public class MenuController {
 
         // Todo: controller of Account-löschen
 
-
-        //next scene Password löschen
+        // next scene Password löschen
         Stage stage = new Stage();
         stage.setScene(new Scene(root1));
         stage.setTitle("wollen Sie den Account wirklich l\u00f6schen?");
@@ -65,9 +95,11 @@ public class MenuController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/startseite.fxml"));
         Parent root = loader.load();
 
-        //TODO: Startseite Controller
+        // TODO: Startseite Controller
+        StartseiteController controller = loader.getController();
+        controller.setParams(new DatabaseProvider(true));
 
-        //next scene öffnen
+        // next scene öffnen
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Startseite");
@@ -85,9 +117,9 @@ public class MenuController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/gameField.fxml"));
         Parent root = loader.load();
 
-        //TODO: Startseite Controller
+        // TODO: Startseite Controller
 
-        //next scene öffnen
+        // next scene öffnen
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Spieldfeld");
@@ -99,5 +131,31 @@ public class MenuController {
         stage.show();
         Stage start = (Stage) button_beitreten.getScene().getWindow();
         start.close();
+    }
+
+    public void sendeNachricht() {
+        String nachricht = globalChat_eingabe.getText();
+
+        try {
+            // create new timestamp with current time
+            Timestamp timestamp = Timestamp.from(Instant.now());
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+            String formattedTime = formatter.format(timestamp);
+            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+            ServerFuncs server = (ServerFuncs) registry.lookup("serverfunc");
+            server.sendMessageToChat(new Message(this.identity.getUsername(), formattedTime, nachricht));
+
+            ArrayList<Message> messages = server.fetchMessages();
+            Message latestMessage = messages.get(messages.size() - 1);
+            globalChat_ausgabe.appendText(
+                    latestMessage.sender + " | " + latestMessage.date.toString() + " | " + latestMessage.content
+                            + "\n");
+            globalChat_eingabe.clear();
+            System.out.println("Message sent" + latestMessage.content);
+        } catch (Exception e) {
+            System.err.println("Client exception: " + e.toString());
+            e.printStackTrace();
+        }
+
     }
 }

@@ -13,7 +13,7 @@ public class DatabaseProvider {
 
     private final String dbUrl = "jdbc:postgresql://localhost/phase10";
     private final String dbUser = "postgres";
-    private final String dbPassword = "Lapatate1"; // TODO: change to your password
+    private final String dbPassword = "giba"; // TODO: change to your password
 
     public boolean useDummy = false;
     public HashMap<String, String> dummyUserData = new HashMap<String, String>();
@@ -172,4 +172,3 @@ public class DatabaseProvider {
     }
 
 }
-

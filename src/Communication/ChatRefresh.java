@@ -43,8 +43,9 @@ public class ChatRefresh implements Runnable {
                 ArrayList<Message> messages = server.fetchMessages();
                 if(!messages.isEmpty()){
                     String currentHisotry = chat_ausgabe.getText();
+                    String latest_serv_message = currentHisotry.substring(currentHisotry.lastIndexOf("|") + 1).trim();
                     Message latestMessage = messages.get(messages.size() - 1);
-                    if(!currentHisotry.contains(latestMessage.content)){
+                    if(!latestMessage.content.equals(latest_serv_message)){
                         for(Message message: messages){
                             chat_ausgabe.appendText(
                             message.sender + " | " + message.date.toString() + " | " + message.content

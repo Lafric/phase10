@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 
+import Communication.ChatRefresh;
 import Communication.Message;
 import Communication.RMIServer;
 import Communication.ServerFuncs;
@@ -51,9 +52,11 @@ public class MenuController {
 
     @FXML
     public void initialize() {
-        Thread chatserver = new Thread(new RMIServer());
-        chatserver.start();
-        System.out.println("Chatserver gestartet");
+        Runnable refresh = new ChatRefresh(globalChat_ausgabe);
+        Thread chatrefresh = new Thread(refresh);
+        chatrefresh.start();
+        //chatserver.start();
+        System.out.println("Chatrefresh started");
     }
 
     @FXML
@@ -151,7 +154,7 @@ public class MenuController {
                     latestMessage.sender + " | " + latestMessage.date.toString() + " | " + latestMessage.content
                             + "\n");
             globalChat_eingabe.clear();
-            System.out.println("Message sent" + latestMessage.content);
+            System.out.println("Message sent " + latestMessage.content);
         } catch (Exception e) {
             System.err.println("Client exception: " + e.toString());
             e.printStackTrace();

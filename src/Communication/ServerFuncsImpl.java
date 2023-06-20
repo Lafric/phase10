@@ -21,7 +21,7 @@ public class ServerFuncsImpl extends UnicastRemoteObject implements ServerFuncs 
         }
 
         if (msg.content.length() > 140) {
-            System.out.println("Chatnachricht darf nicht leer sein.");
+            System.out.println("Chatnachricht darf nicht länger als 140 Zeichen sein.");
             return;
         }
 

@@ -9,19 +9,10 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.ArrayList;
 
 import Communication.Message;
 import Communication.MessageService;
 import Communication.RMIServer;
-import Communication.ServerFuncs;
-import Communication.ServerFuncsImpl;
 import Model.DatabaseProvider;
 import Model.Identity;
 
@@ -50,7 +41,7 @@ public class MenuController {
     public TextArea globalChat_ausgabe;
     public Identity identity;
 
-    MessageService messageService;
+    private MessageService messageService;
 
     public MenuController(MessageService messageService) {
         this.messageService = messageService;

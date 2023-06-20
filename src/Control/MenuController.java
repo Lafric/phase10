@@ -9,19 +9,11 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.ArrayList;
 
 import Communication.ChatRefresh;
 import Communication.Message;
+import Communication.MessageService;
 import Communication.RMIServer;
-import Communication.ServerFuncs;
-import Communication.ServerFuncsImpl;
 import Model.DatabaseProvider;
 import Model.Identity;
 
@@ -49,6 +41,16 @@ public class MenuController {
     public TextField globalChat_eingabe;
     public TextArea globalChat_ausgabe;
     public Identity identity;
+
+    private MessageService messageService;
+
+    public MenuController(MessageService messageService) {
+        this.messageService = messageService;
+    }
+
+    public MenuController() {
+        this.messageService = new MessageService();
+    }
 
     @FXML
     public void initialize() {
@@ -138,18 +140,8 @@ public class MenuController {
 
     public void sendeNachricht() {
         String nachricht = globalChat_eingabe.getText();
-
         try {
-            // create new timestamp with current time
-            Timestamp timestamp = Timestamp.from(Instant.now());
-            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
-            String formattedTime = formatter.format(timestamp);
-            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
-            ServerFuncs server = (ServerFuncs) registry.lookup("serverfunc");
-            server.sendMessageToChat(new Message(this.identity.getUsername(), formattedTime, nachricht));
-
-            ArrayList<Message> messages = server.fetchMessages();
-            Message latestMessage = messages.get(messages.size() - 1);
+            Message latestMessage = messageService.sendeNachricht(identity, nachricht);
             globalChat_ausgabe.appendText(
                     latestMessage.sender + " | " + latestMessage.date.toString() + " | " + latestMessage.content
                             + "\n");
@@ -159,6 +151,5 @@ public class MenuController {
             System.err.println("Client exception: " + e.toString());
             e.printStackTrace();
         }
-
     }
 }

@@ -26,7 +26,7 @@ public class DatabaseProvider {
         this.useDummy = false;
     }
 
-    public Connection connect() {
+    private Connection connect() {
         try {
             // Load the PostgreSQL JDBC driver
             Class.forName("org.postgresql.Driver");
@@ -51,7 +51,7 @@ public class DatabaseProvider {
         }
     }
 
-    public void addUserDummy(String name, String pw) {
+    private void addUserDummy(String name, String pw) {
         this.dummyUserData.put(name, pw);
     }
 
@@ -61,7 +61,7 @@ public class DatabaseProvider {
             return;
         }
         Connection connection = this.connect();
-        String query = "INSERT INTO public.\"user\"(username, password) VALUES (?, ?)";
+        String query = "INSERT INTO users(username, password) VALUES (?, ?)";
         try {
             // sanitize inputs using preparedstatement to prevent injection attacks
             PreparedStatement statement = connection.prepareStatement(query);
@@ -76,7 +76,7 @@ public class DatabaseProvider {
         }
     }
 
-    public boolean checkUserDummy(String name, String pw) {
+    private boolean checkUserDummy(String name, String pw) {
         if (this.dummyUserData.containsKey(name)) {
             if (Objects.equals(this.dummyUserData.get(name), pw)) {
                 return true;
@@ -90,7 +90,7 @@ public class DatabaseProvider {
             return this.checkUserDummy(name, pw);
         }
         Connection connection = this.connect();
-        String query = "SELECT * FROM public.\"user\" WHERE username = ? AND password = ?";
+        String query = "SELECT * FROM users WHERE username = ? AND password = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, name);
@@ -105,7 +105,7 @@ public class DatabaseProvider {
         }
     }
 
-    public void changeUsernameDummy(String currentUsername, String newUsername) {
+    private void changeUsernameDummy(String currentUsername, String newUsername) {
         if (this.dummyUserData.containsKey(currentUsername)) {
             this.dummyUserData.put(newUsername, this.dummyUserData.get(currentUsername));
         }
@@ -117,7 +117,7 @@ public class DatabaseProvider {
             this.changeUsernameDummy(currentUsername, newUsername);
         }
         Connection connection = this.connect();
-        String query = "UPDATE public.\"user\" SET username = ? WHERE username = ?";
+        String query = "UPDATE users SET username = ? WHERE username = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, newUsername);
@@ -136,7 +136,7 @@ public class DatabaseProvider {
         }
     }
 
-    public void changePasswordDummy(String name, String currentPassword, String newPassword) {
+    private void changePasswordDummy(String name, String currentPassword, String newPassword) {
         if (this.checkUser(name, currentPassword)) {
             this.dummyUserData.put(name, newPassword);
         }
@@ -152,7 +152,7 @@ public class DatabaseProvider {
             return;
         }
         Connection connection = this.connect();
-        String query = "UPDATE public.\"user\" SET username = ? WHERE username = ?";
+        String query = "UPDATE users SET password = ? WHERE username = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, newPassword);
@@ -162,6 +162,40 @@ public class DatabaseProvider {
                 System.out.println("Password changed successfully!");
             } else {
                 System.out.println("Failed to change password!");
+            }
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("SQLError when trying to check user!");
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteUserDummy(String name, String password) {
+        if (this.checkUser(name, password)) {
+            this.dummyUserData.remove(name, password);
+        }
+    }
+
+    public void deleteUser(String name, String password) {
+        if (this.useDummy) {
+            this.deleteUserDummy(name, password);
+        }
+        if (!this.checkUser(name, password)) {
+            System.out.println("Invalid name or password");
+            return;
+        }
+        Connection connection = this.connect();
+        String query = "DELETE FROM users WHERE username = ? AND password = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, name);
+            statement.setString(2, password);
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("User deleted successfully!");
+            } else {
+                System.out.println("Failed to delete user!");
             }
             statement.close();
             connection.close();

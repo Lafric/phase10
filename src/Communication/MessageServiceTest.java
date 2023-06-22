@@ -30,7 +30,7 @@ public class MessageServiceTest {
     @Before
     public void setup() throws NotBoundException {
         mockServerFuncs = mock(ServerFuncs.class);
-        messageService = new MessageService(getMockRegistry());
+        messageService = new MessageService();
         mockIdentity = mock(Identity.class);
         mockMessages = new ArrayList<Message>();
     }

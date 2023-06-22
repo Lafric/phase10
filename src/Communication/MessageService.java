@@ -13,13 +13,13 @@ public class MessageService {
 
     private Registry registry;
 
-    public MessageService(Registry registry) {
-        this.registry = registry;
-    }
+    //public MessageService(Registry registry) {
+    //    this.registry = registry;
+    //}
 
     public MessageService() {
         try {
-            this.registry = LocateRegistry.getRegistry("localhost", 1099);
+            this.registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
         } catch (Exception e) {
             e.printStackTrace();
         }

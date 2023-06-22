@@ -29,7 +29,7 @@ public class ChatRefresh implements Runnable {
     public void run() {
         
         try {
-            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+            Registry registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
             ServerFuncs server = (ServerFuncs) registry.lookup("serverfunc");            
             
             TextArea chat_ausgabe = this.chat_ausgabe;
@@ -42,6 +42,7 @@ public class ChatRefresh implements Runnable {
 
                 ArrayList<Message> messages = server.fetchMessages();
                 if(!messages.isEmpty()){
+                    chat_ausgabe.clear();
                     String currentHisotry = chat_ausgabe.getText();
                     String latest_serv_message = currentHisotry.substring(currentHisotry.lastIndexOf("|") + 1).trim();
                     Message latestMessage = messages.get(messages.size() - 1);

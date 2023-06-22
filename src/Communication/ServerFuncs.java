@@ -3,9 +3,11 @@ package Communication;
 import java.rmi.*;
 import java.util.ArrayList;
 
+
 public interface ServerFuncs extends Remote {
     // chat functions
-    public void sendMessageToChat(Message msg) throws RemoteException;
+    public void 
+    sendMessageToChat(Message msg) throws RemoteException;
 
     public ArrayList<Message> fetchMessages() throws RemoteException;
 

@@ -1,19 +1,71 @@
 package Communication;
 
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.rmi.*;
+import java.rmi.server.*;
+
 
 public class ServerFuncsImpl extends UnicastRemoteObject implements ServerFuncs {
 
     // define messages as an arraylist of type message
     private ArrayList<Message> messages = new ArrayList<Message>();
+    
+    private Integer lobbycount = 0; 
 
+    public ArrayList<Lobby> allLobbys = new ArrayList<Lobby>(); 
+    
     public ServerFuncsImpl() throws RemoteException {
         super();
     }
 
-    @Override
+    public int get_LobbyCount(){
+        return lobbycount; 
+    }
+
+    public void Inc_LobbyCount(){
+        this.lobbycount += 1; 
+
+    }
+    //@Override
+    public ArrayList<Lobby> getLobbyList() throws RemoteException{
+        return this.allLobbys;
+    }
+    //@Override
+    public void createLobby(){
+        try {
+            Integer lobbycount = this.get_LobbyCount(); 
+            String lobbyCountString = lobbycount.toString(); 
+
+            String lobbyName = "Lobby" + lobbyCountString; 
+
+            this.Inc_LobbyCount(); 
+
+            Registry registry = LocateRegistry.getRegistry("185.162.248.237",1099);
+            System.out.println("Found registry");
+
+             
+            Lobby lobby = new LobbyImpl(lobbyName);
+            allLobbys.add(lobby);
+            registry.bind(lobbyName,lobby);
+            System.out.println("Bound " + lobbyName);
+
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } 
+
+
+		
+
+
+    }
+
+    //@Override
     public void sendMessageToChat(Message msg) throws RemoteException {
         if (msg.content.length() == 0) {
             System.out.println("Chatnachricht darf nicht leer sein.");
@@ -21,7 +73,7 @@ public class ServerFuncsImpl extends UnicastRemoteObject implements ServerFuncs 
         }
 
         if (msg.content.length() > 140) {
-            System.out.println("Chatnachricht darf nicht länger als 140 Zeichen sein.");
+            System.out.println("Chatnachricht darf nicht leer sein.");
             return;
         }
 
@@ -29,7 +81,7 @@ public class ServerFuncsImpl extends UnicastRemoteObject implements ServerFuncs 
         return;
     }
 
-    @Override
+    //@Override
     public ArrayList<Message> fetchMessages() throws RemoteException {
         ArrayList<Message> result = new ArrayList<Message>();
         for (Message msg : messages) {
@@ -37,8 +89,7 @@ public class ServerFuncsImpl extends UnicastRemoteObject implements ServerFuncs 
         }
         return result;
     }
-
-    // @Override
+// @Override
     // public void addUser(String name, String pw) throws RemoteException {
     // // TODO Auto-generated method stub
 

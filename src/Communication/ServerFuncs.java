@@ -11,6 +11,10 @@ public interface ServerFuncs extends Remote {
 
     public ArrayList<Message> fetchMessages() throws RemoteException;
 
+    public ArrayList<Lobby> getLobbyList() throws RemoteException;
+
+    public void createLobby();
+
     // database functions
     // public void addUser(String name, String pw) throws RemoteException;
 

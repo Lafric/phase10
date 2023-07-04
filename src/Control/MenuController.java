@@ -1,19 +1,28 @@
 package Control;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import Communication.Lobby;
+
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.rmi.NotBoundException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.ArrayList;
 
 import Communication.ChatRefresh;
 import Communication.Message;
 import Communication.MessageService;
 import Communication.RMIServer;
+import Communication.ServerFuncs;
+import Communication.ServerFuncsImpl;
 import Model.DatabaseProvider;
 import Model.Identity;
 
@@ -41,6 +50,8 @@ public class MenuController {
     public TextField globalChat_eingabe;
     public TextArea globalChat_ausgabe;
     public Identity identity;
+    public Button LobbyRefresh;
+    public ListView<String> lobbylist = new ListView<String>(); 
 
     private MessageService messageService;
 
@@ -81,6 +92,56 @@ public class MenuController {
         stage.setTitle("Bestenliste");
         stage.show();
 
+    }
+
+    public void refreshLobbyList(ActionEvent event) throws IOException {
+        
+        try{
+            Registry registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
+
+            ServerFuncs serverFuncs = (ServerFuncs) registry.lookup("serverfunc");
+            System.out.println("Got Serverfunc for LobbyRefresh");
+
+            ArrayList<Lobby> serverLobbys = (ArrayList<Lobby>) serverFuncs.getLobbyList();
+            System.out.println("Got LobbyList from Server");
+            
+            ArrayList<String> lobbys = new ArrayList<String>();
+
+            for(Lobby lobby : serverLobbys){
+                lobbys.add(lobby.getLobbyName());
+            }
+
+            lobbylist.getItems().clear();
+
+            lobbylist.getItems().addAll(lobbys);
+
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        
+
+    
+    }
+
+    public void create_lobby_button(ActionEvent event) throws IOException {
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/gameField.fxml"));
+        //Parent root = loader.load();
+        Registry registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
+        System.out.println("Found registry");
+        try {
+
+            ServerFuncs serverFuncs = (ServerFuncs) registry.lookup("serverfunc");
+            System.out.println("Found serverfunc");
+            serverFuncs.createLobby();
+            //LobbyList.getChildren().add(new Label("Lobby erstellt"));
+
+        } catch (NotBoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+
+    
     }
 
     public void delAccount(ActionEvent event) throws IOException {

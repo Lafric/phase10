@@ -108,7 +108,8 @@ public class MenuController {
             ArrayList<String> lobbys = new ArrayList<String>();
 
             for(Lobby lobby : serverLobbys){
-                lobbys.add(lobby.getLobbyName());
+                String lobbyName = lobby.getLobbyName() +  "\t\t" + "(" + lobby.getCurrentPlayerCount() + "/6)";
+                lobbys.add(lobbyName);
             }
 
             lobbylist.getItems().clear();
@@ -133,6 +134,7 @@ public class MenuController {
             ServerFuncs serverFuncs = (ServerFuncs) registry.lookup("serverfunc");
             System.out.println("Found serverfunc");
             serverFuncs.createLobby();
+            this.refreshLobbyList(event);
             //LobbyList.getChildren().add(new Label("Lobby erstellt"));
 
         } catch (NotBoundException e) {
@@ -180,18 +182,40 @@ public class MenuController {
     }
 
     public void raumBeitreten(ActionEvent event) throws IOException {
+        //get lobbyname from GUI 
+        //Lobbys are bound to those names to registry 
+        String lobbyString = lobbylist.getSelectionModel().getSelectedItem();
+        
+        String[] lobbyNameList = lobbyString.split("\t\t");
+        String lobbyName = lobbyNameList[0];
+        
+        try{
+            Registry registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
+            
+            Lobby lobby =  (Lobby) registry.lookup(lobbyName);
+            System.out.println("Found Lobby");
+
+
+            lobby.joinLobby(identity);
+
+
+        } catch(Exception e){
+            e.printStackTrace(System.out);
+            
+        }
+
+        //UI
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/gameField.fxml"));
         Parent root = loader.load();
 
-        // TODO: Startseite Controller
 
-        // next scene öffnen
+        // TODO next scene öffnen
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Spieldfeld");
 
         stage.setOnCloseRequest(e -> {
-            // TODO: disconnect user
+        //TODO: disconnect user
         });
 
         stage.show();

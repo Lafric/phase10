@@ -8,7 +8,8 @@ import java.rmi.server.UnicastRemoteObject;
 
 
 public class RMIServer implements Runnable {
-
+//Server class to run on the server side 
+//Bind serverfunctions to rmiregistry 
     @Override
     public void run() {
         try {

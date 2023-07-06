@@ -10,76 +10,440 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.GameFieldController">
+<AnchorPane minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.GameFieldController">
     <children>
-        <SplitPane dividerPositions="0.7203525641025641" layoutX="295.0" layoutY="386.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+       <SplitPane dividerPositions="0.7203525641025641" layoutX="295.0" layoutY="386.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                <!--Spielfeld-->
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="570.0" prefWidth="493.0">
                     <children>
-                        <SplitPane dividerPositions="0.763791374122367" layoutX="166.0" layoutY="90.0" prefHeight="452.0" prefWidth="799.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <items>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                    <children>
-                                        <SplitPane dividerPositions="0.45871398453970486" layoutX="279.0" layoutY="179.0" prefHeight="603.2" prefWidth="758.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                            <items>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="570.0" prefWidth="493.0">
-                                                    <children>
-                                                        <Rectangle fx:id="kasten_LobbyHost" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="150.0" layoutX="27.0" layoutY="28.0" stroke="#4fd423" strokeType="INSIDE" width="200.0" />
-                                                        <Label fx:id="label_LobbyhostName" layoutX="44.0" layoutY="40.0" text="Lobyhost.name" />
-                                                        <Label fx:id="label_LobbyhostHandkarten" layoutX="44.0" layoutY="85.0" text="Anzahl Handkarten" />
-                                                        <Label fx:id="label_LobbyhostPunkte" layoutX="44.0" layoutY="137.0" text="Punkte" />
-                                                        <Label fx:id="label_LobbyhostDealer" layoutX="146.0" layoutY="146.0" text="(Dealer)" />
-                                                        <Rectangle fx:id="kasten_spieler3" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="150.0" layoutX="27.0" layoutY="388.0" stroke="#4fd423" strokeType="INSIDE" width="200.0" />
-                                                        <Label fx:id="label_Spieler3Name" layoutX="44.0" layoutY="400.0" text="Spieler3.name" />
-                                                        <Label fx:id="label_Spieler3Handkarten" layoutX="44.0" layoutY="445.0" text="Anzahl Handkarten" />
-                                                        <Label fx:id="label_Spieler3Punkte" layoutX="44.0" layoutY="497.0" text="Punkte" />
-                                                        <Label fx:id="label_Spieler3Dealer" layoutX="146.0" layoutY="506.0" text="(Dealer)" />
-                                                        <Rectangle fx:id="kasten_spieler2" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="150.0" layoutX="25.0" layoutY="210.0" stroke="#4fd423" strokeType="INSIDE" width="200.0" />
-                                                        <Label fx:id="label_Spieler2Name" layoutX="42.0" layoutY="222.0" text="Spieler2.name" />
-                                                        <Label fx:id="label_Spieler2Handkarten" layoutX="42.0" layoutY="267.0" text="Anzahl Handkarten" />
-                                                        <Label fx:id="label_Spieler2Punkte" layoutX="42.0" layoutY="319.0" text="Punkte" />
-                                                        <Label fx:id="label_Spieler2Dealer" layoutX="144.0" layoutY="328.0" text="(Dealer)" />
-                                                        <Rectangle fx:id="kasten_spieler4" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="150.0" layoutX="260.0" layoutY="28.0" stroke="#4fd423" strokeType="INSIDE" width="200.0" />
-                                                        <Label fx:id="label_Spieler4Name" layoutX="277.0" layoutY="40.0" text="Spieler4.name" />
-                                                        <Label fx:id="label_Spieler4Handkarten" layoutX="277.0" layoutY="85.0" text="Anzahl Handkarten" />
-                                                        <Label fx:id="label_Spieler4Punkte" layoutX="277.0" layoutY="137.0" text="Punkte" />
-                                                        <Label fx:id="label_Spieler4Dealer" layoutX="379.0" layoutY="146.0" text="(Dealer)" />
-                                                        <Rectangle fx:id="kasten_spieler5" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="150.0" layoutX="260.0" layoutY="210.0" stroke="#4fd423" strokeType="INSIDE" width="200.0" />
-                                                        <Label fx:id="label_Spieler5Name" layoutX="277.0" layoutY="222.0" text="Spieler5.name" />
-                                                        <Label fx:id="label_Spieler5Handkarten" layoutX="277.0" layoutY="267.0" text="Anzahl Handkarten" />
-                                                        <Label fx:id="label_Spieler5Punkte" layoutX="277.0" layoutY="319.0" text="Punkte" />
-                                                        <Label fx:id="label_Spieler5Dealer" layoutX="379.0" layoutY="328.0" text="(Dealer)" />
-                                                        <Rectangle fx:id="kasten_spieler6" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="150.0" layoutX="260.0" layoutY="388.0" stroke="#4fd423" strokeType="INSIDE" width="200.0" />
-                                                        <Label fx:id="label_Spieler6Name" layoutX="277.0" layoutY="400.0" text="Spieler6.name" />
-                                                        <Label fx:id="label_Spieler6Handkarten" layoutX="277.0" layoutY="445.0" text="Anzahl Handkarten" />
-                                                        <Label fx:id="label_Spieler6Punkte" layoutX="277.0" layoutY="497.0" text="Punkte" />
-                                                        <Label fx:id="label_Spieler6Dealer" layoutX="379.0" layoutY="506.0" text="(Dealer)" />
-                                                    </children>
-                                                </AnchorPane>
+                        <!--Spieler 1-->
+                        <Rectangle fx:id="kasten_Gegenspieler1" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="27.0" layoutY="28.0" stroke="#4fd423" strokeType="INSIDE" width="500.0" />
+                        <Label fx:id="label_Gegenspieler1Name" layoutX="44.0" layoutY="40.0" text="Spieler1" />
+                        <Label fx:id="label_Gegenspieler1Handkarten" layoutX="44.0" layoutY="60.0" text="Anzahl Handkarten" />
+                        <Label fx:id="label_Gegenspieler1Punkte" layoutX="44.0" layoutY="80.0" text="Punkte" />
+                        <Label  layoutX="44.0" layoutY="100.0" text="Phase Rule 1: " />
+                        <Label layoutX="296.0" layoutY="100.0" text="Phase Rule 2: " />
+                        <!-- Karte von 1 bis 5 für die phase Rule Nr 1-->
+                        <ImageView fx:id="imgkarteSpieler1_1" fitHeight="50" fitWidth="75" layoutX="44.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler1_2" fitHeight="50" fitWidth="75" layoutX="86.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler1_3" fitHeight="50" fitWidth="75" layoutX="128.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler1_4" fitHeight="50" fitWidth="75" layoutX="170.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler1_5" fitHeight="50" fitWidth="75" layoutX="212.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <!-- Karte von 6 bis 10 für die phase Rule Nr 2-->
+                        <ImageView fx:id="imgkarteSpieler1_6" fitHeight="50" fitWidth="75" layoutX="296.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler1_7" fitHeight="50" fitWidth="75" layoutX="338.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler1_8" fitHeight="50" fitWidth="75" layoutX="380.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler1_9" fitHeight="50" fitWidth="75" layoutX="422.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler1_10" fitHeight="50" fitWidth="75" layoutX="464.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <!--Spieler 2-->
+                        <Rectangle fx:id="kasten_Gegenspieler2" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="530.0" layoutY="28.0" stroke="#4fd423" strokeType="INSIDE" width="500.0" />
+                        <Label fx:id="label_Gegenspieler2" layoutX="544.0" layoutY="40.0" text="Spieler2" />
+                        <Label fx:id="label_Gegenspieler2Handkarten" layoutX="544.0" layoutY="60.0" text="Anzahl Handkarten" />
+                        <Label fx:id="label_Gegenspieler2Punkte" layoutX="544.0" layoutY="80.0" text="Punkte" />
+                        <Label layoutX="544.0" layoutY="100.0" text="Phase Rule 1: " />
+                        <Label layoutX="796.0" layoutY="100.0" text="Phase Rule 2: " />
+                        <ImageView fx:id="imgkarteSpieler2_1" fitHeight="50" fitWidth="75" layoutX="544.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler2_2" fitHeight="50" fitWidth="75" layoutX="586.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler2_3" fitHeight="50" fitWidth="75" layoutX="628.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler2_4" fitHeight="50" fitWidth="75" layoutX="670.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler2_5" fitHeight="50" fitWidth="75" layoutX="712.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <!-- Karte von 6 bis 10 für die phase Rule Nr 2-->
+                        <ImageView fx:id="imgkarteSpieler2_6" fitHeight="50" fitWidth="75" layoutX="796.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler2_7" fitHeight="50" fitWidth="75" layoutX="838.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler2_8" fitHeight="50" fitWidth="75" layoutX="880.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler2_9" fitHeight="50" fitWidth="75" layoutX="922.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler2_10" fitHeight="50" fitWidth="75" layoutX="964.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <!--Spieler 3-->
+                        <Rectangle fx:id="kasten_Gegenspieler3" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="27.0" layoutY="198.0" stroke="#4fd423" strokeType="INSIDE" width="500.0" />
+                        <Label fx:id="label_Gegenspieler3" layoutX="44.0" layoutY="210.0" text="Spieler3" />
+                        <Label fx:id="label_Gegenspieler3Handkarten" layoutX="44.0" layoutY="230.0" text="Anzahl Handkarten" />
+                        <Label fx:id="label_Gegenspieler3Punkte" layoutX="44.0" layoutY="250.0" text="Punkte" />
+                        <Label layoutX="44.0" layoutY="270.0" text="Phase Rule 1: " />
+                        <Label layoutX="296.0" layoutY="270.0" text="Phase Rule 2: " />
+                        <ImageView fx:id="imgkarteSpieler3_1" fitHeight="50" fitWidth="75" layoutX="44.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler3_2" fitHeight="50" fitWidth="75" layoutX="86.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler3_3" fitHeight="50" fitWidth="75" layoutX="128.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler3_4" fitHeight="50" fitWidth="75" layoutX="170.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler3_5" fitHeight="50" fitWidth="75" layoutX="212.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                          <!-- Karte von 6 bis 10 für die phase Rule Nr 2-->
+                        <ImageView fx:id="imgkarteSpieler3_6" fitHeight="50" fitWidth="75" layoutX="296.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler3_7" fitHeight="50" fitWidth="75" layoutX="338.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler3_8" fitHeight="50" fitWidth="75" layoutX="380.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler3_9" fitHeight="50" fitWidth="75" layoutX="422.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler3_10" fitHeight="50" fitWidth="75" layoutX="464.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <!--Spieler 4-->
+                        <Rectangle fx:id="kasten_Gegenspieler4" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="530.0" layoutY="198.0" stroke="#4fd423" strokeType="INSIDE" width="500.0" />
+                        <Label fx:id="label_Gegenspieler4" layoutX="544.0" layoutY="210.0" text="Spieler4" />
+                        <Label fx:id="label_Gegenspieler4Handkarten" layoutX="544.0" layoutY="230.0" text="Anzahl Handkarten" />
+                        <Label fx:id="label_Gegenspieler4Punkte" layoutX="544.0" layoutY="250.0" text="Punkte" />
+                        <Label layoutX="544.0" layoutY="270.0" text="Phase Rule 1: " />
+                        <Label layoutX="796.0" layoutY="270.0" text="Phase Rule 2: " />
+                        <!-- Karte von 2 bis 5 für die phase Rule Nr 1-->
+                        <ImageView fx:id="imgkarteSpieler4_1" fitHeight="50" fitWidth="75" layoutX="544.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler4_2" fitHeight="50" fitWidth="75" layoutX="586.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler4_3" fitHeight="50" fitWidth="75" layoutX="628.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler4_4" fitHeight="50" fitWidth="75" layoutX="670.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler4_5" fitHeight="50" fitWidth="75" layoutX="712.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <!-- Karte von 6 bis 10 für die phase Rule Nr 2-->
+                        <ImageView fx:id="imgkarteSpieler4_6" fitHeight="50" fitWidth="75" layoutX="796.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler4_7" fitHeight="50" fitWidth="75" layoutX="838.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler4_8" fitHeight="50" fitWidth="75" layoutX="880.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler4_9" fitHeight="50" fitWidth="75" layoutX="922.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler4_10" fitHeight="50" fitWidth="75" layoutX="964.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <!--Spieler 5-->
+                        <Rectangle fx:id="kasten_Gegenspieler5" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="530.0" layoutY="368.0" stroke="#4fd423" strokeType="INSIDE" width="500.0" />
+                        <Label fx:id="label_Gegenspieler5" layoutX="544.0" layoutY="380.0" text="Spieler5" />
+                        <Label fx:id="label_Gegenspieler5Handkarten" layoutX="544.0" layoutY="400.0" text="Anzahl Handkarten" />
+                        <Label fx:id="label_Gegenspieler5Punkte" layoutX="544.0" layoutY="420.0" text="Punkte" />
+                        <Label layoutX="544.0" layoutY="440.0" text="Phase Rule 1: " />
+                        <Label layoutX="796.0" layoutY="440.0" text="Phase Rule 2: " />
+                        <!-- Karte von 2 bis 5 für die phase Rule Nr 1-->
+                        <ImageView fx:id="imgkarteSpieler5_1" fitHeight="50" fitWidth="75" layoutX="544.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler5_2" fitHeight="50" fitWidth="75" layoutX="586.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler5_3" fitHeight="50" fitWidth="75" layoutX="628.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler5_4" fitHeight="50" fitWidth="75" layoutX="670.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler5_5" fitHeight="50" fitWidth="75" layoutX="712.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <!-- Karte von 6 bis 10 für die phase Rule Nr 2-->
+                        <ImageView fx:id="imgkarteSpieler5_6" fitHeight="50" fitWidth="75" layoutX="796.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler5_7" fitHeight="50" fitWidth="75" layoutX="838.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler5_8" fitHeight="50" fitWidth="75" layoutX="880.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler5_9" fitHeight="50" fitWidth="75" layoutX="922.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpieler5_10" fitHeight="50" fitWidth="75" layoutX="964.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <!--Aktuelle Spieler-->
+                        <Rectangle fx:id="kasten_Client" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="27.0" layoutY="368.0" stroke="#4fd423" strokeType="INSIDE" width="500.0" />
+                        <Label fx:id="label_Client" layoutX="44.0" layoutY="380.0" text="Aktuelle Spieler" />
+                        <Label fx:id="label_CLientHandkarten" layoutX="44.0" layoutY="400.0" text="Anzahl Handkarten" />
+                        <Label fx:id="label_ClientPunkte" layoutX="44.0" layoutY="420.0" text="Punkte" />
+                        <Label layoutX="44.0" layoutY="440.0" text="Phase Rule 1: " />
+                        <Label layoutX="296.0" layoutY="440.0" text="Phase Rule 2: " />
+                        <!-- Karte von 2 bis 5 für die phase Rule Nr 1-->
+                        <ImageView fx:id="imgkarteSpielerClient_1" fitHeight="50" fitWidth="75" layoutX="44.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpielerClient_2" fitHeight="50" fitWidth="75" layoutX="86.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpielerClient_3" fitHeight="50" fitWidth="75" layoutX="128.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpielerClient_4" fitHeight="50" fitWidth="75" layoutX="170.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpielerClient_5" fitHeight="50" fitWidth="75" layoutX="212.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <!-- Karte von 6 bis 10 für die phase Rule Nr 2-->
+                        <ImageView fx:id="imgkarteSpielerClient_6" fitHeight="50" fitWidth="75" layoutX="296.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpielerClient_7" fitHeight="50" fitWidth="75" layoutX="338.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpielerClient_8" fitHeight="50" fitWidth="75" layoutX="380.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpielerClient_9" fitHeight="50" fitWidth="75" layoutX="422.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgkarteSpielerClient_10" fitHeight="50" fitWidth="75" layoutX="464.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
 
-
-                                             <!-- SpieldFeld-->
-                                            </items>
-                                        </SplitPane>
-                                    </children>
-                                </AnchorPane>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                    <children>
-                                        <Label layoutX="36.0" layoutY="26.0" prefHeight="30.0" prefWidth="52.0" text="Chat" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="35.0">
-                                            <font>
-                                                <Font size="20.0" />
-                                            </font>
-                                        </Label>
-                                        <TextArea fx:id="raumChat_ausgabe" editable="false" layoutX="36.0" layoutY="55.0" prefHeight="581.0" prefWidth="266.0" wrapText="true" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="80.0" />
-                                        <TextField fx:id="raumChat_eingabe" layoutX="36.0" layoutY="656.0"  prefHeight="26.0" prefWidth="266.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" /> <!--onKeyPressed="#sendeNachricht_raumChat"-->
-                                    </children>
-                                </AnchorPane>
-                            </items>
-                        </SplitPane>
                     </children>
                 </AnchorPane>
+
+                <!-- karten des spielers -->
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                    <!-- karten des spielers -->
+                    <children>
+                        <Label layoutX="36.0" layoutY="14.0" text="Handkarten" />
+                        <ComboBox fx:id="dropdown_KarteWaehlen_karteSpielen" layoutX="146.0" layoutY="10.0" prefWidth="150.0" promptText="Karte auswählen" />
+                        <ComboBox fx:id="dropdown_Zielstapel_StapelBewegen"  layoutX="325.0" layoutY="10.0" prefWidth="150.0" promptText="Zielstapel wählen" />
+                        <Button layoutX="537.0" layoutY="10.0" mnemonicParsing="false" onAction="#karte_spielen" text="Karte spielen" />
+                        <Button layoutX="680.0" layoutY="10.0" mnemonicParsing="false" onAction="#bestätigt_Phase" text="Phase bestätigen" />
+                        <Button layoutX="800.0" layoutY="10.0" mnemonicParsing="false" onAction="#zug_beenden" text="Zug beenden" />
+                        <ImageView fx:id="imagekarte_H1" fitHeight="100.0" fitWidth="150.0" layoutX="14.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imagekarte_H2" fitHeight="100.0" fitWidth="150.0" layoutX="99.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imagekarte_H3" fitHeight="100.0" fitWidth="150.0" layoutX="184.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imagekarte_H4" fitHeight="100.0" fitWidth="150.0" layoutX="269.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imagekarte_H5" fitHeight="100.0" fitWidth="150.0" layoutX="354.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imagekarte_H6" fitHeight="100.0" fitWidth="150.0" layoutX="439.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imagekarte_H7" fitHeight="100.0" fitWidth="150.0" layoutX="524.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imagekarte_H8" fitHeight="100.0" fitWidth="150.0" layoutX="609.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imagekarte_H9" fitHeight="100.0" fitWidth="150.0" layoutX="694.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imagekarte_H10" fitHeight="100.0" fitWidth="150.0" layoutX="779.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+
+                        <Button layoutX="980.0" layoutY="10.0" mnemonicParsing="false" onAction="#UebersichtKarte_Ziehen" text="Uebersichtskarte" />
+                        <ImageView fx:id="imagekarte_Uebersichtskarte" fitHeight="100.0" fitWidth="150.0" layoutX="980.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@playingCards/card1Color5Repeat0.png" />
+                            </image>
+                        </ImageView>
+                        <Label layoutX="1100.0" layoutY="14.0" text="Aufnahmestapel" />
+                        <Button layoutX="1100.0" layoutY="57.0" mnemonicParsing="false" onAction="#karte_spielen" text="Karte Ziehen" />
+                        <Button layoutX="1100.0" layoutY="97.0" mnemonicParsing="false" onAction="#LaunchChat" text="Chat" />
+
+                    </children>
                 </AnchorPane>
             </items>
         </SplitPane>

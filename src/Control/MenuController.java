@@ -184,12 +184,12 @@ public class MenuController {
     public void raumBeitreten(ActionEvent event) throws IOException {
         //get lobbyname from GUI 
         //Lobbys are bound to those names to registry 
-        String lobbyString = lobbylist.getSelectionModel().getSelectedItem();
+        /**         String lobbyString = lobbylist.getSelectionModel().getSelectedItem();
         
         String[] lobbyNameList = lobbyString.split("\t\t");
         String lobbyName = lobbyNameList[0];
         
-        try{
+      try{
             Registry registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
             
             Lobby lobby =  (Lobby) registry.lookup(lobbyName);
@@ -201,8 +201,7 @@ public class MenuController {
 
         } catch(Exception e){
             e.printStackTrace(System.out);
-            
-        }
+        }**/
 
         //UI
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/gameField.fxml"));

@@ -236,4 +236,10 @@ public class MenuController {
             e.printStackTrace();
         }
     }
+
+    public void start_Game(ActionEvent event) {
+    }
+
+    public void raumVerlassen(ActionEvent event) {
+    }
 }

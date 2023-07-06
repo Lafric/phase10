@@ -1,0 +1,16 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16"
+            fx:controller="Control.ChatRaumController">
+    <children>
+        <Label layoutX="36.0" layoutY="26.0" prefHeight="30.0" prefWidth="52.0" text="Chat" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="35.0">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <TextArea fx:id="raumChat_ausgabe" editable="false" layoutX="36.0" layoutY="55.0" prefHeight="581.0" prefWidth="266.0" wrapText="true" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="80.0" />
+        <TextField fx:id="raumChat_eingabe" layoutX="36.0" layoutY="656.0"  prefHeight="26.0" prefWidth="266.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="35.0" onKeyPressed="#sendeNachricht_raumChat" AnchorPane.rightAnchor="35.0" />
+    </children>
+</AnchorPane>
+

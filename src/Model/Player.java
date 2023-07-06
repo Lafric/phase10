@@ -1,5 +1,8 @@
 package Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The class Player represents one Player inside a Game.
  * @author Alexander Guenther
@@ -10,14 +13,14 @@ public class Player {
     private final String name;
     private int points;
     private int phase;
-    private final Card[] handCards;
+    private final List<Card> handCards;
 
-    public Player(int id, String name, int points, int phase, Card[] handCards) {
+    public Player(int id, String name) {
         this.id = id;
         this.name = name;
-        this.points = points;
-        this.phase = phase;
-        this.handCards = handCards;
+        this.points = 0;
+        this.phase = 0;
+        this.handCards = new ArrayList<>();
     }
 
     public int getId() {
@@ -36,16 +39,32 @@ public class Player {
         return this.phase;
     }
 
-    public Card[] getHandCards() {
+    public List<Card> getHandCards() {
         return this.handCards;
     }
 
-    public void increasePoints(int points){
-        this.points += points;
+    /**
+     * The method increases the penalty points of the player by the corresponding amount of his hand cards
+     */
+    public void increasePointsByHandCards(){
+        for(Card card: this.handCards){
+            this.points += card.getType().getPenaltyPoints();
+        }
     }
 
     public void increasePhase(){
         this.phase++;
+    }
+
+    public void resetPoints(){
+        this.points = 0;
+    }
+    public void resetPhase(){
+        this.phase = 0;
+    }
+
+    public void resetHandCards(){
+        this.handCards.clear();
     }
 }
 

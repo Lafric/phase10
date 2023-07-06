@@ -6,5 +6,20 @@ package Model;
  * @version 1.0
  */
 public enum CardColor {
-    GREEN,BLUE,YELLOW,RED,LIGHTBLUE;
+    YELLOW,RED,GREEN,PINK,BLUE;
+
+    /**
+     * This method return a color for each integer
+     * @param num given integer to convert to color
+     * @return
+     */
+    public static CardColor numToCol(int num){
+        switch (num){
+            case 0: return YELLOW;
+            case 1: return RED;
+            case 2: return GREEN;
+            case 3: return PINK;
+            default: return BLUE;
+        }
+    }
 }

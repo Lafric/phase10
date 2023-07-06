@@ -1,6 +1,6 @@
 package Model;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * This Class represents Game that is currently being played.
@@ -8,65 +8,219 @@ import java.util.List;
  * @version 1.0
  */
 public class Game {
-    private final Player[] allPlayer;
-    private Player currentPlayer;
-    private PhaseRule[] phaseRules;
-    private List<Card> hiddenStack;
-    private List<Card> openStack;
-    private List<Filing> filings;
+    private final Player[] allPlayer; // all participating player
+    private int currentPlayer; // index on the current player
+    private final PhaseRule[] phaseRules; // the rules, aka the filings the players need to put on table in each round
+    private Stack<Card> hiddenStack; // hidden stack on table
+    private Stack<Card> openStack; // the open stack on table
+    private final List<Filing> filings; // the filings on the table
+
+    private final boolean[] playerOverloadIndicator;// Indicates if the player has one card too much due to drawing
+
+    private final int[] skipCounter; // counts how many skips are currently on each player
 
     public Game(Player[] allPlayer, PhaseRule[] phaseRules) {
         this.allPlayer = allPlayer;
+        // Reset Players
+        for (Player player: this.allPlayer) {
+            player.resetPhase();
+            player.resetPoints();
+        }
         this.phaseRules = phaseRules;
+        // Distribute Cards
         initializeCards();
-        pickCurrentPlayer();
+        // Pick starting player
+        currentPlayer = 0;
+        // Set overload to false
+        this.playerOverloadIndicator = new boolean[allPlayer.length];
+        Arrays.fill(this.playerOverloadIndicator,false);
+        // Set up Filling Container
+        this.filings = new ArrayList<>();
+        // Set up Skip Counter
+        this.skipCounter = new int[allPlayer.length];
+        Arrays.fill(this.skipCounter,0);
     }
 
     /**
-     * This method picks a starting player for the next round.
+     * This method picks the next active player.
      */
-    private void pickCurrentPlayer(){
-        System.err.println("INITIALIZATION OF RANDOM PLAYER NOT IMPLEMENTED");
+    private void goToNextPlayer(){
+        if(this.currentPlayer== this.allPlayer.length-1){
+            this.currentPlayer = 0;
+        } else{
+           this.currentPlayer++;
+        }
+        // Check if Player gets skipped
+        if(this.skipCounter[currentPlayer]>0){
+            this.skipCounter[currentPlayer]--;
+            this.goToNextPlayer();
+        }
     }
 
     /**
-     * The method initializeCards is shuffling the cards.
+     * The method initializeCards is shuffling and redistributing of the cards.
      */
     private void initializeCards() {
-        System.err.println("RANDOM CARD HAS NOT BEEN IMPLEMENTED");
+        // Setup array and counter
+        int id = 0;
+        hiddenStack = new Stack<>();
+        // Create all numbers
+        for (int i = 0; i < 4; i++) {
+            for (int j = 1; j < 13; j++) {
+                // Ensure unique id
+                boolean unique = true;
+                while (unique) {
+                    unique = true;
+                    for (Player player : this.allPlayer) {
+                        if (player.getId() == id) {
+                            unique = false;
+                            id++;
+                        }
+                    }
+                }
+                // Create card and add to hidden stack
+                hiddenStack.push(new Card(id, CardColor.numToCol(i), CardType.getForNumber(j)));
+                id++;
+            }
+        }
+        // Create 8 Jokers
+        for(int i=0;i<8;i++){
+            // Ensure unique id
+            boolean unique = true;
+            while (unique) {
+                unique = true;
+                for (Player player : this.allPlayer) {
+                    if (player.getId() == id) {
+                        unique = false;
+                        id++;
+                    }
+                }
+            }
+            hiddenStack.push(new Card(id, CardColor.BLUE, CardType.JOKER));
+            id++;
+        }
+        // Create 4 Skips
+        for(int i=0;i<4;i++){
+            // Ensure unique id
+            boolean unique = true;
+            while (unique) {
+                unique = true;
+                for (Player player : this.allPlayer) {
+                    if (player.getId() == id) {
+                        unique = false;
+                        id++;
+                    }
+                }
+            }
+            hiddenStack.push(new Card(id, CardColor.BLUE, CardType.SKIP));
+            id++;
+        }
+
+        // Shuffle Cards
+        Collections.shuffle(this.hiddenStack);
+
+        // Distribute Cards to Players
+        for (Player player: this.allPlayer) {
+            player.resetHandCards();
+            for (int i=0; i<10;i++){
+                Card card = this.hiddenStack.pop();
+                player.getHandCards().add(card);
+            }
+        }
+
+        // Put Card on open stack
+        this.openStack.add(this.hiddenStack.pop());
+
+        // Remove open filings
+        this.filings.clear();
     }
 
     /**
-     * This methods determine the current player in action
+     * This method determine the current player in action
      * @return is the currently active player.
      */
-    public Player getCurrentPlayer(){
+    public int getCurrentPlayer(){
         return this.currentPlayer;
     }
     public Player[] getAllPlayer(){
         return this.allPlayer;
     }
-    public boolean isPhaseOver(){
-        System.err.println("PHASE FINISHED CHECKER NOT IMPLEMENTED");
-        return true;
-    }
 
     /**
-     * This method simulates the process of drawing a card
+     * This method simulates the process of drawing a card from the hidden stack
      * @param player who is drawing a card
      * @param hiddenStack if the card is taken from the hidden or open stack
      */
     public void drawCard(Player player, boolean hiddenStack){
-        System.err.println("DRAW CARD METHOD NOT IMPLEMENTED");
+        if(allPlayer[this.currentPlayer].getId() == player.getId()){
+            if(this.playerOverloadIndicator[currentPlayer]){
+                // Set Overload
+                this.playerOverloadIndicator[currentPlayer] = true;
+                // Draw Card
+                Card card = null;
+                if(hiddenStack){
+                    card = this.hiddenStack.pop();
+                } else{
+                    card = this.openStack.pop();
+                }
+                // Give Card to player
+                this.allPlayer[currentPlayer].getHandCards().add(card);
+            } else {
+                System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", you already draw one card.");
+            }
+        } else{
+            System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", it is not your turn. Please Wait.");
+        }
     }
 
     /**
      * This method simulates the process of putting one card to the open stack
      * @param player who is throwing a card.
      * @param cardId is the id of the card, which will be put on the stack.
+     * @param playerId is the player to be skipped, in case a skip card is played
      */
-    public void throwCard(Player player, int cardId){
-        System.err.println("THROW CARD METHOD NOT IMPLEMENTED");
+    public void throwCard(Player player, int cardId, int playerId){
+        if(allPlayer[this.currentPlayer].getId() == player.getId()){
+            if(!this.playerOverloadIndicator[currentPlayer]){
+                // Set Overload
+                this.playerOverloadIndicator[currentPlayer] = false;
+                boolean success = false;
+                // Check if card is on player hands
+                for (Card card: player.getHandCards()){
+                    if(card.getId()==cardId){
+                        player.getHandCards().remove(card);
+                        this.openStack.push(card);
+                        if(card.getType()==CardType.SKIP){
+                            this.skipCounter[getPlayerIndexById(playerId)]++;
+                        }
+                        checkForPhaseIncrease(player);
+                        success = true;
+                    }
+                }
+                if(!success){
+                    System.err.println("WRONG CARD IDENTIFICATION NUMBER GIVEN");
+                }
+
+            } else {
+                System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", you first need to draw a card.");
+            }
+        } else{
+            System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", it is not your turn. Please Wait.");
+        }
+    }
+
+    /**
+     * Helper method to change from player id to player index in array
+     * @param id of the player
+     * @return the index in array
+     */
+    private int getPlayerIndexById( int id ){
+        for(int i = 0;i<this.allPlayer.length;i++){
+            if(this.allPlayer[i].getId()==id){
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -74,9 +228,71 @@ public class Game {
      * @param player the active player
      * @param cardId the id of the card to put on the table
      * @param filingId the id number of the filing where the card should be added.
+     * @param low indicates, in the case of a street, if the card should added at the start or end.
      */
-    public void playCard(Player player, int cardId, int filingId){
-        System.err.println("SINGLE CARD PLAY NOT IMPLEMENTED");
+    public void playCard(Player player, int cardId, int filingId, boolean low){
+        Card cardInFocus = null;
+        if(this.allPlayer[currentPlayer].getId()==player.getId()){
+            if(this.playerOverloadIndicator[currentPlayer]){
+                // Check if card is on player hands
+                boolean inHand = false;
+                for (Card card: player.getHandCards()){
+                    if(card.getId()==cardId){
+                        cardInFocus = card;
+                        inHand = true;
+                    }
+                }
+                if(inHand){
+                    // Check if filing is on the table
+                    boolean onTable = false;
+                    for (Filing filing: this.filings){
+                        if(filing.getId()==filingId){
+                            if(filing instanceof Street){
+                                // Check if Card fits at street ends
+                                Street street = (Street) filing;
+                                if(street.getStart().getNumber()-1==cardInFocus.getType().getNumber() && low){
+                                    street.lowerStart();
+                                    this.allPlayer[currentPlayer].getHandCards().remove(cardInFocus);
+                                } else if (street.getEnd().getNumber()+1==cardInFocus.getType().getNumber() && !low){
+                                    street.increaseEnd();
+                                    this.allPlayer[currentPlayer].getHandCards().remove(cardInFocus);
+                                } else if (cardInFocus.getType()==CardType.JOKER){
+                                    if(low){
+                                        street.lowerStart();
+                                    } else {
+                                        street.increaseEnd();
+                                    }
+                                    this.allPlayer[currentPlayer].getHandCards().remove(cardInFocus);
+                                } else {
+                                    System.out.println("CARD DOES NOT MATCH THE Specified FILING (Position)");
+                                }
+                            } else if(filing instanceof Tuplet){
+                                Tuplet tuplet = (Tuplet) filing;
+                                if(tuplet.getType()==cardInFocus.getType() || cardInFocus.getType()==CardType.JOKER){
+                                    tuplet.increaseAmount();
+                                    this.allPlayer[currentPlayer].getHandCards().remove(cardInFocus);
+                                }
+                                else {
+                                    System.out.println("CARD DOES NOT MATCH THE Specified FILING (Position)");
+                                }
+                            }
+                            onTable = true;
+                        }
+                    }
+                    checkForPhaseIncrease(player);
+                    if(!onTable){
+                        System.out.println("SPECIFIED FILING NOT PRESENT");
+                    }
+                } else {
+                    System.err.println("WRONG CARD IDENTIFICATION NUMBER GIVEN");
+                }
+
+            } else {
+                System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", you first need to draw a card.");
+            }
+        } else {
+            System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", it is not your turn. Please Wait.");
+        }
     }
 
     /**
@@ -85,7 +301,97 @@ public class Game {
      * @param cardIds the id numbers of the cards to put down.
      */
     public void layCards(Player player, int[] cardIds){
-        System.err.println("LAY CARD METHOD NOT IMPLEMENTED");
+        if(player.getId()==this.allPlayer[currentPlayer].getId()){
+            // Get Rule for Phase
+            PhaseRule rule = this.phaseRules[player.getPhase()];
+            // Check if player has reached maximum number of own filings
+            int counter = 0;
+            for(Filing fill: this.filings){
+                if(fill.getPlayerId()==player.getId()){
+                    counter++;
+                }
+            }
+            if(counter<rule.getPhaseRules().length){
+                // Determine free id
+                int id = 1000;
+                boolean free = false;
+                while(!free){
+                    free = true;
+                    for (Filing fil: this.filings) {
+                        if (id == fil.getId()) {
+                            free = false;
+                            id++;
+                        }
+                    }
+                }
+                // Get cards
+                Card[] cards = new Card[cardIds.length];
+                for(int i = 0; i < cardIds.length; i++){
+                    boolean found = false;
+                    for(Card plCard: player.getHandCards()){
+                        if(cardIds[i]==plCard.getId()){
+                            cards[i] = plCard;
+                        }
+                    }
+                }
+                // Check if filing exists
+                Filing filing = rule.createMatchingFiling(id,cards);
+                if(filing!=null){
+                    this.filings.add(filing);
+                    // Remove cards from player hand
+                    for(int j = 0; j < cards.length; j++){
+                        player.getHandCards().remove(cards[j]);
+                    }
+                } else{
+                    System.out.println("PLAYER "+player.getName()+", NO MATHING FILING FOR YOUR PHASE");
+                }
+            }
+
+        } else{
+            System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", it is not your turn. Please Wait.");
+        }
+    }
+
+    /**
+     * This helper method checks for a player if he/she/it increases in pahse
+     * @param player to check
+     */
+    private void checkForPhaseIncrease(Player player){
+        if(player.getHandCards().size()<=0){
+            player.increasePhase();
+        }
+    }
+
+    /**
+     * This method put the game into the next round. So cards are new distributed.
+     */
+    public void goToNextRound(){
+        // Save Players Points and remove cards
+        for(int i = 0; i < this.allPlayer.length; i++){
+            this.allPlayer[i].increasePointsByHandCards();
+            this.allPlayer[i].resetHandCards();
+        }
+        // Reset Skip Counter and overload
+        Arrays.fill(this.skipCounter,0);
+        Arrays.fill(this.playerOverloadIndicator,false);
+        // Clear fillings and redistributed cards
+        this.filings.clear();
+        this.openStack.clear();
+        this.hiddenStack.clear();
+        this.initializeCards();
+    }
+
+    /**
+     * This method checks if one Player has completed Phase 10
+     * @return true or false depending on if game is over
+     */
+    public boolean isGameOver(){
+        for (int i = 0; i< this.allPlayer.length; i++){
+            if(this.allPlayer[i].getPhase()>10){
+                return true;
+            }
+        }
+        return false;
     }
 }
 

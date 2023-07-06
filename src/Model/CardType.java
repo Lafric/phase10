@@ -34,4 +34,22 @@ public enum CardType {
     public int getPenaltyPoints(){
         return this.penaltyPoints;
     }
+
+    public static CardType getForNumber(int num){
+        switch (num){
+            case 1 : return CardType.ONE;
+            case 2 : return CardType.TWO;
+            case 3 : return CardType.THREE;
+            case 4 : return CardType.FOUR;
+            case 5 : return CardType.FIVE;
+            case 6 : return CardType.SIX;
+            case 7 : return CardType.SEVEN;
+            case 8 : return CardType.EIGHT;
+            case 9 : return CardType.NINE;
+            case 10 : return CardType.TEN;
+            case 11 : return CardType.ELEVEN;
+            case 12 : return CardType.TWELVE;
+            default: return CardType.JOKER;
+        }
+    }
 }

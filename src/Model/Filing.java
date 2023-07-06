@@ -7,6 +7,8 @@ package Model;
  */
 public abstract class Filing {
     private final int id;
+
+    private final int playerId;
     private final boolean unreal;// Indicates if the Card is real or only part of a rule
 
     public int getId() {
@@ -20,10 +22,15 @@ public abstract class Filing {
     public Filing(int id, boolean unreal) {
         this.id = id;
         this.unreal = unreal;
+        this.playerId = -1;
     }
-    public Filing(int id) {
+    public Filing(int id, int playerId) {
         this.id = id;
         this.unreal = false;
+        this.playerId = playerId;
+    }
+    public int getPlayerId(){
+        return this.playerId;
     }
 }
 

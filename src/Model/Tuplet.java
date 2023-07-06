@@ -6,15 +6,25 @@ package Model;
  * @version 1.0
  */
 public class Tuplet extends Filing{
-    private final int amount;
+    private int amount;
+    private CardType type;
 
-    public Tuplet(int id, int amount) {
+    public Tuplet(int id, CardType type, int amount) {
         super(id);
+        this.type = type;
         this.amount = amount;
     }
 
     public int getAmount() {
         return amount;
     }
+
+    public void increaseAmount(){
+        this.amount++;
+    }
+    public CardType getType(){
+        return this.type;
+    }
+
 }
 

@@ -13,7 +13,8 @@ public class LobbyImpl extends UnicastRemoteObject implements Lobby{
     public static Integer maxPlayerCount = 6; 
     public Integer currentplayerCount; 
     public ArrayList<Identity> playerlist = new ArrayList<Identity>();
-    
+
+    private ArrayList<Message> messages = new ArrayList<Message>();
     
     
     
@@ -45,6 +46,7 @@ public class LobbyImpl extends UnicastRemoteObject implements Lobby{
         if (currentplayerCount < maxPlayerCount){ //same player *could* still join twice, maybe fix later
             this.currentplayerCount += 1;
             this.playerlist.add(identity);
+            
 
         }
         else{
@@ -62,6 +64,16 @@ public class LobbyImpl extends UnicastRemoteObject implements Lobby{
         }
     }
 
+    //@Override
+    public ArrayList<Message> fetchMessages() throws RemoteException {
+        return this.messages;
+        
+    }
+
+    @Override
+    public void sendMessage(Message message) throws RemoteException {
+        this.messages.add(message);
+    }
 
     
 

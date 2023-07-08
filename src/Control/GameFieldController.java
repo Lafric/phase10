@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.Stack;
 
+import Communication.ChatRefresh;
+import Communication.LobbyChatRefresh;
+
 public class GameFieldController {
     public ComboBox<String> dropdown_KarteWaehlen_karteSpielen;
     public ComboBox<String> dropdown_Zielstapel_StapelBewegen;
@@ -112,6 +115,8 @@ public class GameFieldController {
     public Button zug_beenden;
     public Button phase_bestätigen;
     public Button Karte_spielen;
+    public String lobby; 
+
 
     //Für Dummy Logik
     private int[] player;
@@ -121,6 +126,12 @@ public class GameFieldController {
     public Stack<Card> uebersichtsCards = new Stack<>(); // Array des Stapel Uebesichtskarte... Nur die erste Karte wird angezeigt
 
     private int currentPlayer = 6; //javafx ordnet die rectangle in order an, deswegen ist der erste spieler 6
+
+    //Method to get LobbyName from main menue, needed for lobby chat
+    public void give_lobby(String lobby){
+        System.out.println("recieved " + lobby);
+        this.lobby = lobby;
+    }
 
     // set the current player or client
     public void setPlayer(int[] player) {
@@ -384,7 +395,13 @@ public class GameFieldController {
     public void LaunchChat(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/chatRaumInGameField.fxml"));
         Parent root = loader.load();
+        ChatRaumController controller = loader.getController();
+        controller.get_lobby(lobby);
 
+        TextArea chatField = controller.getChat_ausgabe();
+        Runnable refresh = new LobbyChatRefresh(chatField,lobby);
+        Thread chatrefresh = new Thread(refresh);
+        chatrefresh.start();
 
         // TODO next scene öffnen
         Stage stage = new Stage();

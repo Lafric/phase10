@@ -25,15 +25,17 @@ public class MessageService {
         }
     }
 
-    public Message sendeNachricht(Identity identity, String nachricht) throws Exception {
+    public Message sendeNachricht(Identity identity, String nachricht,String registryName) throws Exception {
         // create new timestamp with current time
         Timestamp timestamp = Timestamp.from(Instant.now());
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
         String formattedTime = formatter.format(timestamp);
-        ServerFuncs server = (ServerFuncs) registry.lookup("serverfunc");
+        ServerFuncs server = (ServerFuncs) registry.lookup(registryName);
         server.sendMessageToChat(new Message(identity.getUsername(), formattedTime, nachricht));
 
         ArrayList<Message> messages = server.fetchMessages();
         return messages.get(messages.size() - 1);
     }
+
+
 }

@@ -1,5 +1,8 @@
 package Control;
 import Model.Identity;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+
 import javax.swing.*;
 
 /**
@@ -8,6 +11,9 @@ import javax.swing.*;
  */
 public class ChatController extends Thread {
     private Identity identity;
+    public TextArea raumChat_ausgabe;
+    public TextField raumChat_eingabe;
+    public String lobby;
 
     /**
      * Constructor to set up the ChatController
@@ -24,7 +30,12 @@ public class ChatController extends Thread {
      */
     @Override
     public void run() {
-        System.err.println("CHAT SETUP NOT IMPLEMENTED");
+        raumChat_eingabe.setOnKeyPressed(event -> {
+            if(event.getCode().toString().equals("ENTER")){
+                raumChat_ausgabe.appendText(raumChat_eingabe.getText() + "\n");
+                raumChat_eingabe.clear();
+            }
+        });
     }
 
     /**
@@ -46,5 +57,6 @@ public class ChatController extends Thread {
         // Display in GUI
         System.err.println("CHAT CONTROLLER NOT IMPLEMENTED");
     }
+  
 }
 

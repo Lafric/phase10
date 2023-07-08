@@ -52,7 +52,6 @@ public class MenuController {
     public Identity identity;
     public Button LobbyRefresh;
     public ListView<String> lobbylist = new ListView<String>(); 
-
     private MessageService messageService;
 
     public MenuController(MessageService messageService) {
@@ -184,7 +183,7 @@ public class MenuController {
     public void raumBeitreten(ActionEvent event) throws IOException {
         //get lobbyname from GUI 
         //Lobbys are bound to those names to registry 
-        /**         String lobbyString = lobbylist.getSelectionModel().getSelectedItem();
+        String lobbyString = lobbylist.getSelectionModel().getSelectedItem();
         
         String[] lobbyNameList = lobbyString.split("\t\t");
         String lobbyName = lobbyNameList[0];
@@ -201,12 +200,14 @@ public class MenuController {
 
         } catch(Exception e){
             e.printStackTrace(System.out);
-        }**/
+        }
 
         //UI
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/gameField.fxml"));
         Parent root = loader.load();
-
+        GameFieldController controller = loader.getController();
+        controller.give_lobby(lobbyName);
+        System.out.println("Joined: " + lobbyName);
 
         // TODO next scene öffnen
         Stage stage = new Stage();
@@ -225,7 +226,7 @@ public class MenuController {
     public void sendeNachricht() {
         String nachricht = globalChat_eingabe.getText();
         try {
-            Message latestMessage = messageService.sendeNachricht(identity, nachricht);
+            Message latestMessage = messageService.sendeNachricht(identity, nachricht,"serverfunc");
             globalChat_ausgabe.appendText(
                     latestMessage.sender + " | " + latestMessage.date.toString() + " | " + latestMessage.content
                             + "\n");
@@ -242,4 +243,7 @@ public class MenuController {
 
     public void raumVerlassen(ActionEvent event) {
     }
+
+
+    
 }

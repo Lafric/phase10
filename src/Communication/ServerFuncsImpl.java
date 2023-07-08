@@ -11,7 +11,6 @@ import java.rmi.server.*;
 
 public class ServerFuncsImpl extends UnicastRemoteObject implements ServerFuncs {
 
-    // define messages as an arraylist of type message
     private ArrayList<Message> messages = new ArrayList<Message>();
     
     private Integer lobbycount = 0; 
@@ -26,7 +25,7 @@ public class ServerFuncsImpl extends UnicastRemoteObject implements ServerFuncs 
         return lobbycount; 
     }
 
-    public void Inc_LobbyCount(){
+    public void inc_LobbyCount(){
         this.lobbycount += 1; 
 
     }
@@ -39,10 +38,9 @@ public class ServerFuncsImpl extends UnicastRemoteObject implements ServerFuncs 
         try {
             Integer lobbycount = this.get_LobbyCount(); 
             String lobbyCountString = lobbycount.toString(); 
-
             String lobbyName = "Lobby" + lobbyCountString; 
-
-            this.Inc_LobbyCount(); 
+            //Create String for displaying in GUI: LobbyX 0/6
+            this.inc_LobbyCount(); 
 
             Registry registry = LocateRegistry.getRegistry("185.162.248.237",1099);
             System.out.println("Found registry");

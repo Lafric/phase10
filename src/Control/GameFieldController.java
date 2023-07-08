@@ -3,6 +3,7 @@ package Control;
 import Model.Card;
 import Model.CardColor;
 import Model.CardType;
+import Model.Identity;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -116,6 +117,7 @@ public class GameFieldController {
     public Button phase_bestätigen;
     public Button Karte_spielen;
     public String lobby; 
+    public Identity identity;
 
 
     //Für Dummy Logik
@@ -131,6 +133,9 @@ public class GameFieldController {
     public void give_lobby(String lobby){
         System.out.println("recieved " + lobby);
         this.lobby = lobby;
+    }
+    public void get_identity(Identity identity){
+        this.identity = identity;
     }
 
     // set the current player or client
@@ -397,7 +402,7 @@ public class GameFieldController {
         Parent root = loader.load();
         ChatRaumController controller = loader.getController();
         controller.get_lobby(lobby);
-
+        controller.get_identity(identity);
         TextArea chatField = controller.getChat_ausgabe();
         Runnable refresh = new LobbyChatRefresh(chatField,lobby);
         Thread chatrefresh = new Thread(refresh);

@@ -38,4 +38,17 @@ public class MessageService {
     }
 
 
+    public void sendLobbyMessage(Identity identity, String nachricht,String registryName) throws Exception {
+        // create new timestamp with current time
+        Timestamp timestamp = Timestamp.from(Instant.now());
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+        String formattedTime = formatter.format(timestamp);
+        Lobby server = (Lobby) registry.lookup(registryName);
+        server.sendMessage(new Message(identity.getUsername(), formattedTime, nachricht));
+
+   
+       
+    }
+
+
 }

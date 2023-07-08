@@ -207,6 +207,7 @@ public class MenuController {
         Parent root = loader.load();
         GameFieldController controller = loader.getController();
         controller.give_lobby(lobbyName);
+        controller.get_identity(identity);
         System.out.println("Joined: " + lobbyName);
 
         // TODO next scene öffnen

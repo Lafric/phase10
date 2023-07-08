@@ -1,10 +1,15 @@
 package Control;
 
 import java.rmi.RemoteException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 
 import Communication.ChatRefresh;
 import Communication.Lobby;
 import Communication.LobbyChatRefresh;
+import Communication.MessageService;
+import Model.Identity;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +23,7 @@ public class ChatRaumController {
     public TextArea raumChat_ausgabe;
     public TextField raumChat_eingabe;
     public String lobby;
+    public Identity identity;
 
     public void sendeNachricht_raumChat(KeyEvent keyEvent) {
     }
@@ -25,13 +31,23 @@ public class ChatRaumController {
 
     @FXML
     public void initialize() {
+        MessageService messageService = new MessageService();
+
         raumChat_eingabe.setOnKeyPressed(event -> {
             if(event.getCode().toString().equals("ENTER")){
-                raumChat_ausgabe.appendText(raumChat_eingabe.getText() + "\n");
+                try {
+                    messageService.sendLobbyMessage(identity,raumChat_eingabe.getText(), lobby);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Timestamp timestamp = Timestamp.from(Instant.now());
+                SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+                String formattedTime = formatter.format(timestamp);
+                raumChat_ausgabe.appendText(identity.getUsername() + " | " + formattedTime + " | " + raumChat_eingabe.getText() + "\n");
                 raumChat_eingabe.clear();
             }
         });
-    
+
         //chatserver.start();
         System.out.println("Lobby refresh started");
     }
@@ -44,6 +60,9 @@ public class ChatRaumController {
 
     public TextArea getChat_ausgabe(){
         return raumChat_ausgabe;
+    }
+    public void get_identity(Identity identity){
+        this.identity = identity;
     }
 
 

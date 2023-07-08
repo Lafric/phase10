@@ -70,10 +70,22 @@ public class LobbyImpl extends UnicastRemoteObject implements Lobby{
         
     }
 
-    @Override
-    public void sendMessage(Message message) throws RemoteException {
-        this.messages.add(message);
+    
+    public void sendMessage(Message msg) throws RemoteException {
+        if (msg.content.length() == 0) {
+            System.out.println("Chatnachricht darf nicht leer sein.");
+            return;
+        }
+
+        if (msg.content.length() > 140) {
+            System.out.println("Chatnachricht darf nicht leer sein.");
+            return;
+        }
+
+        messages.add(msg);
+        return;
     }
+
 
     
 

@@ -2,17 +2,15 @@ package Model;
 
 import java.util.HashMap;
 import java.util.Objects;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
 import java.sql.*;
 
 public class DatabaseProvider {
 
+    // private final String dbUrl =
+    // "jdbc:postgresql://185.162.248.237:5432/postgres";
     private final String dbUrl = "jdbc:postgresql://localhost/phase10";
     private final String dbUser = "postgres";
+    // private final String dbPassword = "apfel"; // TODO: change to your password
     private final String dbPassword = "giba"; // TODO: change to your password
 
     public boolean useDummy = false;
@@ -205,4 +203,87 @@ public class DatabaseProvider {
         }
     }
 
+    public void incrementGamesPlayed(String username) {
+        if (this.useDummy) {
+            return;
+        }
+        Connection connection = this.connect();
+        String query = "UPDATE users SET games_played = games_played + 1 WHERE username = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, username);
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Games played incremented successfully!");
+            } else {
+                System.out.println("Failed to increment games played!");
+            }
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("SQLError when trying to increment games played!");
+            e.printStackTrace();
+        }
+    }
+
+    public void incrementGamesWon(String username) {
+        if (this.useDummy) {
+            return;
+        }
+        Connection connection = this.connect();
+        String query = "UPDATE users SET games_won = games_won + 1 WHERE username = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, username);
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Games won incremented successfully!");
+            } else {
+                System.out.println("Failed to increment games won!");
+            }
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("SQLError when trying to increment games won!");
+            e.printStackTrace();
+        }
+    }
+
+    public UserData[] getUserData() {
+        if (this.useDummy) {
+            UserData dummyUser = new UserData("test", 1, 2);
+            UserData[] dummyUserData = { dummyUser };
+            return dummyUserData;
+        }
+        Connection connection = this.connect();
+        String query = "SELECT * FROM users";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query,
+                    ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            ResultSet resultSet = statement.executeQuery();
+            int rowCount = 0;
+            while (resultSet.next()) {
+                rowCount++;
+            }
+            UserData[] userData = new UserData[rowCount];
+            resultSet.beforeFirst();
+            int i = 0;
+            while (resultSet.next()) {
+                String username = resultSet.getString("username");
+                int gamesWon = resultSet.getInt("games_won");
+                int gamesPlayed = resultSet.getInt("games_played");
+                userData[i] = new UserData(username, gamesWon, gamesPlayed);
+                i++;
+            }
+            statement.close();
+            connection.close();
+            return userData;
+        } catch (SQLException e) {
+            System.out.println("SQLError when trying to get user data!");
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 }

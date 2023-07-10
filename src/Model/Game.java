@@ -8,6 +8,7 @@ import java.util.*;
  * @version 1.0
  */
 public class Game {
+    private boolean isGameOver;
     private final Player[] allPlayer; // all participating player
     private int currentPlayer; // index on the current player
     private final PhaseRule[] phaseRules; // the rules, aka the filings the players need to put on table in each round
@@ -39,6 +40,7 @@ public class Game {
         // Set up Skip Counter
         this.skipCounter = new int[allPlayer.length];
         Arrays.fill(this.skipCounter,0);
+        this.isGameOver = false;
     }
 
     /**
@@ -66,21 +68,24 @@ public class Game {
         hiddenStack = new Stack<>();
         // Create all numbers
         for (int i = 0; i < 4; i++) {
-            for (int j = 1; j < 13; j++) {
-                // Ensure unique id
-                boolean unique = true;
-                while (unique) {
-                    unique = true;
-                    for (Player player : this.allPlayer) {
-                        if (player.getId() == id) {
-                            unique = false;
-                            id++;
+            // Do it twice
+            for(int q=0;q<2;q++) {
+                for (int j = 1; j < 13; j++) {
+                    // Ensure unique id
+                    boolean unique = true;
+                    while (unique) {
+                        unique = true;
+                        for (Player player : this.allPlayer) {
+                            if (player.getId() == id) {
+                                unique = false;
+                                id++;
+                            }
                         }
                     }
+                    // Create card and add to hidden stack
+                    hiddenStack.push(new Card(id, CardColor.numToCol(i), CardType.getForNumber(j)));
+                    id++;
                 }
-                // Create card and add to hidden stack
-                hiddenStack.push(new Card(id, CardColor.numToCol(i), CardType.getForNumber(j)));
-                id++;
             }
         }
         // Create 8 Jokers
@@ -152,19 +157,26 @@ public class Game {
      * @param hiddenStack if the card is taken from the hidden or open stack
      */
     public void drawCard(Player player, boolean hiddenStack){
-        if(allPlayer[this.currentPlayer].getId() == player.getId()){
+        if(allPlayer[this.currentPlayer].getId() == player.getId() && !isGameOver){
             if(this.playerOverloadIndicator[currentPlayer]){
                 // Set Overload
                 this.playerOverloadIndicator[currentPlayer] = true;
                 // Draw Card
                 Card card = null;
                 if(hiddenStack){
+                    if(this.hiddenStack.empty()){
+                        this.hiddenStack = this.openStack;
+                        Collections.shuffle(this.hiddenStack);
+                        this.openStack.clear();
+                    }
                     card = this.hiddenStack.pop();
                 } else{
                     card = this.openStack.pop();
                 }
                 // Give Card to player
-                this.allPlayer[currentPlayer].getHandCards().add(card);
+                if(card != null) {
+                    this.allPlayer[currentPlayer].getHandCards().add(card);
+                }
             } else {
                 System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", you already draw one card.");
             }
@@ -180,7 +192,7 @@ public class Game {
      * @param playerId is the player to be skipped, in case a skip card is played
      */
     public void throwCard(Player player, int cardId, int playerId){
-        if(allPlayer[this.currentPlayer].getId() == player.getId()){
+        if(allPlayer[this.currentPlayer].getId() == player.getId() && !this.isGameOver){
             if(!this.playerOverloadIndicator[currentPlayer]){
                 // Set Overload
                 this.playerOverloadIndicator[currentPlayer] = false;
@@ -232,7 +244,7 @@ public class Game {
      */
     public void playCard(Player player, int cardId, int filingId, boolean low){
         Card cardInFocus = null;
-        if(this.allPlayer[currentPlayer].getId()==player.getId()){
+        if(this.allPlayer[currentPlayer].getId()==player.getId() && !isGameOver){
             if(this.playerOverloadIndicator[currentPlayer]){
                 // Check if card is on player hands
                 boolean inHand = false;
@@ -301,7 +313,7 @@ public class Game {
      * @param cardIds the id numbers of the cards to put down.
      */
     public void layCards(Player player, int[] cardIds){
-        if(player.getId()==this.allPlayer[currentPlayer].getId()){
+        if(player.getId()==this.allPlayer[currentPlayer].getId() && !this.isGameOver){
             // Get Rule for Phase
             PhaseRule rule = this.phaseRules[player.getPhase()];
             // Check if player has reached maximum number of own filings
@@ -331,7 +343,11 @@ public class Game {
                     for(Card plCard: player.getHandCards()){
                         if(cardIds[i]==plCard.getId()){
                             cards[i] = plCard;
+                            found = true;
                         }
+                    }
+                    if(!found){
+                        System.out.println("The player does not hold the cards to lay");
                     }
                 }
                 // Check if filing exists
@@ -342,6 +358,7 @@ public class Game {
                     for(int j = 0; j < cards.length; j++){
                         player.getHandCards().remove(cards[j]);
                     }
+                    checkForPhaseIncrease(player);
                 } else{
                     System.out.println("PLAYER "+player.getName()+", NO MATHING FILING FOR YOUR PHASE");
                 }
@@ -359,6 +376,11 @@ public class Game {
     private void checkForPhaseIncrease(Player player){
         if(player.getHandCards().size()<=0){
             player.increasePhase();
+            if(player.getPhase()==10){
+                this.isGameOver = true;
+            } else {
+                this.goToNextRound();
+            }
         }
     }
 
@@ -386,12 +408,7 @@ public class Game {
      * @return true or false depending on if game is over
      */
     public boolean isGameOver(){
-        for (int i = 0; i< this.allPlayer.length; i++){
-            if(this.allPlayer[i].getPhase()>10){
-                return true;
-            }
-        }
-        return false;
+        return this.isGameOver;
     }
 }
 

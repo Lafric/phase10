@@ -19,6 +19,12 @@ public abstract class Filing {
         return unreal;
     }
 
+    public Filing(int id){
+        this.id = id;
+        this.unreal = false;
+        this.playerId = -1;
+    }
+
     public Filing(int id, boolean unreal) {
         this.id = id;
         this.unreal = unreal;

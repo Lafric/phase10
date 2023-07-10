@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import org.junit.platform.reporting.shadow.org.opentest4j.reporting.events.core.UserName;
-
 import Model.DatabaseProvider;
 import Model.UserData;
 import javafx.collections.FXCollections;

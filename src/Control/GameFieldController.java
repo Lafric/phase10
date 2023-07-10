@@ -1,9 +1,6 @@
 package Control;
 
-import Model.Card;
-import Model.CardColor;
-import Model.CardType;
-import Model.Identity;
+import Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,6 +20,8 @@ import Communication.ChatRefresh;
 import Communication.LobbyChatRefresh;
 
 public class GameFieldController {
+    public Game game;
+
     public ComboBox<String> dropdown_KarteWaehlen_karteSpielen;
     public ComboBox<String> dropdown_Zielstapel_StapelBewegen;
     public ImageView imagekarte_H1;
@@ -245,6 +244,8 @@ public class GameFieldController {
      * @param event
      */
     public void karte_ziehen(ActionEvent event) {
+        Player player = new Player(1,"Karl");
+        this.game.drawCard(player,true);
     }
 
     /**

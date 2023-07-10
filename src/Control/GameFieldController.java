@@ -423,4 +423,6 @@ public class GameFieldController {
 
     }
 
+    public void Start_Game(ActionEvent event) {
+    }
 }

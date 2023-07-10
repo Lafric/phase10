@@ -451,7 +451,7 @@
                         <Label layoutX="1100.0" layoutY="14.0" text="Aufnahmestapel" />
                         <Button fx:id="karte_ziehen" layoutX="1100.0" layoutY="57.0" mnemonicParsing="false" onAction="#karte_ziehen" text="Karte Ziehen" />
                         <Button  fx:id="launchchat" layoutX="1100.0" layoutY="97.0" mnemonicParsing="false" onAction="#LaunchChat" text="Chat" />
-
+                        <Button  fx:id="start_Game" layoutX="1100.0" layoutY="137.0" mnemonicParsing="false" onAction="#Start_Game" text="Spiel starten" />
                     </children>
                 </AnchorPane>
             </items>

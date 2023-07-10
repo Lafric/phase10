@@ -48,9 +48,6 @@ public class BestenlisteController {
 
     private ObservableList<UserData> getPlayerData() {
         ObservableList<UserData> data = FXCollections.observableArrayList();
-        data.add(new UserData("John", 10, 5));
-        data.add(new UserData("Alice", 15, 8));
-        data.add(new UserData("Bob", 20, 12));
 
         try {
             UserData[] userData = this.dbProvider.getUserData();

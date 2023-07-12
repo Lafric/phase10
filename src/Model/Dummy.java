@@ -1,7 +1,7 @@
 package Model;
 
 public class Dummy {
-    private PhaseRule[] createRules(){
+    public PhaseRule[] createRules(){
         PhaseRule[] rules = new PhaseRule[10];
         rules[0] = new PhaseRule(new Street(2000,CardType.ONE, CardType.FIVE),new Tuplet(2001,CardType.ONE,3));
         rules[1] = new PhaseRule(new Street(2002,CardType.ONE, CardType.FIVE),new Tuplet(2003,CardType.ONE,3));

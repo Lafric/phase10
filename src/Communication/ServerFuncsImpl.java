@@ -5,6 +5,10 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+
+import Model.GameImpl;
+import Model.PhaseRule;
+
 import java.rmi.*;
 import java.rmi.server.*;
 
@@ -47,6 +51,8 @@ public class ServerFuncsImpl extends UnicastRemoteObject implements ServerFuncs 
 
              
             Lobby lobby = new LobbyImpl(lobbyName);
+            
+            
             allLobbys.add(lobby);
             registry.bind(lobbyName,lobby);
             System.out.println("Bound " + lobbyName);

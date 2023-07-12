@@ -13,11 +13,17 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.Stack;
 
 import Communication.ChatRefresh;
+import Communication.Lobby;
 import Communication.LobbyChatRefresh;
+import Communication.LobbyImpl;
 
 public class GameFieldController {
     public Game game;
@@ -243,8 +249,8 @@ public class GameFieldController {
      * Methode zum Ziehen einer Karte aus der AufnahmeStappel
      * @param event
      */
-    public void karte_ziehen(ActionEvent event) {
-        Player player = new Player(1,"Karl");
+    public void karte_ziehen(ActionEvent event) throws RemoteException {
+        PlayerImpl player = new PlayerImpl(1,"Karl");
         this.game.drawCard(player,true);
     }
 
@@ -391,6 +397,26 @@ public class GameFieldController {
         String ergebnis = "file:./src/Graphics/playingCards/" + "card" + wert + "Color" + farbeNum +"Repeat0.png"; // Umgang mit Repeat 1 and 2
         return new Image(ergebnis);
     }
+
+
+    public void start_Game(ActionEvent event) throws IOException,RemoteException{
+
+        Registry registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
+        System.out.println("Connected to Server");
+        try {
+            Lobby lobby = (Lobby) registry.lookup(this.lobby);
+            System.out.println("Lobby found");
+            lobby.startGame();
+            System.out.println("Game started");
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }        
+
+    }
+
+
 
 
     /**

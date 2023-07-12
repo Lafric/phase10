@@ -16,7 +16,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
     private final PhaseRule[] phaseRules; // the rules, aka the filings the players need to put on table in each round
     private Stack<Card> hiddenStack; // hidden stack on table
     private Stack<Card> openStack; // the open stack on table
-    private final List<Filing> filings; // the filings on the table
+    private List<Filing> filings; // the filings on the table
 
     private final boolean[] playerOverloadIndicator;// Indicates if the player has one card too much due to drawing
 
@@ -68,20 +68,17 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         // Setup array and counter
         int id = 0;
         hiddenStack = new Stack<>();
-
         // Create all numbers
-        
         for (int i = 0; i < 4; i++) {
             // Do it twice
             for(int q=0;q<2;q++) {
                 for (int j = 1; j < 13; j++) {
                     // Ensure unique id
-                    boolean unique = true;
-                    while (unique) {
+                    boolean unique = false;
+                    while (!unique) {
                         unique = true;
                         for (Player player : this.allPlayers) {
                             if (player.getId() == id) {
-                                System.out.println(player.getId());
                                 unique = false;
                                 id++;
                             }
@@ -96,8 +93,8 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         // Create 8 Jokers
         for(int i=0;i<8;i++){
             // Ensure unique id
-            boolean unique = true;
-            while (unique) {
+            boolean unique = false;
+            while (!unique) {
                 unique = true;
                 for (Player player : this.allPlayers) {
                     if (player.getId() == id) {
@@ -112,8 +109,8 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         // Create 4 Skips
         for(int i=0;i<4;i++){
             // Ensure unique id
-            boolean unique = true;
-            while (unique) {
+            boolean unique = false;
+            while (!unique) {
                 unique = true;
                 for (Player player : this.allPlayers) {
                     if (player.getId() == id) {
@@ -139,10 +136,11 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         }
 
         // Put Card on open stack
+        this.openStack = new Stack<>();
         this.openStack.add(this.hiddenStack.pop());
 
         // Remove open filings
-        this.filings.clear();
+        this.filings = new ArrayList<>();
     }
 
     /**

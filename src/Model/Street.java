@@ -1,11 +1,13 @@
 package Model;
 
+import java.io.Serializable;
+
 /**
  * This class represents a Street/ Series of cards.
  * @author Alexander Guenther
  * @version 1.0
  */
-public class Street extends Filing {
+public class Street extends Filing implements Serializable{
     private CardType start;
     private CardType end;
 

@@ -11,27 +11,29 @@ import java.util.*;
  */
 public class GameImpl extends UnicastRemoteObject implements Game {
     private boolean isGameOver;
-    private final Player[] allPlayers; // all participating player
+    private final Player[] allPlayer; // all participating player
     private int currentPlayer; // index on the current player
     private final PhaseRule[] phaseRules; // the rules, aka the filings the players need to put on table in each round
     private Stack<Card> hiddenStack; // hidden stack on table
     private Stack<Card> openStack; // the open stack on table
-    private final List<Filing> filings; // the filings on the table
+    private List<Filing> filings; // the filings on the table
 
     private final boolean[] playerOverloadIndicator;// Indicates if the player has one card too much due to drawing
 
     private final int[] skipCounter; // counts how many skips are currently on each player
 
     public GameImpl(Player[] allPlayer, PhaseRule[] phaseRules) throws RemoteException {
-        this.allPlayers = allPlayer;
+        this.allPlayer = allPlayer;
         // Reset Players
-        for (Player player: this.allPlayers) {
+        for (Player player: this.allPlayer) {
             player.resetPhase();
             player.resetPoints();
         }
         this.phaseRules = phaseRules;
         // Distribute Cards
+        System.err.println("Started Cards");
         initializeCards();
+        System.out.println("Ended Cards");
         // Pick starting player
         currentPlayer = 0;
         // Set overload to false
@@ -49,7 +51,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * This method picks the next active player.
      */
     private void goToNextPlayer() throws RemoteException{
-        if(this.currentPlayer== this.allPlayers.length-1){
+        if(this.currentPlayer== this.allPlayer.length-1){
             this.currentPlayer = 0;
         } else{
            this.currentPlayer++;
@@ -64,24 +66,21 @@ public class GameImpl extends UnicastRemoteObject implements Game {
     /**
      * The method initializeCards is shuffling and redistributing of the cards.
      */
-    private void initializeCards() throws RemoteException{
+    private void initializeCards() throws RemoteException {
         // Setup array and counter
         int id = 0;
         hiddenStack = new Stack<>();
-
         // Create all numbers
-        
         for (int i = 0; i < 4; i++) {
             // Do it twice
             for(int q=0;q<2;q++) {
                 for (int j = 1; j < 13; j++) {
                     // Ensure unique id
-                    boolean unique = true;
-                    while (unique) {
+                    boolean unique = false;
+                    while (!unique) {
                         unique = true;
-                        for (Player player : this.allPlayers) {
+                        for (Player player : this.allPlayer) {
                             if (player.getId() == id) {
-                                System.out.println(player.getId());
                                 unique = false;
                                 id++;
                             }
@@ -96,10 +95,10 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         // Create 8 Jokers
         for(int i=0;i<8;i++){
             // Ensure unique id
-            boolean unique = true;
-            while (unique) {
+            boolean unique = false;
+            while (!unique) {
                 unique = true;
-                for (Player player : this.allPlayers) {
+                for (Player player : this.allPlayer) {
                     if (player.getId() == id) {
                         unique = false;
                         id++;
@@ -112,10 +111,10 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         // Create 4 Skips
         for(int i=0;i<4;i++){
             // Ensure unique id
-            boolean unique = true;
-            while (unique) {
+            boolean unique = false;
+            while (!unique) {
                 unique = true;
-                for (Player player : this.allPlayers) {
+                for (Player player : this.allPlayer) {
                     if (player.getId() == id) {
                         unique = false;
                         id++;
@@ -130,7 +129,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         Collections.shuffle(this.hiddenStack);
 
         // Distribute Cards to Players
-        for (Player player: this.allPlayers) {
+        for (Player player: this.allPlayer) {
             player.resetHandCards();
             for (int i=0; i<10;i++){
                 Card card = this.hiddenStack.pop();
@@ -139,10 +138,11 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         }
 
         // Put Card on open stack
+        this.openStack = new Stack<>();
         this.openStack.add(this.hiddenStack.pop());
 
         // Remove open filings
-        this.filings.clear();
+        this.filings = new ArrayList<>();
     }
 
     /**
@@ -152,8 +152,9 @@ public class GameImpl extends UnicastRemoteObject implements Game {
     public int getCurrentPlayer() throws RemoteException{
         return this.currentPlayer;
     }
+
     public Player[] getAllPlayers() throws RemoteException{
-        return this.allPlayers;
+        return this.allPlayer;
     }
 
     /**
@@ -162,7 +163,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * @param hiddenStack if the card is taken from the hidden or open stack
      */
     public void drawCard(Player player, boolean hiddenStack) throws RemoteException{
-        if(allPlayers[this.currentPlayer].getId() == player.getId() && !isGameOver){
+        if(allPlayer[this.currentPlayer].getId() == player.getId() && !isGameOver){
             if(this.playerOverloadIndicator[currentPlayer]){
                 // Set Overload
                 this.playerOverloadIndicator[currentPlayer] = true;
@@ -180,13 +181,13 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                 }
                 // Give Card to player
                 if(card != null) {
-                    this.allPlayers[currentPlayer].getHandCards().add(card);
+                    this.allPlayer[currentPlayer].getHandCards().add(card);
                 }
             } else {
-                System.out.print("Player "+allPlayers[this.currentPlayer].getName()+", you already draw one card.");
+                System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", you already draw one card.");
             }
         } else{
-            System.out.print("Player "+allPlayers[this.currentPlayer].getName()+", it is not your turn. Please Wait.");
+            System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", it is not your turn. Please Wait.");
         }
     }
 
@@ -197,7 +198,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * @param playerId is the player to be skipped, in case a skip card is played
      */
     public void throwCard(Player player, int cardId, int playerId) throws RemoteException{
-        if(allPlayers[this.currentPlayer].getId() == player.getId() && !this.isGameOver){
+        if(allPlayer[this.currentPlayer].getId() == player.getId() && !this.isGameOver){
             if(!this.playerOverloadIndicator[currentPlayer]){
                 // Set Overload
                 this.playerOverloadIndicator[currentPlayer] = false;
@@ -219,10 +220,10 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                 }
 
             } else {
-                System.out.print("Player "+allPlayers[this.currentPlayer].getName()+", you first need to draw a card.");
+                System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", you first need to draw a card.");
             }
         } else{
-            System.out.print("Player "+allPlayers[this.currentPlayer].getName()+", it is not your turn. Please Wait.");
+            System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", it is not your turn. Please Wait.");
         }
     }
 
@@ -232,8 +233,8 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * @return the index in array
      */
     private int getPlayerIndexById( int id ) throws RemoteException{
-        for(int i = 0;i<this.allPlayers.length;i++){
-            if(this.allPlayers[i].getId()==id){
+        for(int i = 0;i<this.allPlayer.length;i++){
+            if(this.allPlayer[i].getId()==id){
                 return i;
             }
         }
@@ -249,7 +250,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      */
     public void playCard(Player player, int cardId, int filingId, boolean low) throws RemoteException{
         Card cardInFocus = null;
-        if(this.allPlayers[currentPlayer].getId()==player.getId() && !isGameOver){
+        if(this.allPlayer[currentPlayer].getId()==player.getId() && !isGameOver){
             if(this.playerOverloadIndicator[currentPlayer]){
                 // Check if card is on player hands
                 boolean inHand = false;
@@ -269,17 +270,17 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                                 Street street = (Street) filing;
                                 if(street.getStart().getNumber()-1==cardInFocus.getType().getNumber() && low){
                                     street.lowerStart();
-                                    this.allPlayers[currentPlayer].getHandCards().remove(cardInFocus);
+                                    this.allPlayer[currentPlayer].getHandCards().remove(cardInFocus);
                                 } else if (street.getEnd().getNumber()+1==cardInFocus.getType().getNumber() && !low){
                                     street.increaseEnd();
-                                    this.allPlayers[currentPlayer].getHandCards().remove(cardInFocus);
+                                    this.allPlayer[currentPlayer].getHandCards().remove(cardInFocus);
                                 } else if (cardInFocus.getType()==CardType.JOKER){
                                     if(low){
                                         street.lowerStart();
                                     } else {
                                         street.increaseEnd();
                                     }
-                                    this.allPlayers[currentPlayer].getHandCards().remove(cardInFocus);
+                                    this.allPlayer[currentPlayer].getHandCards().remove(cardInFocus);
                                 } else {
                                     System.out.println("CARD DOES NOT MATCH THE Specified FILING (Position)");
                                 }
@@ -287,7 +288,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                                 Tuplet tuplet = (Tuplet) filing;
                                 if(tuplet.getType()==cardInFocus.getType() || cardInFocus.getType()==CardType.JOKER){
                                     tuplet.increaseAmount();
-                                    this.allPlayers[currentPlayer].getHandCards().remove(cardInFocus);
+                                    this.allPlayer[currentPlayer].getHandCards().remove(cardInFocus);
                                 }
                                 else {
                                     System.out.println("CARD DOES NOT MATCH THE Specified FILING (Position)");
@@ -305,10 +306,10 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                 }
 
             } else {
-                System.out.print("Player "+allPlayers[this.currentPlayer].getName()+", you first need to draw a card.");
+                System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", you first need to draw a card.");
             }
         } else {
-            System.out.print("Player "+allPlayers[this.currentPlayer].getName()+", it is not your turn. Please Wait.");
+            System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", it is not your turn. Please Wait.");
         }
     }
 
@@ -318,7 +319,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * @param cardIds the id numbers of the cards to put down.
      */
     public void layCards(Player player, int[] cardIds) throws RemoteException{
-        if(player.getId()==this.allPlayers[currentPlayer].getId() && !this.isGameOver){
+        if(player.getId()==this.allPlayer[currentPlayer].getId() && !this.isGameOver){
             // Get Rule for Phase
             PhaseRule rule = this.phaseRules[player.getPhase()];
             // Check if player has reached maximum number of own filings
@@ -370,7 +371,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
             }
 
         } else{
-            System.out.print("Player "+allPlayers[this.currentPlayer].getName()+", it is not your turn. Please Wait.");
+            System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", it is not your turn. Please Wait.");
         }
     }
 
@@ -394,9 +395,9 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      */
     public void goToNextRound() throws RemoteException{
         // Save Players Points and remove cards
-        for(int i = 0; i < this.allPlayers.length; i++){
-            this.allPlayers[i].increasePointsByHandCards();
-            this.allPlayers[i].resetHandCards();
+        for(int i = 0; i < this.allPlayer.length; i++){
+            this.allPlayer[i].increasePointsByHandCards();
+            this.allPlayer[i].resetHandCards();
         }
         // Reset Skip Counter and overload
         Arrays.fill(this.skipCounter,0);

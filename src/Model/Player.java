@@ -1,32 +1,69 @@
-
-
 package Model;
-import java.rmi.Remote;
+
+import java.io.Serializable;
 import java.rmi.RemoteException;
-import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.List;
 
-public interface Player extends Remote{
 
+public class Player  implements Serializable  {
+    private final int id;
+    private final String name;
+    private int points;
+    private int phase;
+    private final List<Card> handCards;
 
-    public int getId() throws RemoteException;
+    public Player(int id, String name) throws RemoteException {
+        this.id = id;
+        this.name = name;
+        this.points = 0;
+        this.phase = 0;
+        this.handCards = new ArrayList<>();
+    }
 
-    public String getName() throws RemoteException;
+    public int getId() throws RemoteException{
+        return this.id;
+    }
 
-    public int getPoints() throws RemoteException;
+    public String getName() throws RemoteException {
+        return this.name;
+    }
 
-    public int getPhase() throws RemoteException;
+    public int getPoints()  throws RemoteException{
+        return this.points;
+    }
 
-    public List<Card> getHandCards() throws RemoteException;
+    public int getPhase()  throws RemoteException{
+        return this.phase;
+    }
 
-    public void increasePointsByHandCards() throws RemoteException;
+    public List<Card> getHandCards()  throws RemoteException{
+        return this.handCards;
+    }
 
-    public void increasePhase() throws RemoteException;
+    /**
+     * The method increases the penalty points of the player by the corresponding amount of his hand cards
+     */
+    public void increasePointsByHandCards() throws RemoteException{
+        for(Card card: this.handCards){
+            this.points += card.getType().getPenaltyPoints();
+        }
+    }
 
-    public void resetPoints() throws RemoteException;
+    public void increasePhase() throws RemoteException{
+        this.phase++;
+    }
 
-    public void resetPhase() throws RemoteException;
+    public void resetPoints() throws RemoteException{
+        this.points = 0;
+    }
+    public void resetPhase() throws RemoteException{
+        this.phase = 0;
+    }
 
-    public void resetHandCards() throws RemoteException;
-
+    public void resetHandCards() throws RemoteException{
+        this.handCards.clear();
+    }
 }
+

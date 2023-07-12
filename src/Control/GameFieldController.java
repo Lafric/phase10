@@ -26,7 +26,7 @@ import Communication.LobbyChatRefresh;
 import Communication.LobbyImpl;
 
 public class GameFieldController {
-    public Game game;
+    //public Game game;
 
     public ComboBox<String> dropdown_KarteWaehlen_karteSpielen;
     public ComboBox<String> dropdown_Zielstapel_StapelBewegen;
@@ -123,7 +123,7 @@ public class GameFieldController {
     public Button Karte_spielen;
     public String lobby; 
     public Identity identity;
-
+    public String gameName; 
 
     //Für Dummy Logik
     private int[] player;
@@ -243,15 +243,32 @@ public class GameFieldController {
         if(dropdown_Zielstapel_StapelBewegen.getValue() == "Uebersichtskarte"){
             bewegenZumAblagestapel(event);
         }
+
     }
 
     /**
      * Methode zum Ziehen einer Karte aus der AufnahmeStappel
      * @param event
      */
-    public void karte_ziehen(ActionEvent event) throws RemoteException {
-        PlayerImpl player = new PlayerImpl(1,"Karl");
-        this.game.drawCard(player,true);
+    public Game get_game(){
+        Registry registry;
+        try {
+            registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
+            Game game = (Game) registry.lookup(this.gameName);
+            return game;    
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    
+     public void karte_ziehen(ActionEvent event) throws RemoteException {
+        
+        //this.game.drawCard(player,true);
+       
+
     }
 
     /**
@@ -404,6 +421,7 @@ public class GameFieldController {
         Registry registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
         System.out.println("Connected to Server");
         try {
+            gameName = "Game" + this.lobby.substring(5);
             Lobby lobby = (Lobby) registry.lookup(this.lobby);
             System.out.println("Lobby found");
             lobby.startGame();

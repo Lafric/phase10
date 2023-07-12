@@ -1,13 +1,10 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-/**
- * The class PhaseRule represents two rules (in the standard game) that each player has to fulfill.
- * @author Alexander Guenther
- * @version 1.0
- */
-public class PhaseRule {
+
+public class PhaseRule implements Serializable{
     private final Filing[] rules;
 
     public PhaseRule(Filing ruleOne, Filing ruleTwo){

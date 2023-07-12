@@ -6,7 +6,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import Model.Identity;
-import Model.PlayerImpl;
+import Model.Player;
 
 public interface Lobby  extends Remote{
     
@@ -17,6 +17,6 @@ public interface Lobby  extends Remote{
     public void leaveLobby(Identity identity) throws RemoteException;
     public ArrayList<Message> fetchMessages() throws RemoteException;
     public void sendMessage(Message message) throws RemoteException;
-    public PlayerImpl[] create_Playerlist() throws RemoteException;
+    public Player[] create_Playerlist() throws RemoteException;
     public void startGame() throws RemoteException;
 }

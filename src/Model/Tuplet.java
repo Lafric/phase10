@@ -1,11 +1,13 @@
 package Model;
 
+import java.io.Serializable;
+
 /**
  * This class represent a Tuple of Cards. Either open stacks in Game or as rules for each Phase.
  * @author Alexander Guenther
  * @version 1.0
  */
-public class Tuplet extends Filing{
+public class Tuplet extends Filing implements Serializable{
     private int amount;
     private CardType type;
 

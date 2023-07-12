@@ -1,6 +1,8 @@
 package Model;
 
-public class ConcreteFiling extends Filing {
+import java.io.Serializable;
+
+public class ConcreteFiling extends Filing implements Serializable{
     private String name;
 
     public ConcreteFiling(int id, boolean unreal, String s) {

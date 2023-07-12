@@ -5,7 +5,7 @@ package Model;
  * @author Alexander Guenther
  * @version 1.0
  */
-public enum CardColor {
+public enum CardColor implements java.io.Serializable{
     YELLOW,RED,GREEN,PINK,BLUE;
 
     /**

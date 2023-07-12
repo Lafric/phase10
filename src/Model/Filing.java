@@ -1,11 +1,13 @@
 package Model;
 
+import java.io.Serializable;
+
 /**
  * This class represents a special group of cards, each needed in phases of the players
  * @author Alexander Guenther
  * @version 1.0
  */
-public abstract class Filing {
+public abstract class Filing implements Serializable{
     private final int id;
 
     private final int playerId;

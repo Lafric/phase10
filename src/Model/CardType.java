@@ -1,11 +1,13 @@
 package Model;
 
+import java.io.Serializable;
+
 /**
  * This enum represents the type of card. Furthermore, it is associated with a number and penalty points.
  * @author Alexander Guenther
  * @version 1.0
  */
-public enum CardType {
+public enum CardType implements Serializable {
     ONE (1, -5),
     TWO (2, -5),
     THREE (3, -5),

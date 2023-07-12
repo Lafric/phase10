@@ -1,11 +1,13 @@
 package Model;
 
+import java.io.Serializable;
+
 /**
  * This class represents one card inside the Game.
  * @author Alexander Guenther
  * @version 1.0
  */
-public class Card {
+public class Card implements Serializable{
     private final int id;
     private final CardColor color;
     private final CardType type;

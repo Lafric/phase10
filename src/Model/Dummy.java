@@ -1,6 +1,8 @@
 package Model;
 
-public class Dummy {
+import java.io.Serializable;
+
+public class Dummy implements Serializable{
     public PhaseRule[] createRules(){
         PhaseRule[] rules = new PhaseRule[10];
         rules[0] = new PhaseRule(new Street(2000,CardType.ONE, CardType.FIVE),new Tuplet(2001,CardType.ONE,3));

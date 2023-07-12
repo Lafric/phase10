@@ -12,7 +12,7 @@ import Model.Game;
 import Model.GameImpl;
 import Model.Identity;
 import Model.Player;
-import Model.PlayerImpl;
+
 
     
 public class LobbyImpl extends UnicastRemoteObject implements Lobby{
@@ -25,14 +25,14 @@ public class LobbyImpl extends UnicastRemoteObject implements Lobby{
     private ArrayList<Message> messages = new ArrayList<Message>();
     
     
-    public PlayerImpl[] create_Playerlist() throws RemoteException{
+    public Player[] create_Playerlist() throws RemoteException{
         
         
-        PlayerImpl[] playerarray = new PlayerImpl[playerlist.size()];
+        Player[] playerarray = new Player[playerlist.size()];
         int id = 0; 
 
         for (int i = 0; i < playerlist.size(); i++) {
-            playerarray[i] = new PlayerImpl(id,playerlist.get(i).getUsername());
+            playerarray[i] = new Player(id,playerlist.get(i).getUsername());
             id++; 
         }
         System.out.println("Playerlist created");
@@ -46,13 +46,13 @@ public class LobbyImpl extends UnicastRemoteObject implements Lobby{
     }
 
     public void startGame() throws RemoteException{
-        System.out.println("Entered method");
-        PlayerImpl[] playerarray = create_Playerlist();
+        
+        Player[] playerarray = create_Playerlist();
         
         Dummy dummy = new Dummy();
-        System.out.println("moving on");
+        
         Game game = new GameImpl(playerarray,dummy.createRules());
-        System.out.println("Game object initialized");
+        
         String gamenum = this.LobbyName.substring(5);
         Registry registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
         try {

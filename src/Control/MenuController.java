@@ -13,6 +13,7 @@ import Communication.Lobby;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
@@ -210,13 +211,22 @@ public class MenuController {
         controller.get_identity(identity);
         System.out.println("Joined: " + lobbyName);
 
-        // TODO next scene öffnen
+
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Spieldfeld");
 
         stage.setOnCloseRequest(e -> {
         //TODO: disconnect user
+            try {
+                Registry registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
+                Lobby lobby = (Lobby) registry.lookup(lobbyName);
+                System.out.println("Lobby found");
+                lobby.leaveLobby(identity);
+            } catch (RemoteException | NotBoundException remoteException) {
+                remoteException.printStackTrace();
+            }
+            System.out.println("Connected to Server");
         });
 
         stage.show();

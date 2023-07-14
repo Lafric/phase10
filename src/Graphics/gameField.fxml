@@ -9,6 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.layout.Pane?>
 <AnchorPane minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.GameFieldController">
     <children>
        <SplitPane dividerPositions="0.7203525641025641" layoutX="295.0" layoutY="386.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -380,16 +383,18 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                     <children>
                         <Label layoutX="36.0" layoutY="14.0" text="Handkarten" />
-                        <ComboBox fx:id="dropdown_KarteWaehlen_karteSpielen" layoutX="146.0" layoutY="10.0" prefWidth="150.0" promptText="Karte auswählen" />
+                        <ComboBox fx:id="dropdown_KarteWaehlen_karteSpielen" layoutX="146.0" layoutY="10.0" prefWidth="150.0" promptText="Karte auswählen"/>
                         <ComboBox fx:id="dropdown_Zielstapel_StapelBewegen" layoutX="325.0" layoutY="10.0" prefWidth="150.0" promptText="Zielstapel wählen" />
                         <Button fx:id="Karte_spielen" layoutX="537.0" layoutY="10.0" mnemonicParsing="false" onAction="#karte_spielen" text="Karte spielen" />
                         <Button fx:id="phase_bestätigen" layoutX="680.0" layoutY="10.0" mnemonicParsing="false" onAction="#bestätigt_Phase" text="Phase bestätigen" />
                         <Button fx:id="zug_beenden" layoutX="800.0" layoutY="10.0" mnemonicParsing="false" onAction="#zug_beenden" text="Zug beenden" />
-                        <ImageView fx:id="imagekarte_H1" fitHeight="100.0" fitWidth="150.0" layoutX="14.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                       <!--<Pane fx:id="pane_kartenSpieler" prefHeight="150.0"  prefWidth="100.0" layoutX="14.0" layoutY="57.0">-->
+                        <ImageView fx:id="imagekarte_H1"  fitHeight="100.0" fitWidth="150.0" layoutX="14.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@playingCards/card1Color5Repeat0.png" />
                             </image>
                         </ImageView>
+                       <!--</Pane>-->
                         <ImageView fx:id="imagekarte_H2" fitHeight="100.0" fitWidth="150.0" layoutX="99.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@playingCards/card1Color5Repeat0.png" />
@@ -447,8 +452,19 @@
                                 <Image url="@playingCards/card1Color5Repeat0.png" />
                             </image>
                         </ImageView>
+                        <CheckBox fx:id = "checkBox_1" layoutX="42.0" layoutY="150.0" />
+                        <CheckBox fx:id = "checkBox_2" layoutX="127.0" layoutY="150.0" />
+                        <CheckBox fx:id = "checkBox_3" layoutX="212.0" layoutY="150.0" />
+                        <CheckBox fx:id = "checkBox_4" layoutX="297.0" layoutY="150.0" />
+                        <CheckBox fx:id = "checkBox_5" layoutX="382.0" layoutY="150.0" />
+                        <CheckBox fx:id = "checkBox_6" layoutX="467.0" layoutY="150.0" />
+                        <CheckBox fx:id = "checkBox_7" layoutX="552.0" layoutY="150.0" />
+                        <CheckBox fx:id = "checkBox_8" layoutX="637.0" layoutY="150.0" />
+                        <CheckBox fx:id = "checkBox_9" layoutX="722.0" layoutY="150.0" />
+                        <CheckBox fx:id = "checkBox_10" layoutX="807.0" layoutY="150.0" />
+                        <CheckBox fx:id = "checkBox_11" layoutX="892.0" layoutY="150.0" />
                         <Label layoutX="1100.0" layoutY="14.0" text="Aufnahmestapel" />
-                        <Button fx:id="karte_ziehen" layoutX="1100.0" layoutY="57.0" mnemonicParsing="false" onAction="#karte_ziehen" text="Karte Ziehen" />
+                        <Button fx:id="karte_ziehen" layoutX="1100.0" layoutY="57.0" mnemonicParsing="false" onAction="#drawCard" text="Karte Ziehen" />
                         <Button fx:id="launchchat" layoutX="1100.0" layoutY="97.0" mnemonicParsing="false" onAction="#LaunchChat" text="Chat" />
                         <Button fx:id="start_Game" layoutX="1100.0" layoutY="137.0" mnemonicParsing="false" onAction="#start_Game" text="Spiel starten" />
                     </children>

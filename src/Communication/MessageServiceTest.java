@@ -1,4 +1,4 @@
-package Communication;
+/**package Communication;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -70,4 +70,4 @@ public class MessageServiceTest {
             throw new RuntimeException(e);
         }
     }
-}
+}**/

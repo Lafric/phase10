@@ -3,29 +3,30 @@ package Control;
 import Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.rmi.AlreadyBoundException;
-import java.rmi.NotBoundException;
+import java.net.URL;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Stack;
 
-import Communication.ChatRefresh;
 import Communication.Lobby;
 import Communication.LobbyChatRefresh;
-import Communication.LobbyImpl;
 
-public class GameFieldController {
+public class GameFieldController implements Initializable {
     //public Game game;
 
     public ComboBox<String> dropdown_KarteWaehlen_karteSpielen;
@@ -123,16 +124,100 @@ public class GameFieldController {
     public Button Karte_spielen;
     public String lobby; 
     public Identity identity;
-    public String gameName; 
+    public String gameName;
+    public Pane pane_kartenSpieler;
+    public CheckBox checkBox_1;
+    public CheckBox checkBox_2;
+    public CheckBox checkBox_3;
+    public CheckBox checkBox_4;
+    public CheckBox checkBox_5;
+    public CheckBox checkBox_6;
+    public CheckBox checkBox_7;
+    public CheckBox checkBox_8;
+    public CheckBox checkBox_9;
+    public CheckBox checkBox_10;
+    public CheckBox checkBox_11;
+    public ImageView imgkarteSpielerClient_1;
+    public ImageView imgkarteSpielerClient_2;
+    public ImageView imgkarteSpielerClient_3;
+    public ImageView imgkarteSpielerClient_4;
+    public ImageView imgkarteSpielerClient_5;
+    public ImageView imgkarteSpielerClient_6;
+    public ImageView imgkarteSpielerClient_7;
+    public ImageView imgkarteSpielerClient_8;
+    public ImageView imgkarteSpielerClient_9;
+    public ImageView imgkarteSpielerClient_10;
 
     //Für Dummy Logik
     private int[] player;
-    private Rectangle[] rechtecke = new Rectangle[]{kasten_Client, kasten_Gegenspieler1, kasten_Gegenspieler2, kasten_Gegenspieler3, kasten_Gegenspieler4, kasten_Gegenspieler5};
-    private ImageView[] handkarte_CurrentPlayer  = new ImageView[]{imagekarte_H1, imagekarte_H2, imagekarte_H3, imagekarte_H4, imagekarte_H5, imagekarte_H6, imagekarte_H7, imagekarte_H8, imagekarte_H9, imagekarte_H10, imagekarte_H11};
+    public Rectangle[] rechtecke;
+    public ImageView[] handkarte_CurrentPlayer;
+    public ImageView[] stapelCards_CurrentPlayer;
+    public CheckBox[] checkBoxes;
+    public ImageView[] cards_opp1;
+    public ImageView[] cards_opp2;
+    public ImageView[] cards_opp3;
+    public ImageView[] cards_opp4;
+    public ImageView[] cards_opp5;
+    public boolean[] selectedCards = new boolean[11];
     private Card[] cards = new Card[]{ new Card(0, CardColor.YELLOW, CardType.ONE),new Card(0, CardColor.GREEN, CardType.ONE), new Card(0, CardColor.RED, CardType.ONE)};
     public Stack<Card> uebersichtsCards = new Stack<>(); // Array des Stapel Uebesichtskarte... Nur die erste Karte wird angezeigt
 
-    private int currentPlayer = 6; //javafx ordnet die rectangle in order an, deswegen ist der erste spieler 6
+    private int currentPlayer = 5; //javafx ordnet die rectangle in order an, deswegen ist der erste spieler 6
+    private Game game;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.handkarte_CurrentPlayer = new ImageView[]{imagekarte_H1, imagekarte_H2, imagekarte_H3, imagekarte_H4, imagekarte_H5, imagekarte_H6, imagekarte_H7, imagekarte_H8, imagekarte_H9, imagekarte_H10, imagekarte_H11};
+        this.rechtecke = new Rectangle[]{kasten_Gegenspieler1, kasten_Gegenspieler2, kasten_Gegenspieler3, kasten_Gegenspieler4, kasten_Gegenspieler5, kasten_Client};
+        this.checkBoxes = new CheckBox[]{checkBox_1, checkBox_2, checkBox_3, checkBox_4, checkBox_5, checkBox_6, checkBox_7, checkBox_8, checkBox_9, checkBox_10, checkBox_11};
+        this.stapelCards_CurrentPlayer = new ImageView[]{imgkarteSpielerClient_1, imgkarteSpielerClient_2, imgkarteSpielerClient_3, imgkarteSpielerClient_4, imgkarteSpielerClient_5, imgkarteSpielerClient_6, imgkarteSpielerClient_7, imgkarteSpielerClient_8, imgkarteSpielerClient_9, imgkarteSpielerClient_10};
+        this.cards_opp1 = new ImageView[]{imgkarteSpieler1_1, imgkarteSpieler1_2, imgkarteSpieler1_3, imgkarteSpieler1_4, imgkarteSpieler1_5, imgkarteSpieler1_6, imgkarteSpieler1_7, imgkarteSpieler1_8, imgkarteSpieler1_9, imgkarteSpieler1_10};
+        this.cards_opp2 = new ImageView[]{imgkarteSpieler2_1, imgkarteSpieler2_2, imgkarteSpieler2_3, imgkarteSpieler2_4, imgkarteSpieler2_5, imgkarteSpieler2_6, imgkarteSpieler2_7, imgkarteSpieler2_8, imgkarteSpieler2_9, imgkarteSpieler2_10};
+        this.cards_opp3 = new ImageView[]{imgkarteSpieler3_1, imgkarteSpieler3_2, imgkarteSpieler3_3, imgkarteSpieler3_4, imgkarteSpieler3_5, imgkarteSpieler3_6, imgkarteSpieler3_7, imgkarteSpieler3_8, imgkarteSpieler3_9, imgkarteSpieler3_10};
+        this.cards_opp4 = new ImageView[]{imgkarteSpieler4_1, imgkarteSpieler4_2, imgkarteSpieler4_3, imgkarteSpieler4_4, imgkarteSpieler4_5, imgkarteSpieler4_6, imgkarteSpieler4_7, imgkarteSpieler4_8, imgkarteSpieler4_9, imgkarteSpieler4_10};
+        this.cards_opp5 = new ImageView[]{imgkarteSpieler5_1, imgkarteSpieler5_2, imgkarteSpieler5_3, imgkarteSpieler5_4, imgkarteSpieler5_5, imgkarteSpieler5_6, imgkarteSpieler5_7, imgkarteSpieler5_8, imgkarteSpieler5_9, imgkarteSpieler5_10};
+
+        try {
+            ablegenZuUebersichtsKarteStapel(new Card(0, CardColor.RED, CardType.TWO));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } // to delete
+        System.out.println("Controller initialized!");
+
+        //set the images to invisible by initialization
+        for(int i = 0; i < stapelCards_CurrentPlayer.length; i++){
+            stapelCards_CurrentPlayer[i].setVisible(false);
+            cards_opp1[i].setVisible(false);
+            cards_opp2[i].setVisible(false);
+            cards_opp3[i].setVisible(false);
+            cards_opp3[i].setVisible(false);
+            cards_opp4[i].setVisible(false);
+            cards_opp5[i].setVisible(false);
+        }
+        imagekarte_Uebersichtskarte.setVisible(false);
+        for(int i = 0; i < handkarte_CurrentPlayer.length; i++){
+            handkarte_CurrentPlayer[i].setVisible(false);
+        }
+        //set the array of selected cards
+        selected_cards();
+
+    }
+
+    public void selected_cards(){
+        for( int i = 0; i < handkarte_CurrentPlayer.length; i++){
+            int finalI = i;
+            checkBoxes[i].setOnMouseClicked(event -> {
+                if(selectedCards[finalI] == true){
+                    selectedCards[finalI] = false;
+                } else {
+                    selectedCards[finalI] = true;
+                }
+                System.out.println(selectedCards[finalI]);
+            });
+        }
+    }
+
 
     //Method to get LobbyName from main menue, needed for lobby chat
     public void give_lobby(String lobby){
@@ -153,23 +238,25 @@ public class GameFieldController {
      * @param event
      */
     public void zug_beenden(ActionEvent event) {
+       try{
+           if(currentPlayer== 0){
+               currentPlayer = 5;
+           } else{
 
+               currentPlayer--;
+               System.out.println(rechtecke[currentPlayer]);
 
-        if(currentPlayer== 0){
-            currentPlayer = 5;
-        } else{
-
-            currentPlayer--;
-            System.out.println(rechtecke[currentPlayer]);
-
-        }
-       for(int i = 0; i < this.player.length; i++){
-           if(i == currentPlayer){
-               rechtecke[i].setStroke(Paint.valueOf("#4fd423"));
-           } else {
-               rechtecke[i].setStroke(Paint.valueOf("black"));
            }
-        }
+           for(int i = 0; i < player.length; i++){
+               if(i == currentPlayer){
+                   rechtecke[i].setStroke(Paint.valueOf("#4fd423"));
+               } else {
+                   rechtecke[i].setStroke(Paint.valueOf("black"));
+               }
+           }
+       } catch ( Exception e) {
+           e.printStackTrace();
+       }
     }
 
     /**
@@ -193,9 +280,10 @@ public class GameFieldController {
     /**
      * Methode zum setzen der Karten auf der Uebersichtskarte
      */
-    public void setImagekarte_Uebersichtskarte(){
+    public void setImagekarte_Uebersichtskarte() throws RemoteException {
         Card firstCard = uebersichtsCards.peek();
         imagekarte_Uebersichtskarte.setImage(KartetoImage(firstCard));
+        imagekarte_Uebersichtskarte.setVisible(true);
     }
 
 
@@ -203,8 +291,11 @@ public class GameFieldController {
      * Ablegen zur ÜbersichtsKarte
      * @param card
      */
-    public void ablegenZuUebersichtsKarteStapel(Card card){
+    public void ablegenZuUebersichtsKarteStapel(Card card) throws RemoteException {
         uebersichtsCards.push(card);
+        setImagekarte_Uebersichtskarte();
+
+
     }
 
     /**
@@ -239,17 +330,46 @@ public class GameFieldController {
      * Zum Uebersichtskartenstapel
      * @param event
      */
-    public void karte_spielen(ActionEvent event) {
+    public void karte_spielen(ActionEvent event) throws RemoteException {
         if(dropdown_Zielstapel_StapelBewegen.getValue() == "Uebersichtskarte"){
-            bewegenZumAblagestapel(event);
+            bewegenZumUebersichtskartenstapel(event);
+        } else if(dropdown_Zielstapel_StapelBewegen.getValue() == "Mein Stapel Rule 1"){
+            for(int i = 0; i < selectedCards.length; i++){
+                if(selectedCards[i] == true){
+                    System.out.println(cards[i]);
+                    ablegenZuEigenerAblagestapel(cards[i],1);
+                }
+            }
+        }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Mein Stapel Rule 2"){
+            for(int i = 0; i < selectedCards.length; i++){
+                if(selectedCards[i] == true){
+                    System.out.println(cards[i]);
+                    ablegenZuEigenerAblagestapel(cards[i],2);
+                }
+            }
         }
 
     }
 
-    /**
-     * Methode zum Ziehen einer Karte aus der AufnahmeStappel
-     * @param event
-     */
+    private void ablegenZuEigenerAblagestapel(Card card, int num) {
+        if (num == 1) {
+           for(int i = 0; i < cards.length; i++){
+               if(selectedCards[i] == true){
+                   stapelCards_CurrentPlayer[i].setImage(KartetoImage(cards[i]));
+                   //d'enlever du handkarte,
+                   //supprimer ton image
+                   //set les gens a false
+               }
+           }
+
+        } else if (num == 2) {
+
+        } else if (num == 0) {
+
+        }
+    }
+
+
     public Game get_game(){
         Registry registry;
         try {
@@ -262,32 +382,37 @@ public class GameFieldController {
         }
         return null;
     }
-    
-    
-     public void karte_ziehen(ActionEvent event) throws RemoteException {
-        
-        //this.game.drawCard(player,true);
-       
 
+    /**
+     * Methode zum Ziehen einer Karte aus der AufnahmeStappel
+     */
+     public void drawCard(ActionEvent event) throws RemoteException {
+         System.out.println("drawCard");
+         Player player = game.getAllPlayers()[game.getCurrentPlayer()];
+         System.out.println(player.getHandCards());
+         this.game.drawCard(player, true);
+         //update Gui
+         System.out.println(player.getHandCards());
     }
 
     /**
      * Methode zum Ziehen der Übersichtskarten des Clients
      * @param event
      */
-    public void UebersichtKarte_Ziehen(ActionEvent event) {
-        /**int index = handkarte_CurrentPlayer.length ;
-        handkarte_CurrentPlayer[index].setImage(KartetoImage(uebersichtsKarte));**/
-        if(uebersichtsCards.empty()){
-            imagekarte_Uebersichtskarte.setVisible(false);
-        }else{
+    public void UebersichtKarte_Ziehen(ActionEvent event) throws RemoteException {
+        /**handkarte_CurrentPlayer[index].setImage(KartetoImage(uebersichtsKarte));**/
+
+        this.game.drawCard(game.getAllPlayers()[game.getCurrentPlayer()], false);
+        //update Gui
+
+        /**
             imagekarte_H4.setImage(KartetoImage(getUebersichtskarte()));
             if(uebersichtsCards.empty()){
                 imagekarte_Uebersichtskarte.setVisible(false);
             }else{
                 setImagekarte_Uebersichtskarte();
             }
-        }
+        **/
     }
 
     /**
@@ -298,10 +423,21 @@ public class GameFieldController {
     }
 
     /**
-     * Methode zum Bewegen der Karte zum Ablagestapel
+     * Methode zum Bewegen der Karte zum uebersichtsStapel
      * @param event
      */
-    public void bewegenZumUebersichtskartenstapel(ActionEvent event) {
+    public void bewegenZumUebersichtskartenstapel(ActionEvent event) throws RemoteException {
+        System.out.println(uebersichtsCards.peek());
+
+        for(int i = 0; i < cards.length; i++){
+            if(selectedCards[i] == true){
+                Card uebersichtscard = cards[i];
+                System.out.println("selectedCard "+cards[i]);
+                ablegenZuUebersichtsKarteStapel(uebersichtscard);
+                System.out.println(uebersichtsCards.peek());
+                break;
+            }
+        }
     }
 
     /**
@@ -309,11 +445,7 @@ public class GameFieldController {
      * @param event
      */
     public void bewegenZumAblagestapel(ActionEvent event) {
-        System.out.println(dropdown_KarteWaehlen_karteSpielen.getValue());
-        Card uebersichtscard = StringtoKarte(dropdown_KarteWaehlen_karteSpielen.getValue());
-        ablegenZuUebersichtsKarteStapel(uebersichtscard);
-        System.out.println("stack uebersichtskarte size" +" "+uebersichtsCards.size());
-        setImagekarte_Uebersichtskarte();
+
     }
 
     /**
@@ -399,8 +531,8 @@ public class GameFieldController {
             case 10 -> "10";
             case 11 -> "11";
             case 12 -> "12";
-            case -1 -> "Skip";
-            case -2 -> "Joker";
+            case -1 -> "SKIP";
+            case -2 -> "JOKER";
             default -> "Fehler";
         };
 
@@ -408,10 +540,11 @@ public class GameFieldController {
             case YELLOW -> "1";
             case RED -> "2";
             case GREEN -> "3";
-            case BLUE -> "5";
             case PINK -> "4";
+            case BLUE -> "5";
         };
-        String ergebnis = "file:./src/Graphics/playingCards/" + "card" + wert + "Color" + farbeNum +"Repeat0.png"; // Umgang mit Repeat 1 and 2
+        String ergebnis = "file:./src/Graphics/playingCards/" + "card" + wert + "Color" + farbeNum +"Repeat0.png";
+        System.out.println(ergebnis);
         return new Image(ergebnis);
     }
 
@@ -425,8 +558,31 @@ public class GameFieldController {
             Lobby lobby = (Lobby) registry.lookup(this.lobby);
             System.out.println("Lobby found");
             lobby.startGame();
-            System.out.println("Game started");
+            this.game = get_game();
 
+            //update the GUI after the game has started
+            // set Openstack image
+            setImagekarte_Uebersichtskarte();
+
+            // set the cards of the player
+            for(int i = 0; i < game.getAllPlayers()[game.getCurrentPlayer()].getHandCards().size() ; i++){
+                List<Card> handCards = game.getAllPlayers()[game.getCurrentPlayer()].getHandCards();
+                System.out.println(handCards);
+                handkarte_CurrentPlayer[i].setImage(KartetoImage(handCards.get(i)));
+                handkarte_CurrentPlayer[i].setVisible(true);
+            }
+
+            //set the cards of the opponent and current player to invisible
+            for(int i = 0; i < stapelCards_CurrentPlayer.length; i++){
+                stapelCards_CurrentPlayer[i].setVisible(false);
+                cards_opp1[i].setVisible(false);
+                cards_opp2[i].setVisible(false);
+                cards_opp3[i].setVisible(false);
+                cards_opp3[i].setVisible(false);
+                cards_opp4[i].setVisible(false);
+                cards_opp5[i].setVisible(false);
+            }
+            System.out.println("Game started");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -456,7 +612,7 @@ public class GameFieldController {
         // TODO next scene öffnen
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
-        stage.setTitle("Spieldfeld");
+        stage.setTitle("Chatroom");
 
         stage.setOnCloseRequest(e -> {
             //TODO: disconnect user
@@ -465,8 +621,5 @@ public class GameFieldController {
         stage.show();
 
 
-    }
-
-    public void Start_Game(ActionEvent event) {
     }
 }

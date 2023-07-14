@@ -5,7 +5,8 @@ import java.rmi.RemoteException;
 import java.util.*;
 
 public interface Game extends Remote{
-    //public Stack<Card> getOpenStack() throws RemoteException;
+    public Stack<Card> getOpenStack() throws RemoteException;
+    public Stack<Card> getHiddenStack() throws RemoteException;
     public int getCurrentPlayer() throws RemoteException;
     public Player[] getAllPlayers() throws RemoteException;
 

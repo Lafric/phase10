@@ -22,6 +22,16 @@ public class GameImpl extends UnicastRemoteObject implements Game {
 
     private final int[] skipCounter; // counts how many skips are currently on each player
 
+
+    public Stack<Card> getOpenStack() {
+        return openStack;
+    }
+
+    @Override
+    public Stack<Card> getHiddenStack() throws RemoteException {
+        return hiddenStack;
+    }
+
     public GameImpl(Player[] allPlayer, PhaseRule[] phaseRules) throws RemoteException {
         this.allPlayer = allPlayer;
         // Reset Players
@@ -175,7 +185,10 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                         Collections.shuffle(this.hiddenStack);
                         this.openStack.clear();
                     }
+                    System.out.println("The hidden stack has "+ this.hiddenStack.size());
                     card = this.hiddenStack.pop();
+                    System.out.println("Player "+allPlayer[this.currentPlayer].getName()+" draws a card from the hidden stack.");
+                    System.out.println("The hidden stack has "+this.hiddenStack.size()+" cards left.");
                 } else{
                     card = this.openStack.pop();
                 }

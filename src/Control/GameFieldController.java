@@ -178,11 +178,11 @@ public class GameFieldController implements Initializable {
         this.cards_opp4 = new ImageView[]{imgkarteSpieler4_1, imgkarteSpieler4_2, imgkarteSpieler4_3, imgkarteSpieler4_4, imgkarteSpieler4_5, imgkarteSpieler4_6, imgkarteSpieler4_7, imgkarteSpieler4_8, imgkarteSpieler4_9, imgkarteSpieler4_10};
         this.cards_opp5 = new ImageView[]{imgkarteSpieler5_1, imgkarteSpieler5_2, imgkarteSpieler5_3, imgkarteSpieler5_4, imgkarteSpieler5_5, imgkarteSpieler5_6, imgkarteSpieler5_7, imgkarteSpieler5_8, imgkarteSpieler5_9, imgkarteSpieler5_10};
 
-        try {
-            ablegenZuUebersichtsKarteStapel(new Card(0, CardColor.RED, CardType.TWO));
+        /**try {
+            movetoOpenStack(new Card(0, CardColor.RED, CardType.TWO));
         } catch (RemoteException e) {
             e.printStackTrace();
-        } // to delete
+        } // to delete**/
         System.out.println("Controller initialized!");
 
         //set the images to invisible by initialization
@@ -199,6 +199,9 @@ public class GameFieldController implements Initializable {
         for(int i = 0; i < handkarte_CurrentPlayer.length; i++){
             handkarte_CurrentPlayer[i].setVisible(false);
         }
+        // set the values of dropdown Zielstapel
+        dropdown_Zielstapel_StapelBewegen.getItems().addAll( "Mein Stapel","Mein Stapel Rule 1", "Mein Stapel Rule 2", "Uebersichtskarte", "Spieler 1 Rule 1","Spieler 1 Rule 2","Spieler 2 Rule 1", "Spieler 2 Rule 2", "Spieler 3 Rule 1","Spieler 3 Rule 2","Spieler 4 Rule 1","Spieler 4 Rule 2","Spieler 5 Rule 1","Spieler 5 Rule 2");
+
         //set the array of selected cards
         selected_cards();
 
@@ -221,16 +224,11 @@ public class GameFieldController implements Initializable {
 
     //Method to get LobbyName from main menue, needed for lobby chat
     public void give_lobby(String lobby){
-        System.out.println("recieved " + lobby);
+        System.out.println("received " + lobby);
         this.lobby = lobby;
     }
     public void get_identity(Identity identity){
         this.identity = identity;
-    }
-
-    // set the current player or client
-    public void setPlayer(int[] player) {
-        this.player = player;
     }
 
     /**
@@ -259,113 +257,100 @@ public class GameFieldController implements Initializable {
        }
     }
 
-    /**
-     * Methode zum setzen der Karten auf der Hand
-     * @throws RemoteException
-     */
-    public void setDropdown_KarteWaehlen_karteSpielen() throws RemoteException {
-        dropdown_KarteWaehlen_karteSpielen.getItems().addAll("karte1","karte2");
-        /** for (Karte karte : client.get_spielstatus().getEigeneHandkarten()) {
-         dropdown_KarteWaehlen_karteSpielen.getItems().addAll(KartetoString(karte));
-         }**/
-    }
+
+
 
     /**
-     * Methode zum setzen der Karten auf der Hand
-     */
-    public void setStapel() {
-        dropdown_Zielstapel_StapelBewegen.getItems().addAll( "Mein Stapel Rule 1", "Mein Stapel Rule 2", "Uebersichtskarte", "Spieler 1 Rule 1","Spieler 1 Rule 2","Spieler 2 Rule 1", "Spieler 2 Rule 2", "Spieler 3 Rule 1","Spieler 3 Rule 2","Spieler 4 Rule 1","Spieler 4 Rule 2","Spieler 5 Rule 1","Spieler 5 Rule 2");
-    }
+     * Methodt to set the image of the oppenStack
 
-    /**
-     * Methode zum setzen der Karten auf der Uebersichtskarte
-     */
-    public void setImagekarte_Uebersichtskarte() throws RemoteException {
-        Card firstCard = uebersichtsCards.peek();
-        imagekarte_Uebersichtskarte.setImage(KartetoImage(firstCard));
+    public void setImagekarte_OpenStack() throws RemoteException {
+        Card firstCard =cards[0]; //  game.getOpenStack().peek();
+        imagekarte_Uebersichtskarte.setImage(CardtoImage(firstCard));
         imagekarte_Uebersichtskarte.setVisible(true);
-    }
-
-
-    /**
-     * Ablegen zur ÜbersichtsKarte
-     * @param card
-     */
-    public void ablegenZuUebersichtsKarteStapel(Card card) throws RemoteException {
-        uebersichtsCards.push(card);
-        setImagekarte_Uebersichtskarte();
-
-
-    }
+    }*/
 
     /**
-     * Methode zur Aufruf der erste Übersichtskarte
-     * @return
-     */
-    public Card getUebersichtskarte(){
-        return uebersichtsCards.pop();
-    }
-
-    /**
-     * Methode zum setzen der Karten auf der Hand
-     * @param cards
-     */
-    public void setImageHandkarte_CurrentPlayer(Card[] cards){
-        /**for(int i = 0; i < handkarte_CurrentPlayer.length; i++){
-            System.out.println(cards[i]);
-            System.out.println(handkarte_CurrentPlayer.length);
-            handkarte_CurrentPlayer[i].setImage(KartetoImage(cards[i])); // es wirft handkarte_currentPlayer[i] is null
-        }**/
-        // just the 3 first Cards
-        imagekarte_H1.setImage(KartetoImage(cards[0]));
-        imagekarte_H2.setImage(KartetoImage(cards[1]));
-        imagekarte_H3.setImage(KartetoImage(cards[2]));
-    }
-
-    /**
-     * Methode zum Spielen einer Karte
+     * Method to play
      * Fälle :
      * Zum eigenen Ablagestapel für Phase Rule 1 oder 2
      * Zum Ablagestapel eines Gegners für Phase Rule 1 oder 2
      * Zum Uebersichtskartenstapel
      * @param event
      */
-    public void karte_spielen(ActionEvent event) throws RemoteException {
+    public void playCard(ActionEvent event) throws RemoteException {
         if(dropdown_Zielstapel_StapelBewegen.getValue() == "Uebersichtskarte"){
-            bewegenZumUebersichtskartenstapel(event);
+            moveToOpenStack(event);
         } else if(dropdown_Zielstapel_StapelBewegen.getValue() == "Mein Stapel Rule 1"){
             for(int i = 0; i < selectedCards.length; i++){
                 if(selectedCards[i] == true){
-                    System.out.println(cards[i]);
-                    ablegenZuEigenerAblagestapel(cards[i],1);
+                    moveToCurrentPlayerBox(1);
                 }
             }
         }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Mein Stapel Rule 2"){
             for(int i = 0; i < selectedCards.length; i++){
                 if(selectedCards[i] == true){
-                    System.out.println(cards[i]);
-                    ablegenZuEigenerAblagestapel(cards[i],2);
+                    moveToCurrentPlayerBox(2);
+                }
+            }
+        }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Mein Stapel") {
+            for (int i = 0; i < selectedCards.length; i++) {
+                if (selectedCards[i] == true) {
+                    moveToCurrentPlayerBox(0);
                 }
             }
         }
 
     }
 
-    private void ablegenZuEigenerAblagestapel(Card card, int num) {
-        if (num == 1) {
-           for(int i = 0; i < cards.length; i++){
+    /**
+     * Methode to move a card to the current player box
+     * @param Rulenum
+     */
+    private void moveToCurrentPlayerBox( int Rulenum) throws RemoteException {
+        Player player = game.getAllPlayers()[game.getCurrentPlayer()];
+        List<Card> handCards = player.getHandCards();
+        if (Rulenum == 1) {
+           for(int i = 0; i < selectedCards.length; i++){
                if(selectedCards[i] == true){
-                   stapelCards_CurrentPlayer[i].setImage(KartetoImage(cards[i]));
-                   //d'enlever du handkarte,
-                   //supprimer ton image
-                   //set les gens a false
+
+                   if(i>4){
+                      stapelCards_CurrentPlayer[i-5].setImage(CardtoImage(cards[0]));
+                      stapelCards_CurrentPlayer[i-5].setVisible(true);
+                   }else {
+                       stapelCards_CurrentPlayer[i].setImage(CardtoImage(cards[0]));
+                       stapelCards_CurrentPlayer[i].setVisible(true);
+                   }
+
                }
            }
 
-        } else if (num == 2) {
+        } else if (Rulenum == 2) {
+            for(int i = 0; i < selectedCards.length; i++){
+                if(selectedCards[i] == true){
+                    if(i < 5) {
+                        stapelCards_CurrentPlayer[i + 5].setImage(CardtoImage(cards[0]));
+                        stapelCards_CurrentPlayer[i + 5].setVisible(true);
+                    }else {
+                        stapelCards_CurrentPlayer[i].setImage(CardtoImage(cards[0]));
+                        stapelCards_CurrentPlayer[i].setVisible(true);
+                    }
 
-        } else if (num == 0) {
+                    //d'enlever du handkarte,
+                    //supprimer ton image
+                    //set les gens a false
+                }
+            }
 
+        } else if (Rulenum == 0) { // for phase mit keine Rules
+            for(int i = 0; i < selectedCards.length; i++){
+                if(selectedCards[i] == true){
+                    stapelCards_CurrentPlayer[i].setImage(CardtoImage(cards[0]));
+                    stapelCards_CurrentPlayer[i].setVisible(true);
+                    //d'enlever du handkarte,
+                    //supprimer ton image
+                    //set les gens a false
+                }
+            }
         }
     }
 
@@ -384,7 +369,7 @@ public class GameFieldController implements Initializable {
     }
 
     /**
-     * Methode zum Ziehen einer Karte aus der AufnahmeStappel
+     * Methode to draw a card from the stack
      */
      public void drawCard(ActionEvent event) throws RemoteException {
          System.out.println("drawCard");
@@ -392,129 +377,88 @@ public class GameFieldController implements Initializable {
          System.out.println(player.getHandCards());
          this.game.drawCard(player, true);
          //update Gui
-         System.out.println(player.getHandCards());
+         List<Card> handCards = player.getHandCards();
+         int index = handCards.size() - 1;
+         handkarte_CurrentPlayer[index].setImage(CardtoImage(handCards.get(index)));
+         handkarte_CurrentPlayer[index].setVisible(true);
+         System.out.println("HandsCards "+player.getHandCards());
     }
 
     /**
-     * Methode zum Ziehen der Übersichtskarten des Clients
+     * Method to draw a card from the open stack
      * @param event
      */
-    public void UebersichtKarte_Ziehen(ActionEvent event) throws RemoteException {
-        /**handkarte_CurrentPlayer[index].setImage(KartetoImage(uebersichtsKarte));**/
+    public void drawOpenStackCard(ActionEvent event) throws RemoteException {
+        try{
+            Player player = game.getAllPlayers()[game.getCurrentPlayer()];
+            this.game.drawCard(game.getAllPlayers()[game.getCurrentPlayer()], false);
+            //update Gui
+            List<Card> handCards = player.getHandCards();
+            int index = handCards.size() - 1;
+            //setImagekarte_OpenStack();
 
-        this.game.drawCard(game.getAllPlayers()[game.getCurrentPlayer()], false);
-        //update Gui
+            Card firstCard =  game.getOpenStack().peek();
+            imagekarte_Uebersichtskarte.setImage(CardtoImage(firstCard));
+            imagekarte_Uebersichtskarte.setVisible(true);
 
-        /**
-            imagekarte_H4.setImage(KartetoImage(getUebersichtskarte()));
-            if(uebersichtsCards.empty()){
-                imagekarte_Uebersichtskarte.setVisible(false);
-            }else{
-                setImagekarte_Uebersichtskarte();
-            }
-        **/
+            handkarte_CurrentPlayer[index].setImage(CardtoImage(handCards.get(index)));
+            handkarte_CurrentPlayer[index].setVisible(true);
+            System.out.println("HandsCards "+player.getHandCards());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
-     * Methode zum Bestätigen der Gültigkeit der Phase
+     * Method to ensure the validity of a phase
      * @param event
      */
     public void bestätigt_Phase(ActionEvent event) {
     }
 
     /**
-     * Methode zum Bewegen der Karte zum uebersichtsStapel
+     * Method to move a card to the overview stack
      * @param event
      */
-    public void bewegenZumUebersichtskartenstapel(ActionEvent event) throws RemoteException {
-        System.out.println(uebersichtsCards.peek());
-
-        for(int i = 0; i < cards.length; i++){
+    public void moveToOpenStack(ActionEvent event) throws RemoteException {
+        System.out.println(game.getOpenStack().peek());
+        Player player = game.getAllPlayers()[game.getCurrentPlayer()];
+        List<Card> handCards = player.getHandCards();
+        for(int i = 0; i < selectedCards.length; i++){
             if(selectedCards[i] == true){
-                Card uebersichtscard = cards[i];
-                System.out.println("selectedCard "+cards[i]);
-                ablegenZuUebersichtsKarteStapel(uebersichtscard);
-                System.out.println(uebersichtsCards.peek());
+                Card selectedCard = handCards.get(i);
+
+                System.out.println("openStackCard "+ game.getOpenStack().peek());
+
+                game.throwCard(player, selectedCard.getId(),player.getId());
+                //update Gui
+                Card firstCard =  game.getOpenStack().peek();
+                imagekarte_Uebersichtskarte.setImage(CardtoImage(firstCard));
+                imagekarte_Uebersichtskarte.setVisible(true);
+
+                System.out.println("openStackCard new " + game.getOpenStack().peek());
                 break;
             }
         }
     }
 
+
+
     /**
-     * Methode zum Bewegen der Karte zum Ablagestapel
+     * Method to move a card to the opponent stack
      * @param event
      */
-    public void bewegenZumAblagestapel(ActionEvent event) {
-
+    public void moveToOpponent(ActionEvent event) {
     }
 
-    /**
-     * Methode zum Bewegen der Karte zum Ablagestapel des Gegners
-     * @param event
-     */
-    public void bewegenZumAblagestapelGegner(ActionEvent event) {
-    }
-
-
-
-    /**
-     * Methode zur Umwandlung von String zu Karte wenn user auf ein Option Clickt
-     * @param wert
-     * @return
-     */
-    public Card StringtoKarte(String wert) {
-        Card card = switch (wert){
-            case "karte1" -> new Card(0, CardColor.YELLOW, CardType.ONE);
-            default -> new Card(0, CardColor.GREEN, CardType.ONE);
-        };
-        return card;
-    };
-
-    /**
-     * String zum Anzeige der Karten anhand der Wert und Farbe
-     * @param card
-     * @return
-     */
-    public String KartetoString(Card card) {
-        String wert;
-        String farbe;
-
-        wert = switch (card.getType().getNumber()) {
-            case 1 -> "1";
-            case 2 -> "2";
-            case 3 -> "3";
-            case 4 -> "4";
-            case 5 -> "5";
-            case 6 -> "6";
-            case 7 -> "7";
-            case 8 -> "8";
-            case 9 -> "9";
-            case 10 -> "10";
-            case 11 -> "11";
-            case 12 -> "12";
-            case -1 -> "Skip";
-            case -2 -> "Joker";
-            default -> "Fehler";
-        };
-
-        farbe = switch (card.getColor()) {
-            case YELLOW -> "Gelb";
-            case GREEN -> "Grün";
-            case BLUE -> "Blau";
-            case RED -> "Rot";
-            case PINK -> "Pink";
-        };
-
-
-        return farbe + " " + wert;
-    }
 
     /**
      * give the image Object of a given Card
      * @param card
      * @return
      */
-    public Image KartetoImage(Card card) {
+    public Image CardtoImage(Card card) {
         String wert;
         String farbeNum;
 
@@ -558,17 +502,15 @@ public class GameFieldController implements Initializable {
             Lobby lobby = (Lobby) registry.lookup(this.lobby);
             System.out.println("Lobby found");
             lobby.startGame();
-            this.game = get_game();
+            game = get_game();
 
             //update the GUI after the game has started
-            // set Openstack image
-            setImagekarte_Uebersichtskarte();
 
             // set the cards of the player
             for(int i = 0; i < game.getAllPlayers()[game.getCurrentPlayer()].getHandCards().size() ; i++){
                 List<Card> handCards = game.getAllPlayers()[game.getCurrentPlayer()].getHandCards();
                 System.out.println(handCards);
-                handkarte_CurrentPlayer[i].setImage(KartetoImage(handCards.get(i)));
+                handkarte_CurrentPlayer[i].setImage(CardtoImage(handCards.get(i)));
                 handkarte_CurrentPlayer[i].setVisible(true);
             }
 
@@ -582,7 +524,13 @@ public class GameFieldController implements Initializable {
                 cards_opp4[i].setVisible(false);
                 cards_opp5[i].setVisible(false);
             }
+            //set the Openstack card
+            imagekarte_Uebersichtskarte.setImage(CardtoImage(game.getOpenStack().get(0)));
+            imagekarte_Uebersichtskarte.setVisible(true);
             System.out.println("Game started");
+            System.out.println("openStackCard " + game.getOpenStack());
+            System.out.println("hiidenstackfirstCard " + game.getHiddenStack().peek());
+            System.out.println("playerName " + game.getAllPlayers()[game.getCurrentPlayer()].getName()+ " playerID " + game.getAllPlayers()[game.getCurrentPlayer()].getId());
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -622,4 +570,6 @@ public class GameFieldController implements Initializable {
 
 
     }
+
+
 }

@@ -385,7 +385,7 @@
                         <Label layoutX="36.0" layoutY="14.0" text="Handkarten" />
                         <ComboBox fx:id="dropdown_KarteWaehlen_karteSpielen" layoutX="146.0" layoutY="10.0" prefWidth="150.0" promptText="Karte auswählen"/>
                         <ComboBox fx:id="dropdown_Zielstapel_StapelBewegen" layoutX="325.0" layoutY="10.0" prefWidth="150.0" promptText="Zielstapel wählen" />
-                        <Button fx:id="Karte_spielen" layoutX="537.0" layoutY="10.0" mnemonicParsing="false" onAction="#karte_spielen" text="Karte spielen" />
+                        <Button fx:id="Karte_spielen" layoutX="537.0" layoutY="10.0" mnemonicParsing="false" onAction="#playCard" text="Karte spielen" />
                         <Button fx:id="phase_bestätigen" layoutX="680.0" layoutY="10.0" mnemonicParsing="false" onAction="#bestätigt_Phase" text="Phase bestätigen" />
                         <Button fx:id="zug_beenden" layoutX="800.0" layoutY="10.0" mnemonicParsing="false" onAction="#zug_beenden" text="Zug beenden" />
                        <!--<Pane fx:id="pane_kartenSpieler" prefHeight="150.0"  prefWidth="100.0" layoutX="14.0" layoutY="57.0">-->
@@ -446,7 +446,7 @@
                             </image>
                         </ImageView>
 
-                        <Button layoutX="980.0" layoutY="10.0" mnemonicParsing="false" onAction="#UebersichtKarte_Ziehen" text="Uebersichtskarte" />
+                        <Button layoutX="980.0" layoutY="10.0" mnemonicParsing="false" onAction="#drawOpenStackCard" text="Uebersichtskarte" />
                         <ImageView fx:id="imagekarte_Uebersichtskarte" fitHeight="100.0" fitWidth="150.0" layoutX="980.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@playingCards/card1Color5Repeat0.png" />

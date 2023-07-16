@@ -386,7 +386,9 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                     // Remove cards from player hand
                     for(int j = 0; j < cards.length; j++){
                         System.out.println("REMOVING CARD "+cards[j].getId());
+                        System.out.println("length CARD before"+player.getHandCards().size());
                         player.getHandCards().remove(cards[j]);
+                        System.out.println("length CARD after"+player.getHandCards().size());
                     }
                     checkForPhaseIncrease(player);
                 } else{

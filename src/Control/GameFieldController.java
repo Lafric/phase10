@@ -19,6 +19,7 @@ import java.net.URL;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Stack;
@@ -258,25 +259,25 @@ public class GameFieldController implements Initializable {
         }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Mein Stapel") {
             moveToCurrentPlayerBox(0);
         }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 1 Rule 1") {
-            moveToOpponentBox(1,cards_opp1);
+            moveToOpponentBox(1,cards_opp1,game.getAllPlayers()[1]);
         }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 1 Rule 2") {
-            moveToOpponentBox(2, cards_opp1);
+            moveToOpponentBox(2, cards_opp1,game.getAllPlayers()[1]);
         }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 2 Rule 1") {
-            moveToOpponentBox(1, cards_opp2);
+            moveToOpponentBox(1, cards_opp2,game.getAllPlayers()[2]);
         }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 2 Rule 2") {
-            moveToOpponentBox(2, cards_opp2);
+            moveToOpponentBox(2, cards_opp2,game.getAllPlayers()[2]);
         }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 3 Rule 1") {
-            moveToOpponentBox(1, cards_opp3);
+            moveToOpponentBox(1, cards_opp3,game.getAllPlayers()[3]);
         }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 3 Rule 2") {
-            moveToOpponentBox(2, cards_opp3);
+            moveToOpponentBox(2, cards_opp3,game.getAllPlayers()[3]);
         }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 4 Rule 1") {
-            moveToOpponentBox(1, cards_opp4);
+            moveToOpponentBox(1, cards_opp4,game.getAllPlayers()[4]);
         }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 4 Rule 2") {
-            moveToOpponentBox(2, cards_opp4);
+            moveToOpponentBox(2, cards_opp4,game.getAllPlayers()[4]);
         }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 5 Rule 1") {
-            moveToOpponentBox(1, cards_opp5);
+            moveToOpponentBox(1, cards_opp5,game.getAllPlayers()[5]);
         }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 5 Rule 2") {
-            moveToOpponentBox(2, cards_opp5);
+            moveToOpponentBox(2, cards_opp5,game.getAllPlayers()[5]);
         }
 
     }
@@ -289,6 +290,21 @@ public class GameFieldController implements Initializable {
     private void moveToCurrentPlayerBox(int Rulenum) throws RemoteException {
         Player player = game.getAllPlayers()[game.getCurrentPlayer()];
         List<Card> handCards = player.getHandCards();
+        List<Integer> cardIDs = new ArrayList<>();
+        for(int i = 0; i< selectedCards.length; i++){
+            if(selectedCards[i] == true){
+                cardIDs.add(handCards.get(i).getId());
+            }
+        }
+        for(int i = 0; i< cardIDs.size(); i++){
+            System.out.println("arrayId" + cardIDs.get(i));
+        }
+
+        int[] arrayCardIDs = cardIDs.stream().mapToInt(i->i).toArray(); //convert list to array
+        System.out.println("arrayId" + arrayCardIDs.length);
+        System.out.println("before laycard " + game.getAllPlayers()[game.getCurrentPlayer()].getHandCards());
+        game.layCards(player, arrayCardIDs);
+        System.out.println("after laycard " + game.getAllPlayers()[game.getCurrentPlayer()].getHandCards());
         if (Rulenum == 1) {
            for(int i = 0; i < selectedCards.length; i++){
                if(selectedCards[i] == true){
@@ -330,10 +346,22 @@ public class GameFieldController implements Initializable {
     }
 
 
-    public void moveToOpponentBox(int Rulenum, ImageView[] stapelCards_Opponent) throws RemoteException {
+    public void moveToOpponentBox(int Rulenum, ImageView[] stapelCards_Opponent, Player moveToplayer) throws RemoteException {
         Player player = game.getAllPlayers()[game.getCurrentPlayer()];
         List<Card> handCards = player.getHandCards();
-        if (Rulenum == 1) {
+        for(int i = 0; i< selectedCards.length; i++){
+            if(selectedCards[i] == true){
+                for(int j = 0; j < game.getFilings().size(); j++){
+                    if(game.getFilings().get(j).getPlayerId() == moveToplayer.getId()){
+                        game.playCard(player, handCards.get(i).getId(),game.getFilings().get(j).getId(),true); // fälle low true und low false
+                    }
+                }
+            }
+            break;
+        }
+
+        //game.playCard(player, handCards.get(0).getId(),game.getFilings().);
+        /**if (Rulenum == 1) {
             for(int i = 0; i < selectedCards.length; i++){
                 if(selectedCards[i] == true){
 
@@ -370,7 +398,7 @@ public class GameFieldController implements Initializable {
                     renderHandCards();
                 }
             }
-        }
+        }**/
     }
 
 
@@ -380,7 +408,7 @@ public class GameFieldController implements Initializable {
      * Methode to draw a card from the stack
      */
      public void drawCard(ActionEvent event) throws RemoteException {
-         try {
+
              System.out.println("drawCard");
 
              Player player = game.getAllPlayers()[game.getCurrentPlayer()];
@@ -389,9 +417,6 @@ public class GameFieldController implements Initializable {
              //update Gui
              renderHandCards();
              System.out.println("HandsCards "+player.getHandCards());
-         }catch (RemoteException e){
-             e.printStackTrace();
-         }
     }
 
     /**
@@ -424,6 +449,7 @@ public class GameFieldController implements Initializable {
      * @param event
      */
     public void zug_beenden(ActionEvent event) throws RemoteException {
+        //game.goToNextPlayer();
         playerBoxs[game.getCurrentPlayer()].setStroke(Paint.valueOf("#4fd42"));
         // other Actions
     }
@@ -440,15 +466,11 @@ public class GameFieldController implements Initializable {
      * @param event
      */
     public void moveToOpenStack(ActionEvent event) throws RemoteException {
-        System.out.println(game.getOpenStack().peek());
         Player player = game.getAllPlayers()[game.getCurrentPlayer()];
         List<Card> handCards = player.getHandCards();
         for(int i = 0; i < selectedCards.length; i++){
             if(selectedCards[i] == true){
                 Card selectedCard = handCards.get(i);
-
-                System.out.println("openStackCard "+ game.getOpenStack().peek());
-
                 game.throwCard(player, selectedCard.getId(),player.getId());
                 //update Gui
                 Card firstCard =  game.getOpenStack().peek();

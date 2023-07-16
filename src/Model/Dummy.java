@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class Dummy implements Serializable{
     public PhaseRule[] createRules(){
         PhaseRule[] rules = new PhaseRule[10];
-        rules[0] = new PhaseRule(new Street(2000,CardType.ONE, CardType.FIVE),new Tuplet(2001,CardType.ONE,3));
-        rules[1] = new PhaseRule(new Street(2002,CardType.ONE, CardType.FIVE),new Tuplet(2003,CardType.ONE,3));
+        rules[0] = new PhaseRule(new Street(2000,CardType.ONE, CardType.THREE),new Tuplet(2001,CardType.ONE,2));
+        rules[1] = new PhaseRule(new Street(2002,CardType.ONE, CardType.FIVE),new Tuplet(2003,CardType.ONE,2));
         rules[2] = new PhaseRule(new Street(2004,CardType.ONE, CardType.FIVE),new Tuplet(2005,CardType.ONE,3));
         rules[3] = new PhaseRule(new Street(2006,CardType.ONE, CardType.FIVE),new Tuplet(2007,CardType.ONE,3));
         rules[4] = new PhaseRule(new Street(2008,CardType.ONE, CardType.FIVE),new Tuplet(2009,CardType.ONE,3));

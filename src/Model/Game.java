@@ -10,6 +10,10 @@ public interface Game extends Remote{
     public int getCurrentPlayer() throws RemoteException;
     public Player[] getAllPlayers() throws RemoteException;
 
+    public PhaseRule[] getPhaseRules() throws RemoteException;
+
+    public void goToNextPlayer() throws RemoteException;
+
   
     public void drawCard(Player player, boolean hiddenStack) throws RemoteException;
 

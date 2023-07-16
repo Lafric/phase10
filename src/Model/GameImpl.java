@@ -172,14 +172,13 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * @param player who is drawing a card
      * @param hiddenStack if the card is taken from the hidden or open stack
      */
-    public void drawCard(Player player, boolean hiddenStack) throws RemoteException{
+    public void drawCard(Player player, boolean hiddenStackIndicator) throws RemoteException{
+        System.out.println("drawCard called");
         if(allPlayer[this.currentPlayer].getId() == player.getId() && !isGameOver){
-            if(this.playerOverloadIndicator[currentPlayer]){
-                // Set Overload
-                this.playerOverloadIndicator[currentPlayer] = true;
+            if(!this.playerOverloadIndicator[currentPlayer]){
                 // Draw Card
                 Card card = null;
-                if(hiddenStack){
+                if(hiddenStackIndicator){
                     if(this.hiddenStack.empty()){
                         this.hiddenStack = this.openStack;
                         Collections.shuffle(this.hiddenStack);
@@ -195,6 +194,8 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                 // Give Card to player
                 if(card != null) {
                     this.allPlayer[currentPlayer].getHandCards().add(card);
+                    // Set Overload
+                    this.playerOverloadIndicator[currentPlayer] = true;
                 }
             } else {
                 System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", you already draw one card.");

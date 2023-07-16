@@ -172,26 +172,31 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * @param player who is drawing a card
      * @param hiddenStack if the card is taken from the hidden or open stack
      */
-    public void drawCard(Player player, boolean hiddenStack) throws RemoteException{
+    public void drawCard(Player player, boolean hiddenStackIndicator) throws RemoteException{
         System.out.println("drawCard called");
         if(allPlayer[this.currentPlayer].getId() == player.getId() && !isGameOver){
             if(!this.playerOverloadIndicator[currentPlayer]){
-                // Set Overload
-                this.playerOverloadIndicator[currentPlayer] = true;
                 // Draw Card
                 Card card = null;
-                if(this.hiddenStack.empty()){
-                    this.hiddenStack = this.openStack;
-                    Collections.shuffle(this.hiddenStack);
-                    this.openStack.clear();
+                if(hiddenStackIndicator){
+                    if(this.hiddenStack.empty()){
+                        this.hiddenStack = this.openStack;
+                        Collections.shuffle(this.hiddenStack);
+                        this.openStack.clear();
+                    }
+                    System.out.println("The hidden stack has "+ this.hiddenStack.size());
+                    card = this.hiddenStack.pop();
+                    System.out.println("Player "+allPlayer[this.currentPlayer].getName()+" draws a card from the hidden stack.");
+                    System.out.println("The hidden stack has "+this.hiddenStack.size()+" cards left.");
+                } else{
+                    card = this.openStack.pop();
                 }
-                System.out.println("The hidden stack has "+ this.hiddenStack.size());
-                card = this.hiddenStack.pop();
-                System.out.println("Player "+allPlayer[this.currentPlayer].getName()+" draws a card from the hidden stack.");
-                System.out.println("The hidden stack has "+this.hiddenStack.size()+" cards left.");
-                card = this.openStack.pop();
                 // Give Card to player
-                this.allPlayer[currentPlayer].getHandCards().add(card);
+                if(card != null) {
+                    this.allPlayer[currentPlayer].getHandCards().add(card);
+                    // Set Overload
+                    this.playerOverloadIndicator[currentPlayer] = true;
+                }
             } else {
                 System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", you already draw one card.");
             }

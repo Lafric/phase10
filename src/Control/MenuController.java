@@ -1,4 +1,5 @@
 package Control;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +27,7 @@ import Communication.ServerFuncs;
 import Communication.ServerFuncsImpl;
 import Model.DatabaseProvider;
 import Model.Identity;
+import Model.UserData;
 
 public class MenuController {
     public Button botHinzufuegenButton;
@@ -52,7 +54,7 @@ public class MenuController {
     public TextArea globalChat_ausgabe;
     public Identity identity;
     public Button LobbyRefresh;
-    public ListView<String> lobbylist = new ListView<String>(); 
+    public ListView<String> lobbylist = new ListView<String>();
     private MessageService messageService;
 
     public MenuController(MessageService messageService) {
@@ -68,7 +70,7 @@ public class MenuController {
         Runnable refresh = new ChatRefresh(globalChat_ausgabe);
         Thread chatrefresh = new Thread(refresh);
         chatrefresh.start();
-        //chatserver.start();
+        // chatserver.start();
         System.out.println("Chatrefresh started");
     }
 
@@ -95,8 +97,8 @@ public class MenuController {
     }
 
     public void refreshLobbyList(ActionEvent event) throws IOException {
-        
-        try{
+
+        try {
             Registry registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
 
             ServerFuncs serverFuncs = (ServerFuncs) registry.lookup("serverfunc");
@@ -104,11 +106,11 @@ public class MenuController {
 
             ArrayList<Lobby> serverLobbys = (ArrayList<Lobby>) serverFuncs.getLobbyList();
             System.out.println("Got LobbyList from Server");
-            
+
             ArrayList<String> lobbys = new ArrayList<String>();
 
-            for(Lobby lobby : serverLobbys){
-                String lobbyName = lobby.getLobbyName() +  "\t\t" + "(" + lobby.getCurrentPlayerCount() + "/6)";
+            for (Lobby lobby : serverLobbys) {
+                String lobbyName = lobby.getLobbyName() + "\t\t" + "(" + lobby.getCurrentPlayerCount() + "/6)";
                 lobbys.add(lobbyName);
             }
 
@@ -116,17 +118,15 @@ public class MenuController {
 
             lobbylist.getItems().addAll(lobbys);
 
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
-
-    
     }
 
     public void create_lobby_button(ActionEvent event) throws IOException {
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/gameField.fxml"));
-        //Parent root = loader.load();
+        // FXMLLoader loader = new
+        // FXMLLoader(getClass().getResource("/Graphics/gameField.fxml"));
+        // Parent root = loader.load();
         Registry registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
         System.out.println("Found registry");
         try {
@@ -135,15 +135,13 @@ public class MenuController {
             System.out.println("Found serverfunc");
             serverFuncs.createLobby();
             this.refreshLobbyList(event);
-            //LobbyList.getChildren().add(new Label("Lobby erstellt"));
+            // LobbyList.getChildren().add(new Label("Lobby erstellt"));
 
         } catch (NotBoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-
-    
     }
 
     public void delAccount(ActionEvent event) throws IOException {
@@ -165,7 +163,7 @@ public class MenuController {
 
         // TODO: Startseite Controller
         StartseiteController controller = loader.getController();
-        controller.setParams(new DatabaseProvider(true));
+        controller.setParams(new DatabaseProvider(false));
 
         // next scene öffnen
         Stage stage = new Stage();
@@ -182,28 +180,26 @@ public class MenuController {
     }
 
     public void raumBeitreten(ActionEvent event) throws IOException {
-        //get lobbyname from GUI 
-        //Lobbys are bound to those names to registry 
+        // get lobbyname from GUI
+        // Lobbys are bound to those names to registry
         String lobbyString = lobbylist.getSelectionModel().getSelectedItem();
-        
+
         String[] lobbyNameList = lobbyString.split("\t\t");
         String lobbyName = lobbyNameList[0];
-        
-      try{
-            Registry registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
-            
-            Lobby lobby =  (Lobby) registry.lookup(lobbyName);
-            System.out.println("Found Lobby");
 
+        try {
+            Registry registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
+
+            Lobby lobby = (Lobby) registry.lookup(lobbyName);
+            System.out.println("Found Lobby");
 
             lobby.joinLobby(identity);
 
-
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace(System.out);
         }
 
-        //UI
+        // UI
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/gameField.fxml"));
         Parent root = loader.load();
         GameFieldController controller = loader.getController();
@@ -211,13 +207,12 @@ public class MenuController {
         controller.get_identity(identity);
         System.out.println("Joined: " + lobbyName);
 
-
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Spieldfeld");
 
         stage.setOnCloseRequest(e -> {
-        //TODO: disconnect user
+            // TODO: disconnect user
             try {
                 Registry registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
                 Lobby lobby = (Lobby) registry.lookup(lobbyName);
@@ -237,7 +232,7 @@ public class MenuController {
     public void sendeNachricht() {
         String nachricht = globalChat_eingabe.getText();
         try {
-            Message latestMessage = messageService.sendeNachricht(identity, nachricht,"serverfunc");
+            Message latestMessage = messageService.sendeNachricht(identity, nachricht, "serverfunc");
             globalChat_ausgabe.appendText(
                     latestMessage.sender + " | " + latestMessage.date.toString() + " | " + latestMessage.content
                             + "\n");
@@ -255,6 +250,4 @@ public class MenuController {
     public void raumVerlassen(ActionEvent event) {
     }
 
-
-    
 }

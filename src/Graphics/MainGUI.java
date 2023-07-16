@@ -26,7 +26,7 @@ public class MainGUI extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        DatabaseProvider databaseProvider = new DatabaseProvider(true);
+        DatabaseProvider databaseProvider = new DatabaseProvider(false);
 
         FXMLLoader root = new FXMLLoader((getClass().getResource("startseite.fxml")));
         Scene scene = new Scene(root.load());

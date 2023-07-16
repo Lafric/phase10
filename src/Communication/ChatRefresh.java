@@ -24,48 +24,43 @@ public class ChatRefresh implements Runnable {
         this.chat_ausgabe = chatbox;
     }
 
-
     @Override
     public void run() {
-        
+
         try {
             Registry registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
-            ServerFuncs server = (ServerFuncs) registry.lookup("serverfunc");            
-            
+            ServerFuncs server = (ServerFuncs) registry.lookup("serverfunc");
+
             TextArea chat_ausgabe = this.chat_ausgabe;
-            
-            while(true){
-                
+
+            while (true) {
+
                 Thread.sleep(10000);
                 System.out.println("Chatrefresh");
-                //chat_ausgabe.clear();
+                // chat_ausgabe.clear();
 
                 ArrayList<Message> messages = server.fetchMessages();
-                if(!messages.isEmpty()){
+                if (!messages.isEmpty()) {
                     chat_ausgabe.clear();
                     String currentHisotry = chat_ausgabe.getText();
                     String latest_serv_message = currentHisotry.substring(currentHisotry.lastIndexOf("|") + 1).trim();
                     Message latestMessage = messages.get(messages.size() - 1);
-                    if(!latestMessage.content.equals(latest_serv_message)){
-                        for(Message message: messages){
+                    if (!latestMessage.content.equals(latest_serv_message)) {
+                        for (Message message : messages) {
                             chat_ausgabe.appendText(
-                            message.sender + " | " + message.date.toString() + " | " + message.content
-                                        + "\n");
+                                    message.sender + " | " + message.date.toString() + " | " + message.content
+                                            + "\n");
                         }
                     }
 
-                    
                 }
-                
-                
+
             }
-            
-            
 
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-         
+
     }
 }

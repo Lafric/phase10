@@ -270,8 +270,8 @@ public class DatabaseProvider {
             int i = 0;
             while (resultSet.next()) {
                 String username = resultSet.getString("username");
-                int gamesWon = resultSet.getInt("games_won");
-                int gamesPlayed = resultSet.getInt("games_played");
+                int gamesWon = resultSet.getInt("number_of_games_won");
+                int gamesPlayed = resultSet.getInt("number_of_games_played");
                 userData[i] = new UserData(username, gamesWon, gamesPlayed);
                 i++;
             }

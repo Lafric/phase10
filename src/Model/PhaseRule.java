@@ -48,13 +48,12 @@ public class PhaseRule implements Serializable{
             if(this.rules[i] instanceof Tuplet){
                 Tuplet rule = (Tuplet) rules[i];
                 boolean fitting = true;
-                for(int j = 0; j < cards.length; j++){
-                    System.err.println(cards[j].toString());
-                    if(rule.getType().getNumber()!=cards[j].getType().getNumber()){
+                for(int j = 0; j < cards.length-1; j++){
+                    if(cards[j].getType().getNumber() != cards[j+1].getType().getNumber()){
                         fitting = false;
                     }
                 }
-                if(fitting){
+                if(fitting && cards.length==rule.getAmount()){
                     System.err.println("Found Tuple");
                     return new Tuplet(id, rule.getType(),cards.length);
                 }

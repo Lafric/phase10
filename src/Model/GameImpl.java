@@ -22,6 +22,10 @@ public class GameImpl extends UnicastRemoteObject implements Game {
 
     private final int[] skipCounter; // counts how many skips are currently on each player
 
+    public List<Filing> getFilings() throws RemoteException{
+        return filings;
+    }
+
     public PhaseRule[] getPhaseRules() throws RemoteException{
         return phaseRules;
     }
@@ -378,8 +382,10 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                 Filing filing = rule.createMatchingFiling(id,cards);
                 if(filing!=null){
                     this.filings.add(filing);
+                    System.out.println("filings "+this.filings.size());
                     // Remove cards from player hand
                     for(int j = 0; j < cards.length; j++){
+                        System.out.println("REMOVING CARD "+cards[j].getId());
                         player.getHandCards().remove(cards[j]);
                     }
                     checkForPhaseIncrease(player);

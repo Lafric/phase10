@@ -35,8 +35,10 @@ public class PhaseRule implements Serializable{
         for(int j = 0; j < cards.length;j++){
             if(cards[j].getType()==CardType.JOKER){
                 for(int k = 0; k< 12;k++){
+                    Card tmp = cards[j];
                     cards[j] = new Card(cards[j].getId(),CardColor.BLUE,CardType.getForNumber(k+1));
                     Filing fill = createMatchingFiling(id,cards);
+                    cards[j] = tmp;
                     if(fill != null){
                         return fill;
                     }
@@ -53,7 +55,7 @@ public class PhaseRule implements Serializable{
                         fitting = false;
                     }
                 }
-                if(fitting && cards.length==rule.getAmount()){
+                if(fitting && cards.length>=rule.getAmount()){
                     System.err.println("Found Tuple");
                     return new Tuplet(id, rule.getType(),cards.length);
                 }

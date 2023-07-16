@@ -173,8 +173,9 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * @param hiddenStack if the card is taken from the hidden or open stack
      */
     public void drawCard(Player player, boolean hiddenStack) throws RemoteException{
+        System.out.println("drawCard called");
         if(allPlayer[this.currentPlayer].getId() == player.getId() && !isGameOver){
-            if(this.playerOverloadIndicator[currentPlayer]){
+            if(!this.playerOverloadIndicator[currentPlayer]){
                 // Set Overload
                 this.playerOverloadIndicator[currentPlayer] = true;
                 // Draw Card

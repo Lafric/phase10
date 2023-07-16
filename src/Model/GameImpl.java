@@ -22,8 +22,12 @@ public class GameImpl extends UnicastRemoteObject implements Game {
 
     private final int[] skipCounter; // counts how many skips are currently on each player
 
+    public PhaseRule[] getPhaseRules() throws RemoteException{
+        return phaseRules;
+    }
 
-    public Stack<Card> getOpenStack() {
+
+    public Stack<Card> getOpenStack() throws RemoteException{
         return openStack;
     }
 
@@ -60,7 +64,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
     /**
      * This method picks the next active player.
      */
-    private void goToNextPlayer() throws RemoteException{
+    public void goToNextPlayer() throws RemoteException{
         if(this.currentPlayer== this.allPlayer.length-1){
             this.currentPlayer = 0;
         } else{
@@ -170,7 +174,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
     /**
      * This method simulates the process of drawing a card from the hidden stack
      * @param player who is drawing a card
-     * @param hiddenStack if the card is taken from the hidden or open stack
+     * @param hiddenStackIndicator if the card is taken from the hidden or open stack
      */
     public void drawCard(Player player, boolean hiddenStackIndicator) throws RemoteException{
         System.out.println("drawCard called");
@@ -213,7 +217,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      */
     public void throwCard(Player player, int cardId, int playerId) throws RemoteException{
         if(allPlayer[this.currentPlayer].getId() == player.getId() && !this.isGameOver){
-            if(!this.playerOverloadIndicator[currentPlayer]){
+            if(this.playerOverloadIndicator[currentPlayer]){
                 // Set Overload
                 this.playerOverloadIndicator[currentPlayer] = false;
                 boolean success = false;

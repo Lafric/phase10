@@ -180,23 +180,18 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                 this.playerOverloadIndicator[currentPlayer] = true;
                 // Draw Card
                 Card card = null;
-                if(hiddenStack){
-                    if(this.hiddenStack.empty()){
-                        this.hiddenStack = this.openStack;
-                        Collections.shuffle(this.hiddenStack);
-                        this.openStack.clear();
-                    }
-                    System.out.println("The hidden stack has "+ this.hiddenStack.size());
-                    card = this.hiddenStack.pop();
-                    System.out.println("Player "+allPlayer[this.currentPlayer].getName()+" draws a card from the hidden stack.");
-                    System.out.println("The hidden stack has "+this.hiddenStack.size()+" cards left.");
-                } else{
-                    card = this.openStack.pop();
+                if(this.hiddenStack.empty()){
+                    this.hiddenStack = this.openStack;
+                    Collections.shuffle(this.hiddenStack);
+                    this.openStack.clear();
                 }
+                System.out.println("The hidden stack has "+ this.hiddenStack.size());
+                card = this.hiddenStack.pop();
+                System.out.println("Player "+allPlayer[this.currentPlayer].getName()+" draws a card from the hidden stack.");
+                System.out.println("The hidden stack has "+this.hiddenStack.size()+" cards left.");
+                card = this.openStack.pop();
                 // Give Card to player
-                if(card != null) {
-                    this.allPlayer[currentPlayer].getHandCards().add(card);
-                }
+                this.allPlayer[currentPlayer].getHandCards().add(card);
             } else {
                 System.out.print("Player "+allPlayer[this.currentPlayer].getName()+", you already draw one card.");
             }

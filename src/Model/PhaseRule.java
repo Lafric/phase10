@@ -1,5 +1,3 @@
-package Model;
-
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -33,37 +31,54 @@ public class PhaseRule implements Serializable{
      * @return is null if no rule is fulfilled or a filing which is fulfilled
      */
     public Filing createMatchingFiling(int id, Card[] cards){
-        for(int i = 1; i< this.rules.length; i++){
+        for(int j = 0; j < cards.length;j++){
+            if(cards[j].getType()==CardType.JOKER){
+                for(int k = 0; k< 12;k++){
+                    cards[j] = new Card(cards[j].getId(),CardColor.BLUE,CardType.getForNumber(k+1));
+                    Filing fill = createMatchingFiling(id,cards);
+                    if(fill != null){
+                        return fill;
+                    }
+                }
+            }
+        }
+
+        for(int i = 0; i< this.rules.length; i++){
             if(this.rules[i] instanceof Tuplet){
                 Tuplet rule = (Tuplet) rules[i];
                 boolean fitting = true;
                 for(int j = 0; j < cards.length; j++){
-                    if(rule.getType()!=cards[j].getType()){
+                    System.err.println(cards[j].toString());
+                    if(rule.getType().getNumber()!=cards[j].getType().getNumber()){
                         fitting = false;
                     }
                 }
                 if(fitting){
+                    System.err.println("Found Tuple");
                     return new Tuplet(id, rule.getType(),cards.length);
                 }
             } else if(this.rules[i] instanceof Street){
                 Street street = (Street) rules[i];
                 // Check if minimum length is fulfilled
-                if(street.getEnd().getNumber()-street.getStart().getNumber()+1> cards.length){
-                    return null;
-                }
-                // Order values
-                int[] values = new int[cards.length];
-                for(int j = 0; j < values.length; j++){
-                    values[j] = cards[j].getType().getNumber();
-                }
-                // Sort values and check for order
-                Arrays.sort(values);
-                for(int j = 0; j < values.length-1; j++){
-                    if(values[j]+1 != values[j]){
-                        return null;
+                if(street.getEnd().getNumber()-street.getStart().getNumber() <= cards.length) {
+                    // Order values
+                    int[] values = new int[cards.length];
+                    for (int j = 0; j < values.length; j++) {
+                        values[j] = cards[j].getType().getNumber();
+                    }
+                    // Sort values and check for order
+                    boolean sorted = true;
+                    Arrays.sort(values);
+                    for (int j = 0; j < values.length - 1; j++) {
+                        if (values[j]+1 != values[j+1]) {
+                            sorted = false;
+                        }
+                    }
+                    if (sorted) {
+                        System.out.println("Found Street");
+                        return new Street(id, CardType.getForNumber(values[0]), CardType.getForNumber(values[values.length - 1]));
                     }
                 }
-                return new Street(id,CardType.getForNumber(values[0]),CardType.getForNumber(values[values.length-1]));
             }
         }
         return null;

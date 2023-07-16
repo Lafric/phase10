@@ -1,5 +1,3 @@
-package Model;
-
 import java.io.Serializable;
 
 /**
@@ -28,5 +26,8 @@ public class Card implements Serializable{
 
     public CardType getType() {
         return this.type;
+    }
+    public String toString(){
+        return ""+this.color.toString() + "-" + this.type.getNumber()+"-id:"+this.id;
     }
 }

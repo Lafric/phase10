@@ -6,12 +6,11 @@ import java.sql.*;
 
 public class DatabaseProvider {
 
-    // private final String dbUrl =
-    // "jdbc:postgresql://185.162.248.237:5432/postgres";
-    private final String dbUrl = "jdbc:postgresql://localhost/phase10";
+    private final String dbUrl = "jdbc:postgresql://185.162.248.237:5432/postgres";
+    // private final String dbUrl = "jdbc:postgresql://localhost/phase10";
     private final String dbUser = "postgres";
-    // private final String dbPassword = "apfel"; // TODO: change to your password
-    private final String dbPassword = "giba"; // TODO: change to your password
+    private final String dbPassword = "apfel"; // TODO: change to your password
+    // private final String dbPassword = "giba"; // TODO: change to your password
 
     public boolean useDummy = false;
     public HashMap<String, String> dummyUserData = new HashMap<String, String>();

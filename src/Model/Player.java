@@ -38,7 +38,7 @@ public class Player  implements Serializable  {
         return this.phase;
     }
 
-    public List<Card> getHandCards()  throws RemoteException{
+    public synchronized List<Card> getHandCards()  throws RemoteException{
         return this.handCards;
     }
 
@@ -64,6 +64,9 @@ public class Player  implements Serializable  {
 
     public void resetHandCards() throws RemoteException{
         this.handCards.clear();
+    }
+    public synchronized void removeCard(Card card){
+        this.handCards.remove(card);
     }
 }
 

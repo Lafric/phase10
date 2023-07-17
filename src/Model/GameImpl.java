@@ -374,7 +374,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
 
     /**
      * This method simulates the process of open up a new filing.
-     * 
+     *
      * @param player
      *            who is active at the moment
      * @param cardIds
@@ -426,12 +426,13 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                     // Remove cards from player hand
                     for (int j = 0; j < cards.length; j++) {
                         System.out.println("REMOVING CARD " + cards[j].getId());
-                        System.out.println("length CARD before" + player.getHandCards().size());
-                        System.out.println("current player before" +  player.getName() + " " + player.getId());
-                        player.removeCard(cards[j]);
+                        System.out.println("length CARD before" + this.allPlayer[currentPlayer].getHandCards().size());
+                        System.out.println("current player before" +  this.allPlayer[currentPlayer].getName() + " " + player.getId());
 
-                        System.out.println("length CARD after" + player.getHandCards().size());
-                        System.out.println("current player after" +  player.getName() + " " + player.getId());
+                        this.allPlayer[currentPlayer].removeCard(cards[j]);
+
+                        System.out.println("length CARD after" + this.allPlayer[currentPlayer].getHandCards().size());
+                        System.out.println("current player after" +  this.allPlayer[currentPlayer].getName() + " " + player.getId());
                         for(Card card : player.getHandCards()){
                             System.out.println( "card after" + card);
                         }

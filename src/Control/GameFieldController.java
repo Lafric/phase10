@@ -226,22 +226,22 @@ public class GameFieldController implements Initializable {
                 "Spieler 5 Rule 2");
 
         //set the labels as invisible by initialization
-        label_Gegenspieler1Name.setVisible(false);
+        // label_Gegenspieler1Name.setVisible(false);
         label_Gegenspieler1Handkarten.setVisible(false);
         label_Gegenspieler1Punkte.setVisible(false);
-        label_Gegenspieler2.setVisible(false);
+        // label_Gegenspieler2.setVisible(false);
         label_Gegenspieler2Handkarten.setVisible(false);
         label_Gegenspieler2Punkte.setVisible(false);
-        label_Gegenspieler3.setVisible(false);
+        // label_Gegenspieler3.setVisible(false);
         label_Gegenspieler3Handkarten.setVisible(false);
         label_Gegenspieler3Punkte.setVisible(false);
-        label_Gegenspieler4.setVisible(false);
+        // label_Gegenspieler4.setVisible(false);
         label_Gegenspieler4Handkarten.setVisible(false);
         label_Gegenspieler4Punkte.setVisible(false);
-        label_Gegenspieler5.setVisible(false);
+        // label_Gegenspieler5.setVisible(false);
         label_Gegenspieler5Handkarten.setVisible(false);
         label_Gegenspieler5Punkte.setVisible(false);
-        label_Client.setVisible(false);
+        // label_Client.setVisible(false);
         label_ClientHandkarten.setVisible(false);
         label_ClientPunkte.setVisible(false);
         for(int i = 0; i < playerBoxs.length; i++){
@@ -614,8 +614,8 @@ public class GameFieldController implements Initializable {
     }
 
     public void addBot(ActionEvent event) throws RemoteException {
-        get_game().addBot();
         get_lobby().addBot();
+        get_game().addBot();
     }
 
     /**

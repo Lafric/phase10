@@ -25,18 +25,38 @@ public enum CardType implements Serializable {
 
     private final int number;
     private final int penaltyPoints;
+
+    /**
+     * Constructor for type
+     * @param number the card number
+     * @param penaltyPoints the penalty points
+     */
     CardType(int number, int penaltyPoints) {
         this.number = number;
         this.penaltyPoints = penaltyPoints;
     }
+
+    /**
+     * getter fro number
+     * @return the representattive number
+     */
     public int getNumber(){
         return this.number;
     }
 
+    /**
+     * getter for penalty points
+     * @return the penalty points
+     */
     public int getPenaltyPoints(){
         return this.penaltyPoints;
     }
 
+    /**
+     * method to switch between enum and number
+     * @param num number
+     * @return corresponding card type
+     */
     public static CardType getForNumber(int num){
         switch (num){
             case 1 : return CardType.ONE;

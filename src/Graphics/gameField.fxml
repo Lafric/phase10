@@ -22,12 +22,14 @@
                         <!--Spieler 5-->
                         <Rectangle fx:id="kasten_Gegenspieler5" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="530.0" layoutY="368.0" stroke="black" strokeType="INSIDE" width="500.0" />
                         <Label fx:id="label_Gegenspieler5" layoutX="544.0" layoutY="380.0" text="[LEER 6]" />
-                        <Label fx:id="label_Gegenspieler5Handkarten" layoutX="544.0" layoutY="400.0" text="Anzahl Handkarten" />
-                        <Label layoutX="664.0" layoutY="400.0" text="0" />
+                        <Label  layoutX="544.0" layoutY="400.0" text="Anzahl Handkarten" />
+                        <Label fx:id="label_Gegenspieler5Handkarten" layoutX="664.0" layoutY="400.0" text="0" />
                         <Label layoutX="544.0" layoutY="420.0" text="Punkte" />
                         <Label fx:id="label_Gegenspieler5Punkte" layoutX="600.0" layoutY="420.0" text="0" />
                         <Label layoutX="544.0" layoutY="440.0" text="Phase Rule 1: " />
+                        <Label fx:id="opp5_cards1" layoutX="544.0" layoutY="500.0" text="0 - 10" />
                         <Label layoutX="796.0" layoutY="440.0" text="Phase Rule 2: " />
+                        <Label fx:id="opp5_cards2" layoutX="796.0" layoutY="500.0" text="0 - 10" />
                         <!-- Karte von 2 bis 5 für die phase Rule Nr 1-->
                         <ImageView fx:id="imgkarteSpieler5_1" fitHeight="50" fitWidth="75" layoutX="544.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -83,12 +85,14 @@
                         <!--Spieler 4-->
                         <Rectangle fx:id="kasten_Gegenspieler4" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="530.0" layoutY="198.0" stroke="black" strokeType="INSIDE" width="500.0" />
                         <Label fx:id="label_Gegenspieler4" layoutX="544.0" layoutY="210.0" text="[LEER 4]" />
-                        <Label fx:id="label_Gegenspieler4Handkarten" layoutX="544.0" layoutY="230.0" text="Anzahl Handkarten" />
-                        <Label layoutX="664.0" layoutY="230.0" text="0" />
+                        <Label  layoutX="544.0" layoutY="230.0" text="Anzahl Handkarten" />
+                        <Label fx:id="label_Gegenspieler4Handkarten" layoutX="664.0" layoutY="230.0" text="0" />
                         <Label layoutX="544.0" layoutY="250.0" text="Punkte" />
                         <Label fx:id="label_Gegenspieler4Punkte" layoutX="600.0" layoutY="250.0" text="0" />
                         <Label layoutX="544.0" layoutY="270.0" text="Phase Rule 1: " />
+                        <Label fx:id="opp4_cards1" layoutX="544.0" layoutY="330.0" text="0 - 10" />
                         <Label layoutX="796.0" layoutY="270.0" text="Phase Rule 2: " />
+                        <Label fx:id="opp4_cards2" layoutX="796.0" layoutY="330.0" text="0 - 10" />
                         <!-- Karte von 2 bis 5 für die phase Rule Nr 1-->
                         <ImageView fx:id="imgkarteSpieler4_1" fitHeight="50" fitWidth="75" layoutX="544.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -144,12 +148,14 @@
                         <!--Spieler 3-->
                         <Rectangle fx:id="kasten_Gegenspieler3" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="27.0" layoutY="198.0" stroke="black" strokeType="INSIDE" width="500.0" />
                         <Label fx:id="label_Gegenspieler3" layoutX="44.0" layoutY="210.0" text="[LEER 3]" />
-                        <Label fx:id="label_Gegenspieler3Handkarten" layoutX="44.0" layoutY="230.0" text="Anzahl Handkarten" />
-                        <Label layoutX="160.0" layoutY="230.0" text="0" />
-                        <Label layoutX="44.0" layoutY="250.0" text="Punkte" />
+                        <Label  layoutX="44.0" layoutY="230.0" text="Anzahl Handkarten" />
+                        <Label fx:id="label_Gegenspieler3Handkarten" layoutX="160.0" layoutY="230.0" text="0" />
+                        <Label layoutX="44.0" layoutY="250.0" text="Punkte"/>
                         <Label fx:id="label_Gegenspieler3Punkte" layoutX="100.0" layoutY="250.0" text="0" />
                         <Label layoutX="44.0" layoutY="270.0" text="Phase Rule 1: " />
+                        <Label fx:id="opp3_cards1" layoutX="44.0" layoutY="330.0" text="0 - 10" />
                         <Label layoutX="296.0" layoutY="270.0" text="Phase Rule 2: " />
+                        <Label fx:id="opp3_cards2" layoutX="296.0" layoutY="330.0" text="0 - 10" />
                         <ImageView fx:id="imgkarteSpieler3_1" fitHeight="50" fitWidth="75" layoutX="44.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@playingCards/card1Color5Repeat0.png" />
@@ -204,12 +210,14 @@
                         <!--Spieler 2-->
                         <Rectangle fx:id="kasten_Gegenspieler2" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="530.0" layoutY="28.0" stroke="black" strokeType="INSIDE" width="500.0" />
                         <Label fx:id="label_Gegenspieler2" layoutX="544.0" layoutY="40.0" text="[LEER 2]" />
-                        <Label fx:id="label_Gegenspieler2Handkarten" layoutX="544.0" layoutY="60.0" text="Anzahl Handkarten" />
-                        <Label layoutX="664.0" layoutY="60.0" text="0" />
+                        <Label  layoutX="544.0" layoutY="60.0" text="Anzahl Handkarten" />
+                        <Label fx:id="label_Gegenspieler2Handkarten" layoutX="664.0" layoutY="60.0" text="0" />
                         <Label layoutX="544.0" layoutY="80.0" text="Punkte" />
                         <Label fx:id="label_Gegenspieler2Punkte" layoutX="600.0" layoutY="80.0" text="0" />
                         <Label layoutX="544.0" layoutY="100.0" text="Phase Rule 1: " />
+                        <Label fx:id="opp2_cards1" layoutX="544.0" layoutY="160.0" text="0 - 10" />
                         <Label layoutX="796.0" layoutY="100.0" text="Phase Rule 2: " />
+                        <Label fx:id="opp2_cards2" layoutX="796.0" layoutY="160.0" text="0 - 10" />
                         <ImageView fx:id="imgkarteSpieler2_1" fitHeight="50" fitWidth="75" layoutX="544.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@playingCards/card1Color5Repeat0.png" />
@@ -265,12 +273,14 @@
                         <!--Spieler 1-->
                         <Rectangle fx:id="kasten_Gegenspieler1" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="27.0" layoutY="28.0" stroke="black" strokeType="INSIDE" width="500.0" />
                         <Label fx:id="label_Gegenspieler1Name" layoutX="44.0" layoutY="40.0" text="[LEER 1]" />
-                        <Label fx:id="label_Gegenspieler1Handkarten" layoutX="44.0" layoutY="60.0" text="Anzahl Handkarten" />
-                        <Label layoutX="160.0" layoutY="60.0" text="0" />
+                        <Label  layoutX="44.0" layoutY="60.0" text="Anzahl Handkarten" />
+                        <Label fx:id="label_Gegenspieler1Handkarten" layoutX="160.0" layoutY="60.0" text="0" />
                         <Label layoutX="44.0" layoutY="80.0" text="Punkte" />
                         <Label fx:id="label_Gegenspieler1Punkte" layoutX="100.0" layoutY="80.0" text="0" />
                         <Label layoutX="44.0" layoutY="100.0" text="Phase Rule 1: " />
+                        <Label fx:id="opp1_cards1" layoutX="44.0" layoutY="160.0" text="0 - 10" />
                         <Label layoutX="296.0" layoutY="100.0" text="Phase Rule 2: " />
+                        <Label fx:id="opp1_cards2" layoutX="296.0" layoutY="160.0" text="0 - 10" />
                         <!-- Karte von 1 bis 5 für die phase Rule Nr 1-->
                         <ImageView fx:id="imgkarteSpieler1_1" fitHeight="50" fitWidth="75" layoutX="44.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -327,12 +337,14 @@
                         <!--Aktuelle Spieler-->
                         <Rectangle fx:id="kasten_Client" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="27.0" layoutY="368.0" stroke="black" strokeType="INSIDE" width="500.0" />
                         <Label fx:id="label_Client" layoutX="44.0" layoutY="380.0" text="[LEER 5]" />
-                        <Label fx:id="label_ClientHandkarten" layoutX="44.0" layoutY="400.0" text="Anzahl Handkarten" />
-                        <Label layoutX="160.0" layoutY="400.0" text="0" />
+                        <Label  layoutX="44.0" layoutY="400.0" text="Anzahl Handkarten" />
+                        <Label fx:id="label_ClientHandkarten" layoutX="160.0" layoutY="400.0" text="0" />
                         <Label layoutX="44.0" layoutY="420.0" text="Punkte" />
                         <Label fx:id="label_ClientPunkte" layoutX="100.0" layoutY="420.0" text="0" />
                         <Label layoutX="44.0" layoutY="440.0" text="Phase Rule 1: " />
+                        <Label fx:id="client_cards1" layoutX="44.0" layoutY="500.0" text="0 - 10" />
                         <Label layoutX="296.0" layoutY="440.0" text="Phase Rule 2: " />
+                        <Label fx:id="client_cards2" layoutX="296.0"  layoutY="500.0" text="0 - 10: " />
                         <!-- Karte von 2 bis 5 für die phase Rule Nr 1-->
                         <ImageView fx:id="imgkarteSpielerClient_1" fitHeight="50" fitWidth="75" layoutX="44.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -457,6 +469,7 @@
                                 <Image url="@playingCards/card1Color5Repeat0.png" />
                             </image>
                         </ImageView>
+                        <Button fx:id="draw_openStack" layoutX="980.0" layoutY="10.0" mnemonicParsing="false" onAction="#drawOpenStackCard" text="Uebersichtkarte" />
                         <ImageView fx:id="imagekarte_Uebersichtskarte" fitHeight="100.0" fitWidth="150.0" layoutX="980.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@playingCards/card1Color5Repeat0.png" />
@@ -477,6 +490,7 @@
                         <Button fx:id="karte_ziehen" layoutX="1100.0" layoutY="57.0" mnemonicParsing="false" onAction="#drawCard" text="Karte Ziehen" />
                         <Button fx:id="launchchat" layoutX="1100.0" layoutY="97.0" mnemonicParsing="false" onAction="#LaunchChat" text="Chat" />
                         <Button fx:id="start_Game" layoutX="1100.0" layoutY="137.0" mnemonicParsing="false" onAction="#start_Game" text="Spiel starten" />
+                        <CheckBox fx:id="checkBox_Low" layoutX="1100.0" layoutY="177.0" />
                     </children>
                 </AnchorPane>
             </items>

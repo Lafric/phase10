@@ -41,56 +41,6 @@ public class GameFieldController implements Initializable {
     public ImageView imagekarte_H10;
     public ImageView imagekarte_H9;
     public ImageView imagekarte_H11;
-    public ImageView imgkarteSpieler1_1;
-    public ImageView imgkarteSpieler1_2;
-    public ImageView imgkarteSpieler1_3;
-    public ImageView imgkarteSpieler1_4;
-    public ImageView imgkarteSpieler1_5;
-    public ImageView imgkarteSpieler1_6;
-    public ImageView imgkarteSpieler1_7;
-    public ImageView imgkarteSpieler1_8;
-    public ImageView imgkarteSpieler1_9;
-    public ImageView imgkarteSpieler1_10;
-    public ImageView imgkarteSpieler2_1;
-    public ImageView imgkarteSpieler2_2;
-    public ImageView imgkarteSpieler2_3;
-    public ImageView imgkarteSpieler2_4;
-    public ImageView imgkarteSpieler2_5;
-    public ImageView imgkarteSpieler2_6;
-    public ImageView imgkarteSpieler2_7;
-    public ImageView imgkarteSpieler2_8;
-    public ImageView imgkarteSpieler2_9;
-    public ImageView imgkarteSpieler2_10;
-    public ImageView imgkarteSpieler3_1;
-    public ImageView imgkarteSpieler3_2;
-    public ImageView imgkarteSpieler3_3;
-    public ImageView imgkarteSpieler3_4;
-    public ImageView imgkarteSpieler3_5;
-    public ImageView imgkarteSpieler3_6;
-    public ImageView imgkarteSpieler3_7;
-    public ImageView imgkarteSpieler3_8;
-    public ImageView imgkarteSpieler3_9;
-    public ImageView imgkarteSpieler3_10;
-    public ImageView imgkarteSpieler4_1;
-    public ImageView imgkarteSpieler4_2;
-    public ImageView imgkarteSpieler4_3;
-    public ImageView imgkarteSpieler4_4;
-    public ImageView imgkarteSpieler4_5;
-    public ImageView imgkarteSpieler4_6;
-    public ImageView imgkarteSpieler4_7;
-    public ImageView imgkarteSpieler4_8;
-    public ImageView imgkarteSpieler4_9;
-    public ImageView imgkarteSpieler4_10;
-    public ImageView imgkarteSpieler5_1;
-    public ImageView imgkarteSpieler5_2;
-    public ImageView imgkarteSpieler5_3;
-    public ImageView imgkarteSpieler5_4;
-    public ImageView imgkarteSpieler5_5;
-    public ImageView imgkarteSpieler5_6;
-    public ImageView imgkarteSpieler5_7;
-    public ImageView imgkarteSpieler5_8;
-    public ImageView imgkarteSpieler5_9;
-    public ImageView imgkarteSpieler5_10;
     public ImageView imagekarte_Uebersichtskarte;
     public Rectangle kasten_Gegenspieler1;
     public Label label_Gegenspieler1Name;
@@ -137,27 +87,12 @@ public class GameFieldController implements Initializable {
     public CheckBox checkBox_9;
     public CheckBox checkBox_10;
     public CheckBox checkBox_11;
-    public ImageView imgkarteSpielerClient_1;
-    public ImageView imgkarteSpielerClient_2;
-    public ImageView imgkarteSpielerClient_3;
-    public ImageView imgkarteSpielerClient_4;
-    public ImageView imgkarteSpielerClient_5;
-    public ImageView imgkarteSpielerClient_6;
-    public ImageView imgkarteSpielerClient_7;
-    public ImageView imgkarteSpielerClient_8;
-    public ImageView imgkarteSpielerClient_9;
-    public ImageView imgkarteSpielerClient_10;
+
 
     // Für Dummy Logik
     public Rectangle[] playerBoxs;
     public ImageView[] handkarte_CurrentPlayer;
-    public ImageView[] stapelCards_CurrentPlayer;
     public CheckBox[] checkBoxes;
-    public ImageView[] cards_opp1;
-    public ImageView[] cards_opp2;
-    public ImageView[] cards_opp3;
-    public ImageView[] cards_opp4;
-    public ImageView[] cards_opp5;
     public boolean[] selectedCards = new boolean[11];
     public Button draw_openStack;
     public CheckBox checkBox_Low;
@@ -179,24 +114,6 @@ public class GameFieldController implements Initializable {
                 kasten_Gegenspieler3, kasten_Gegenspieler4, kasten_Gegenspieler5 };
         this.checkBoxes = new CheckBox[] { checkBox_1, checkBox_2, checkBox_3, checkBox_4, checkBox_5, checkBox_6,
                 checkBox_7, checkBox_8, checkBox_9, checkBox_10, checkBox_11 };
-        this.stapelCards_CurrentPlayer = new ImageView[] { imgkarteSpielerClient_1, imgkarteSpielerClient_2,
-                imgkarteSpielerClient_3, imgkarteSpielerClient_4, imgkarteSpielerClient_5, imgkarteSpielerClient_6,
-                imgkarteSpielerClient_7, imgkarteSpielerClient_8, imgkarteSpielerClient_9, imgkarteSpielerClient_10 };
-        this.cards_opp1 = new ImageView[] { imgkarteSpieler1_1, imgkarteSpieler1_2, imgkarteSpieler1_3,
-                imgkarteSpieler1_4, imgkarteSpieler1_5, imgkarteSpieler1_6, imgkarteSpieler1_7, imgkarteSpieler1_8,
-                imgkarteSpieler1_9, imgkarteSpieler1_10 };
-        this.cards_opp2 = new ImageView[] { imgkarteSpieler2_1, imgkarteSpieler2_2, imgkarteSpieler2_3,
-                imgkarteSpieler2_4, imgkarteSpieler2_5, imgkarteSpieler2_6, imgkarteSpieler2_7, imgkarteSpieler2_8,
-                imgkarteSpieler2_9, imgkarteSpieler2_10 };
-        this.cards_opp3 = new ImageView[] { imgkarteSpieler3_1, imgkarteSpieler3_2, imgkarteSpieler3_3,
-                imgkarteSpieler3_4, imgkarteSpieler3_5, imgkarteSpieler3_6, imgkarteSpieler3_7, imgkarteSpieler3_8,
-                imgkarteSpieler3_9, imgkarteSpieler3_10 };
-        this.cards_opp4 = new ImageView[] { imgkarteSpieler4_1, imgkarteSpieler4_2, imgkarteSpieler4_3,
-                imgkarteSpieler4_4, imgkarteSpieler4_5, imgkarteSpieler4_6, imgkarteSpieler4_7, imgkarteSpieler4_8,
-                imgkarteSpieler4_9, imgkarteSpieler4_10 };
-        this.cards_opp5 = new ImageView[] { imgkarteSpieler5_1, imgkarteSpieler5_2, imgkarteSpieler5_3,
-                imgkarteSpieler5_4, imgkarteSpieler5_5, imgkarteSpieler5_6, imgkarteSpieler5_7, imgkarteSpieler5_8,
-                imgkarteSpieler5_9, imgkarteSpieler5_10 };
 
         /**
          * try {
@@ -207,16 +124,7 @@ public class GameFieldController implements Initializable {
          **/
         System.out.println("Controller initialized!");
 
-        // set the images to invisible by initialization
-        for (int i = 0; i < stapelCards_CurrentPlayer.length; i++) {
-            stapelCards_CurrentPlayer[i].setVisible(false);
-            cards_opp1[i].setVisible(false);
-            cards_opp2[i].setVisible(false);
-            cards_opp3[i].setVisible(false);
-            cards_opp3[i].setVisible(false);
-            cards_opp4[i].setVisible(false);
-            cards_opp5[i].setVisible(false);
-        }
+
         imagekarte_Uebersichtskarte.setVisible(false);
         for (int i = 0; i < handkarte_CurrentPlayer.length; i++) {
             handkarte_CurrentPlayer[i].setVisible(false);
@@ -246,6 +154,7 @@ public class GameFieldController implements Initializable {
         // label_Client.setVisible(false);
         label_ClientHandkarten.setVisible(false);
         label_ClientPunkte.setVisible(false);
+
         for(int i = 0; i < playerBoxs.length; i++){
             playerBoxs[i].setVisible(false);
         }
@@ -407,33 +316,33 @@ public class GameFieldController implements Initializable {
             moveToCurrentPlayerBox(0);
         } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 1 Rule 1" || dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 1 Rule 2") {
             if(checkBox_Low.isSelected()){
-                moveToOpponentBox(1, cards_opp1, game.getAllPlayers()[1], true);
+                moveToOpponentBox(1, game.getAllPlayers()[1], true);
             } else {
-                moveToOpponentBox(2, cards_opp1, game.getAllPlayers()[1], false);
+                moveToOpponentBox(2, game.getAllPlayers()[1], false);
             }
         } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 2 Rule 1" || dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 2 Rule 2") {
             if(checkBox_Low.isSelected()){
-                moveToOpponentBox(1, cards_opp2, game.getAllPlayers()[2], true);
+                moveToOpponentBox(1, game.getAllPlayers()[2], true);
             } else {
-                moveToOpponentBox(2, cards_opp2, game.getAllPlayers()[2], false);
+                moveToOpponentBox(2, game.getAllPlayers()[2], false);
             }
         } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 3 Rule 1" || dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 3 Rule 2") {
             if(checkBox_Low.isSelected()){
-                moveToOpponentBox(1, cards_opp3, game.getAllPlayers()[3], true);
+                moveToOpponentBox(1,  game.getAllPlayers()[3], true);
             } else {
-                moveToOpponentBox(2, cards_opp3, game.getAllPlayers()[3], false);
+                moveToOpponentBox(2, game.getAllPlayers()[3], false);
             }
         } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 4 Rule 1" || dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 4 Rule 2") {
             if(checkBox_Low.isSelected()){
-                moveToOpponentBox(1, cards_opp4, game.getAllPlayers()[4], true);
+                moveToOpponentBox(1, game.getAllPlayers()[4], true);
             } else {
-                moveToOpponentBox(2, cards_opp4, game.getAllPlayers()[4], false);
+                moveToOpponentBox(2,  game.getAllPlayers()[4], false);
             }
         } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 5 Rule 1" || dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 5 Rule 2") {
             if(checkBox_Low.isSelected()){
-                moveToOpponentBox(1, cards_opp5, game.getAllPlayers()[5], true);
+                moveToOpponentBox(1, game.getAllPlayers()[5], true);
             } else {
-                moveToOpponentBox(2, cards_opp5, game.getAllPlayers()[5], false);
+                moveToOpponentBox(2,  game.getAllPlayers()[5], false);
             }
         }
 
@@ -473,7 +382,7 @@ public class GameFieldController implements Initializable {
                 System.out.println("Filing " + game.getFilings().get(j));
                 System.out.println("Filing " + game.getFilings().get(j).getPlayerId());
                 System.out.println("Filing " + game.getAllPlayers()[game.getCurrentPlayer()].getId());
-            System.out.println("check" + checkBox_Low.isSelected());
+                System.out.println("check" + checkBox_Low.isSelected());
 
         }
 
@@ -484,11 +393,9 @@ public class GameFieldController implements Initializable {
                 if (selectedCards[i] == true) {
 
                     if (i > 4) {
-                        stapelCards_CurrentPlayer[i - 5].setImage(CardtoImage(handCards.get(i)));
-                        stapelCards_CurrentPlayer[i - 5].setVisible(true);
+
                     } else {
-                        stapelCards_CurrentPlayer[i].setImage(CardtoImage(handCards.get(i)));
-                        stapelCards_CurrentPlayer[i].setVisible(true);
+
                     }
                     renderHandCards();
                 }
@@ -498,11 +405,9 @@ public class GameFieldController implements Initializable {
             for (int i = 0; i < selectedCards.length; i++) {
                 if (selectedCards[i] == true) {
                     if (i < 5) {
-                        stapelCards_CurrentPlayer[i + 5].setImage(CardtoImage(handCards.get(i)));
-                        stapelCards_CurrentPlayer[i + 5].setVisible(true);
+
                     } else {
-                        stapelCards_CurrentPlayer[i].setImage(CardtoImage(handCards.get(i)));
-                        stapelCards_CurrentPlayer[i].setVisible(true);
+
                     }
                     renderHandCards();
                 }
@@ -511,15 +416,14 @@ public class GameFieldController implements Initializable {
         } else if (Rulenum == 0) { // for phase mit keine Rules
             for (int i = 0; i < selectedCards.length; i++) {
                 if (selectedCards[i] == true) {
-                    stapelCards_CurrentPlayer[i].setImage(CardtoImage(handCards.get(i)));
-                    stapelCards_CurrentPlayer[i].setVisible(true);
+
                     renderHandCards();
                 }
             }
         }
     }
 
-    public void moveToOpponentBox(int Rulenum, ImageView[] stapelCards_Opponent, Player moveToplayer, boolean low) throws RemoteException {
+    public void moveToOpponentBox(int Rulenum, Player moveToplayer, boolean low) throws RemoteException {
 
         Player player = game.getAllPlayers()[game.getCurrentPlayer()];
         List<Card> handCards = player.getHandCards();
@@ -534,48 +438,6 @@ public class GameFieldController implements Initializable {
             }
             break;
         }
-
-        // game.playCard(player, handCards.get(0).getId(),game.getFilings().);
-        /**
-         * if (Rulenum == 1) {
-         * for(int i = 0; i < selectedCards.length; i++){
-         * if(selectedCards[i] == true){
-         * 
-         * if(i>4){
-         * stapelCards_Opponent[i-5].setImage(CardtoImage(handCards.get(i)));
-         * stapelCards_Opponent[i-5].setVisible(true);
-         * }else {
-         * stapelCards_Opponent[i].setImage(CardtoImage(handCards.get(i)));
-         * stapelCards_Opponent[i].setVisible(true);
-         * }
-         * renderHandCards();
-         * }
-         * }
-         * 
-         * } else if (Rulenum == 2) {
-         * for(int i = 0; i < selectedCards.length; i++){
-         * if(selectedCards[i] == true){
-         * if(i < 5) {
-         * stapelCards_Opponent[i + 5].setImage(CardtoImage(handCards.get(i)));
-         * stapelCards_Opponent[i + 5].setVisible(true);
-         * }else {
-         * stapelCards_Opponent[i].setImage(CardtoImage(handCards.get(i)));
-         * stapelCards_Opponent[i].setVisible(true);
-         * }
-         * renderHandCards();
-         * }
-         * }
-         * 
-         * } else if (Rulenum == 0) { // for phase mit keine zweite Rule
-         * for(int i = 0; i < selectedCards.length; i++){
-         * if(selectedCards[i] == true){
-         * stapelCards_Opponent[i].setImage(CardtoImage(handCards.get(i)));
-         * stapelCards_Opponent[i].setVisible(true);
-         * renderHandCards();
-         * }
-         * }
-         * }
-         **/
     }
 
     /**
@@ -826,16 +688,6 @@ public class GameFieldController implements Initializable {
                 handkarte_CurrentPlayer[i].setVisible(true);
             }
 
-            // set the cards of the opponent and current player to invisible
-            for (int i = 0; i < stapelCards_CurrentPlayer.length; i++) {
-                stapelCards_CurrentPlayer[i].setVisible(false);
-                cards_opp1[i].setVisible(false);
-                cards_opp2[i].setVisible(false);
-                cards_opp3[i].setVisible(false);
-                cards_opp3[i].setVisible(false);
-                cards_opp4[i].setVisible(false);
-                cards_opp5[i].setVisible(false);
-            }
             // set the Openstack card
             imagekarte_Uebersichtskarte.setImage(CardtoImage(game.getOpenStack().get(0)));
             imagekarte_Uebersichtskarte.setVisible(true);

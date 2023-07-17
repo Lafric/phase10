@@ -252,7 +252,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                 // Check if card is on player hands
                 for (Card card : player.getHandCards()) {
                     if (card.getId() == cardId) {
-                        allPlayer[this.currentPlayer].getHandCards().remove(card);
+                        this.allPlayer[this.currentPlayer].getHandCards().remove(card);
                         this.openStack.push(card);
                         if (card.getType() == CardType.SKIP) {
                             this.skipCounter[getPlayerIndexById(playerId)]++;
@@ -428,11 +428,13 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                         System.out.println("REMOVING CARD " + cards[j].getId());
                         System.out.println("length CARD before" + this.allPlayer[currentPlayer].getHandCards().size());
                         System.out.println("current player before" +  this.allPlayer[currentPlayer].getName() + " " + player.getId());
+                        System.out.println("length CARD before" + player.getHandCards().size());
+                        System.out.println("current player before" +  player.getName() + " " + player.getId());
 
-                        this.allPlayer[currentPlayer].removeCard(cards[j]);
+                        player.removeCard(cards[j]);
 
-                        System.out.println("length CARD after" + this.allPlayer[currentPlayer].getHandCards().size());
-                        System.out.println("current player after" +  this.allPlayer[currentPlayer].getName() + " " + player.getId());
+                        System.out.println("length CARD after" + player.getHandCards().size());
+                        System.out.println("current player after" +  player.getName() + " " + player.getId());
                         for(Card card : player.getHandCards()){
                             System.out.println( "card after" + card);
                         }

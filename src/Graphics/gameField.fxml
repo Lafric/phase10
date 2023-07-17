@@ -329,7 +329,7 @@
                         <!--Aktuelle Spieler-->
                         <Rectangle fx:id="kasten_Client" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="27.0" layoutY="368.0" stroke="black" strokeType="INSIDE" width="500.0" />
                         <Label fx:id="label_Client" layoutX="44.0" layoutY="380.0" text="Aktuelle Spieler" />
-                        <Label fx:id="label_CLientHandkarten" layoutX="44.0" layoutY="400.0" text="Anzahl Handkarten" />
+                        <Label fx:id="label_ClientHandkarten" layoutX="44.0" layoutY="400.0" text="Anzahl Handkarten" />
                         <Label layoutX="160.0" layoutY="400.0" text="0" />
                         <Label  layoutX="44.0" layoutY="420.0" text="Punkte" />
                         <Label fx:id="label_ClientPunkte" layoutX="100.0" layoutY="420.0" text="0" />

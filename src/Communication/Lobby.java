@@ -8,15 +8,27 @@ import java.util.ArrayList;
 import Model.Identity;
 import Model.Player;
 
-public interface Lobby  extends Remote{
-    
-    public Integer getCurrentPlayerCount() throws RemoteException; 
-    public Integer getMaxPlayerCount() throws RemoteException; 
+public interface Lobby extends Remote {
+
+    public Integer getCurrentPlayerCount() throws RemoteException;
+
+    public Integer getMaxPlayerCount() throws RemoteException;
+
+    public ArrayList<Identity> getPlayerList() throws RemoteException;
+
     public String getLobbyName() throws RemoteException;
+
     public void joinLobby(Identity identity) throws RemoteException;
+
     public void leaveLobby(Identity identity) throws RemoteException;
+
     public ArrayList<Message> fetchMessages() throws RemoteException;
+
     public void sendMessage(Message message) throws RemoteException;
+
     public Player[] create_Playerlist() throws RemoteException;
+
     public void startGame() throws RemoteException;
+
+    public void addBot() throws RemoteException;
 }

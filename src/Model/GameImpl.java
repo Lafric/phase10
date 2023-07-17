@@ -200,7 +200,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      */
     public void drawCard(Player player, boolean hiddenStackIndicator) throws RemoteException {
         System.out.println("drawCard called");
-        /**if (allPlayer[this.currentPlayer].getId() == player.getId() && !isGameOver) {
+        if (allPlayer[this.currentPlayer].getId() == player.getId() && !isGameOver) {
             if (!this.playerOverloadIndicator[currentPlayer]) {
                 // Draw Card
                 Card card = null;
@@ -219,11 +219,9 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                     card = this.openStack.pop();
                 }
                 // Give Card to player
-                if (card != null) {**/
-                    Card card = null;
-                    card = this.openStack.pop();
+                if (card != null) {
                     this.allPlayer[currentPlayer].getHandCards().add(card);
-                /**    // Set Overload
+                    // Set Overload
                     this.playerOverloadIndicator[currentPlayer] = true;
                 }
             } else {
@@ -232,7 +230,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         } else {
             System.out
                     .print("Player " + allPlayer[this.currentPlayer].getName() + ", it is not your turn. Please Wait.");
-        }**/
+        }
     }
 
     /**

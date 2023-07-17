@@ -252,7 +252,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                 // Check if card is on player hands
                 for (Card card : player.getHandCards()) {
                     if (card.getId() == cardId) {
-                        player.getHandCards().remove(card);
+                        allPlayer[this.currentPlayer].getHandCards().remove(card);
                         this.openStack.push(card);
                         if (card.getType() == CardType.SKIP) {
                             this.skipCounter[getPlayerIndexById(playerId)]++;

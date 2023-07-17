@@ -451,6 +451,9 @@ public class GameFieldController implements Initializable {
         game.layCards(player, arrayCardIDs);
         Thread.sleep(1000);
         System.out.println("after laycard " + get_game().getAllPlayers()[game.getCurrentPlayer()].getHandCards());
+
+
+
         if (Rulenum == 1) {
             for (int i = 0; i < selectedCards.length; i++) {
                 if (selectedCards[i] == true) {

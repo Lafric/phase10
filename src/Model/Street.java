@@ -17,6 +17,10 @@ public class Street extends Filing implements Serializable{
         this.end = end;
     }
 
+    
+    /** 
+     * @return CardType
+     */
     public CardType getStart() {
         return start;
     }

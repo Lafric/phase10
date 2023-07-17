@@ -11,6 +11,10 @@ public class Identity implements Serializable {
         this.username = name;
     }
 
+    
+    /** 
+     * @param lobbyName
+     */
     public void setCurrentLobby(String lobbyName){
         this.currentLobby = lobbyName; 
     }

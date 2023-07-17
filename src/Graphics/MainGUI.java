@@ -46,6 +46,10 @@ public class MainGUI extends Application {
         primaryStage.show();
     }
 
+    
+    /** 
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }

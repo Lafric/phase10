@@ -17,6 +17,10 @@ public class Tuplet extends Filing implements Serializable{
         this.amount = amount;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getAmount() {
         return amount;
     }

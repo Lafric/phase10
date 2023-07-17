@@ -28,7 +28,7 @@ import Communication.Lobby;
 import Communication.LobbyChatRefresh;
 
 public class GameFieldController implements Initializable {
-    //public Game game;
+    // public Game game;
 
     public ComboBox<String> dropdown_KarteWaehlen_karteSpielen;
     public ComboBox<String> dropdown_Zielstapel_StapelBewegen;
@@ -123,9 +123,10 @@ public class GameFieldController implements Initializable {
     public Button zug_beenden;
     public Button phase_bestätigen;
     public Button Karte_spielen;
-    public String lobby; 
+    public String lobby;
     public Identity identity;
     public String gameName;
+    public Button bot_hinzufügen;
     public Pane pane_kartenSpieler;
     public CheckBox checkBox_1;
     public CheckBox checkBox_2;
@@ -149,7 +150,7 @@ public class GameFieldController implements Initializable {
     public ImageView imgkarteSpielerClient_9;
     public ImageView imgkarteSpielerClient_10;
 
-    //Für Dummy Logik
+    // Für Dummy Logik
     public Rectangle[] playerBoxs;
     public ImageView[] handkarte_CurrentPlayer;
     public ImageView[] stapelCards_CurrentPlayer;
@@ -160,30 +161,54 @@ public class GameFieldController implements Initializable {
     public ImageView[] cards_opp4;
     public ImageView[] cards_opp5;
     public boolean[] selectedCards = new boolean[11];
-    private Card[] cards = new Card[]{ new Card(0, CardColor.YELLOW, CardType.ONE),new Card(0, CardColor.GREEN, CardType.ONE), new Card(0, CardColor.RED, CardType.ONE)};
+    private Card[] cards = new Card[] { new Card(0, CardColor.YELLOW, CardType.ONE),
+            new Card(0, CardColor.GREEN, CardType.ONE), new Card(0, CardColor.RED, CardType.ONE) };
     private Game game;
 
+    
+    /** 
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.handkarte_CurrentPlayer = new ImageView[]{imagekarte_H1, imagekarte_H2, imagekarte_H3, imagekarte_H4, imagekarte_H5, imagekarte_H6, imagekarte_H7, imagekarte_H8, imagekarte_H9, imagekarte_H10, imagekarte_H11};
-        this.playerBoxs = new Rectangle[]{kasten_Client,kasten_Gegenspieler1, kasten_Gegenspieler2, kasten_Gegenspieler3, kasten_Gegenspieler4, kasten_Gegenspieler5};
-        this.checkBoxes = new CheckBox[]{checkBox_1, checkBox_2, checkBox_3, checkBox_4, checkBox_5, checkBox_6, checkBox_7, checkBox_8, checkBox_9, checkBox_10, checkBox_11};
-        this.stapelCards_CurrentPlayer = new ImageView[]{imgkarteSpielerClient_1, imgkarteSpielerClient_2, imgkarteSpielerClient_3, imgkarteSpielerClient_4, imgkarteSpielerClient_5, imgkarteSpielerClient_6, imgkarteSpielerClient_7, imgkarteSpielerClient_8, imgkarteSpielerClient_9, imgkarteSpielerClient_10};
-        this.cards_opp1 = new ImageView[]{imgkarteSpieler1_1, imgkarteSpieler1_2, imgkarteSpieler1_3, imgkarteSpieler1_4, imgkarteSpieler1_5, imgkarteSpieler1_6, imgkarteSpieler1_7, imgkarteSpieler1_8, imgkarteSpieler1_9, imgkarteSpieler1_10};
-        this.cards_opp2 = new ImageView[]{imgkarteSpieler2_1, imgkarteSpieler2_2, imgkarteSpieler2_3, imgkarteSpieler2_4, imgkarteSpieler2_5, imgkarteSpieler2_6, imgkarteSpieler2_7, imgkarteSpieler2_8, imgkarteSpieler2_9, imgkarteSpieler2_10};
-        this.cards_opp3 = new ImageView[]{imgkarteSpieler3_1, imgkarteSpieler3_2, imgkarteSpieler3_3, imgkarteSpieler3_4, imgkarteSpieler3_5, imgkarteSpieler3_6, imgkarteSpieler3_7, imgkarteSpieler3_8, imgkarteSpieler3_9, imgkarteSpieler3_10};
-        this.cards_opp4 = new ImageView[]{imgkarteSpieler4_1, imgkarteSpieler4_2, imgkarteSpieler4_3, imgkarteSpieler4_4, imgkarteSpieler4_5, imgkarteSpieler4_6, imgkarteSpieler4_7, imgkarteSpieler4_8, imgkarteSpieler4_9, imgkarteSpieler4_10};
-        this.cards_opp5 = new ImageView[]{imgkarteSpieler5_1, imgkarteSpieler5_2, imgkarteSpieler5_3, imgkarteSpieler5_4, imgkarteSpieler5_5, imgkarteSpieler5_6, imgkarteSpieler5_7, imgkarteSpieler5_8, imgkarteSpieler5_9, imgkarteSpieler5_10};
+        this.handkarte_CurrentPlayer = new ImageView[] { imagekarte_H1, imagekarte_H2, imagekarte_H3, imagekarte_H4,
+                imagekarte_H5, imagekarte_H6, imagekarte_H7, imagekarte_H8, imagekarte_H9, imagekarte_H10,
+                imagekarte_H11 };
+        this.playerBoxs = new Rectangle[] { kasten_Client, kasten_Gegenspieler1, kasten_Gegenspieler2,
+                kasten_Gegenspieler3, kasten_Gegenspieler4, kasten_Gegenspieler5 };
+        this.checkBoxes = new CheckBox[] { checkBox_1, checkBox_2, checkBox_3, checkBox_4, checkBox_5, checkBox_6,
+                checkBox_7, checkBox_8, checkBox_9, checkBox_10, checkBox_11 };
+        this.stapelCards_CurrentPlayer = new ImageView[] { imgkarteSpielerClient_1, imgkarteSpielerClient_2,
+                imgkarteSpielerClient_3, imgkarteSpielerClient_4, imgkarteSpielerClient_5, imgkarteSpielerClient_6,
+                imgkarteSpielerClient_7, imgkarteSpielerClient_8, imgkarteSpielerClient_9, imgkarteSpielerClient_10 };
+        this.cards_opp1 = new ImageView[] { imgkarteSpieler1_1, imgkarteSpieler1_2, imgkarteSpieler1_3,
+                imgkarteSpieler1_4, imgkarteSpieler1_5, imgkarteSpieler1_6, imgkarteSpieler1_7, imgkarteSpieler1_8,
+                imgkarteSpieler1_9, imgkarteSpieler1_10 };
+        this.cards_opp2 = new ImageView[] { imgkarteSpieler2_1, imgkarteSpieler2_2, imgkarteSpieler2_3,
+                imgkarteSpieler2_4, imgkarteSpieler2_5, imgkarteSpieler2_6, imgkarteSpieler2_7, imgkarteSpieler2_8,
+                imgkarteSpieler2_9, imgkarteSpieler2_10 };
+        this.cards_opp3 = new ImageView[] { imgkarteSpieler3_1, imgkarteSpieler3_2, imgkarteSpieler3_3,
+                imgkarteSpieler3_4, imgkarteSpieler3_5, imgkarteSpieler3_6, imgkarteSpieler3_7, imgkarteSpieler3_8,
+                imgkarteSpieler3_9, imgkarteSpieler3_10 };
+        this.cards_opp4 = new ImageView[] { imgkarteSpieler4_1, imgkarteSpieler4_2, imgkarteSpieler4_3,
+                imgkarteSpieler4_4, imgkarteSpieler4_5, imgkarteSpieler4_6, imgkarteSpieler4_7, imgkarteSpieler4_8,
+                imgkarteSpieler4_9, imgkarteSpieler4_10 };
+        this.cards_opp5 = new ImageView[] { imgkarteSpieler5_1, imgkarteSpieler5_2, imgkarteSpieler5_3,
+                imgkarteSpieler5_4, imgkarteSpieler5_5, imgkarteSpieler5_6, imgkarteSpieler5_7, imgkarteSpieler5_8,
+                imgkarteSpieler5_9, imgkarteSpieler5_10 };
 
-        /**try {
-            movetoOpenStack(new Card(0, CardColor.RED, CardType.TWO));
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } // to delete**/
+        /**
+         * try {
+         * movetoOpenStack(new Card(0, CardColor.RED, CardType.TWO));
+         * } catch (RemoteException e) {
+         * e.printStackTrace();
+         * } // to delete
+         **/
         System.out.println("Controller initialized!");
 
-        //set the images to invisible by initialization
-        for(int i = 0; i < stapelCards_CurrentPlayer.length; i++){
+        // set the images to invisible by initialization
+        for (int i = 0; i < stapelCards_CurrentPlayer.length; i++) {
             stapelCards_CurrentPlayer[i].setVisible(false);
             cards_opp1[i].setVisible(false);
             cards_opp2[i].setVisible(false);
@@ -193,22 +218,25 @@ public class GameFieldController implements Initializable {
             cards_opp5[i].setVisible(false);
         }
         imagekarte_Uebersichtskarte.setVisible(false);
-        for(int i = 0; i < handkarte_CurrentPlayer.length; i++){
+        for (int i = 0; i < handkarte_CurrentPlayer.length; i++) {
             handkarte_CurrentPlayer[i].setVisible(false);
         }
         // set the values of dropdown Zielstapel
-        dropdown_Zielstapel_StapelBewegen.getItems().addAll( "Mein Stapel","Mein Stapel Rule 1", "Mein Stapel Rule 2", "Uebersichtskarte", "Spieler 1 Rule 1","Spieler 1 Rule 2","Spieler 2 Rule 1", "Spieler 2 Rule 2", "Spieler 3 Rule 1","Spieler 3 Rule 2","Spieler 4 Rule 1","Spieler 4 Rule 2","Spieler 5 Rule 1","Spieler 5 Rule 2");
+        dropdown_Zielstapel_StapelBewegen.getItems().addAll("Mein Stapel", "Mein Stapel Rule 1", "Mein Stapel Rule 2",
+                "Uebersichtskarte", "Spieler 1 Rule 1", "Spieler 1 Rule 2", "Spieler 2 Rule 1", "Spieler 2 Rule 2",
+                "Spieler 3 Rule 1", "Spieler 3 Rule 2", "Spieler 4 Rule 1", "Spieler 4 Rule 2", "Spieler 5 Rule 1",
+                "Spieler 5 Rule 2");
 
-        //set the array of selected cards
+        // set the array of selected cards
         selected_cards();
 
     }
 
-    public void selected_cards(){
-        for( int i = 0; i < handkarte_CurrentPlayer.length; i++){
+    public void selected_cards() {
+        for (int i = 0; i < handkarte_CurrentPlayer.length; i++) {
             int finalI = i;
             checkBoxes[i].setOnMouseClicked(event -> {
-                if(selectedCards[finalI] == true){
+                if (selectedCards[finalI] == true) {
                     selectedCards[finalI] = false;
                 } else {
                     selectedCards[finalI] = true;
@@ -218,18 +246,17 @@ public class GameFieldController implements Initializable {
         }
     }
 
-
-    //Method to get LobbyName from main menue, needed for lobby chat
-    public void give_lobby(String lobby){
+    // Method to get LobbyName from main menue, needed for lobby chat
+    public void give_lobby(String lobby) {
         System.out.println("received " + lobby);
         this.lobby = lobby;
     }
 
-    public void get_identity(Identity identity){
+    public void get_identity(Identity identity) {
         this.identity = identity;
     }
 
-    public Game get_game(){
+    public Game get_game() {
         Registry registry;
         try {
             registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
@@ -241,92 +268,107 @@ public class GameFieldController implements Initializable {
         }
         return null;
     }
+
+    public Lobby get_lobby() {
+        Registry registry;
+        try {
+            registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
+            Lobby lobby = (Lobby) registry.lookup(this.lobby);
+            return lobby;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      * Method to play
      * Fälle :
      * Zum eigenen Ablagestapel für Phase Rule 1 oder 2
      * Zum Ablagestapel eines Gegners für Phase Rule 1 oder 2
      * Zum Uebersichtskartenstapel
+     * 
      * @param event
      */
     public void playCard(ActionEvent event) throws RemoteException {
-        if(dropdown_Zielstapel_StapelBewegen.getValue() == "Uebersichtskarte"){
+        if (dropdown_Zielstapel_StapelBewegen.getValue() == "Uebersichtskarte") {
             moveToOpenStack(event);
-        } else if(dropdown_Zielstapel_StapelBewegen.getValue() == "Mein Stapel Rule 1"){
+        } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Mein Stapel Rule 1") {
             moveToCurrentPlayerBox(1);
-        }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Mein Stapel Rule 2"){
+        } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Mein Stapel Rule 2") {
             moveToCurrentPlayerBox(2);
-        }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Mein Stapel") {
+        } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Mein Stapel") {
             moveToCurrentPlayerBox(0);
-        }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 1 Rule 1") {
-            moveToOpponentBox(1,cards_opp1,game.getAllPlayers()[1]);
-        }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 1 Rule 2") {
-            moveToOpponentBox(2, cards_opp1,game.getAllPlayers()[1]);
-        }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 2 Rule 1") {
-            moveToOpponentBox(1, cards_opp2,game.getAllPlayers()[2]);
-        }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 2 Rule 2") {
-            moveToOpponentBox(2, cards_opp2,game.getAllPlayers()[2]);
-        }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 3 Rule 1") {
-            moveToOpponentBox(1, cards_opp3,game.getAllPlayers()[3]);
-        }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 3 Rule 2") {
-            moveToOpponentBox(2, cards_opp3,game.getAllPlayers()[3]);
-        }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 4 Rule 1") {
-            moveToOpponentBox(1, cards_opp4,game.getAllPlayers()[4]);
-        }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 4 Rule 2") {
-            moveToOpponentBox(2, cards_opp4,game.getAllPlayers()[4]);
-        }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 5 Rule 1") {
-            moveToOpponentBox(1, cards_opp5,game.getAllPlayers()[5]);
-        }else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 5 Rule 2") {
-            moveToOpponentBox(2, cards_opp5,game.getAllPlayers()[5]);
+        } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 1 Rule 1") {
+            moveToOpponentBox(1, cards_opp1, game.getAllPlayers()[1]);
+        } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 1 Rule 2") {
+            moveToOpponentBox(2, cards_opp1, game.getAllPlayers()[1]);
+        } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 2 Rule 1") {
+            moveToOpponentBox(1, cards_opp2, game.getAllPlayers()[2]);
+        } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 2 Rule 2") {
+            moveToOpponentBox(2, cards_opp2, game.getAllPlayers()[2]);
+        } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 3 Rule 1") {
+            moveToOpponentBox(1, cards_opp3, game.getAllPlayers()[3]);
+        } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 3 Rule 2") {
+            moveToOpponentBox(2, cards_opp3, game.getAllPlayers()[3]);
+        } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 4 Rule 1") {
+            moveToOpponentBox(1, cards_opp4, game.getAllPlayers()[4]);
+        } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 4 Rule 2") {
+            moveToOpponentBox(2, cards_opp4, game.getAllPlayers()[4]);
+        } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 5 Rule 1") {
+            moveToOpponentBox(1, cards_opp5, game.getAllPlayers()[5]);
+        } else if (dropdown_Zielstapel_StapelBewegen.getValue() == "Spieler 5 Rule 2") {
+            moveToOpponentBox(2, cards_opp5, game.getAllPlayers()[5]);
         }
 
     }
 
-
     /**
      * Methode to move a card to the current player box
-     * @param Rulenum represents the phaserule number
+     * 
+     * @param Rulenum
+     *            represents the phaserule number
      */
     private void moveToCurrentPlayerBox(int Rulenum) throws RemoteException {
         Player player = game.getAllPlayers()[game.getCurrentPlayer()];
         List<Card> handCards = player.getHandCards();
         List<Integer> cardIDs = new ArrayList<>();
-        for(int i = 0; i< selectedCards.length; i++){
-            if(selectedCards[i] == true){
+        for (int i = 0; i < selectedCards.length; i++) {
+            if (selectedCards[i] == true) {
                 cardIDs.add(handCards.get(i).getId());
             }
         }
-        for(int i = 0; i< cardIDs.size(); i++){
+        for (int i = 0; i < cardIDs.size(); i++) {
             System.out.println("arrayId" + cardIDs.get(i));
         }
 
-        int[] arrayCardIDs = cardIDs.stream().mapToInt(i->i).toArray(); //convert list to array
+        int[] arrayCardIDs = cardIDs.stream().mapToInt(i -> i).toArray(); // convert list to array
         System.out.println("arrayId" + arrayCardIDs.length);
         System.out.println("before laycard " + game.getAllPlayers()[game.getCurrentPlayer()].getHandCards());
         game.layCards(player, arrayCardIDs);
         System.out.println("after laycard " + game.getAllPlayers()[game.getCurrentPlayer()].getHandCards());
         if (Rulenum == 1) {
-           for(int i = 0; i < selectedCards.length; i++){
-               if(selectedCards[i] == true){
+            for (int i = 0; i < selectedCards.length; i++) {
+                if (selectedCards[i] == true) {
 
-                   if(i>4){
-                      stapelCards_CurrentPlayer[i-5].setImage(CardtoImage(handCards.get(i)));
-                      stapelCards_CurrentPlayer[i-5].setVisible(true);
-                   }else {
-                       stapelCards_CurrentPlayer[i].setImage(CardtoImage(handCards.get(i)));
-                       stapelCards_CurrentPlayer[i].setVisible(true);
-                   }
-                   renderHandCards();
-               }
-           }
+                    if (i > 4) {
+                        stapelCards_CurrentPlayer[i - 5].setImage(CardtoImage(handCards.get(i)));
+                        stapelCards_CurrentPlayer[i - 5].setVisible(true);
+                    } else {
+                        stapelCards_CurrentPlayer[i].setImage(CardtoImage(handCards.get(i)));
+                        stapelCards_CurrentPlayer[i].setVisible(true);
+                    }
+                    renderHandCards();
+                }
+            }
 
         } else if (Rulenum == 2) {
-            for(int i = 0; i < selectedCards.length; i++){
-                if(selectedCards[i] == true){
-                    if(i < 5) {
+            for (int i = 0; i < selectedCards.length; i++) {
+                if (selectedCards[i] == true) {
+                    if (i < 5) {
                         stapelCards_CurrentPlayer[i + 5].setImage(CardtoImage(handCards.get(i)));
                         stapelCards_CurrentPlayer[i + 5].setVisible(true);
-                    }else {
+                    } else {
                         stapelCards_CurrentPlayer[i].setImage(CardtoImage(handCards.get(i)));
                         stapelCards_CurrentPlayer[i].setVisible(true);
                     }
@@ -335,8 +377,8 @@ public class GameFieldController implements Initializable {
             }
 
         } else if (Rulenum == 0) { // for phase mit keine Rules
-            for(int i = 0; i < selectedCards.length; i++){
-                if(selectedCards[i] == true){
+            for (int i = 0; i < selectedCards.length; i++) {
+                if (selectedCards[i] == true) {
                     stapelCards_CurrentPlayer[i].setImage(CardtoImage(handCards.get(i)));
                     stapelCards_CurrentPlayer[i].setVisible(true);
                     renderHandCards();
@@ -345,117 +387,136 @@ public class GameFieldController implements Initializable {
         }
     }
 
-
-    public void moveToOpponentBox(int Rulenum, ImageView[] stapelCards_Opponent, Player moveToplayer) throws RemoteException {
+    public void moveToOpponentBox(int Rulenum, ImageView[] stapelCards_Opponent, Player moveToplayer)
+            throws RemoteException {
         Player player = game.getAllPlayers()[game.getCurrentPlayer()];
         List<Card> handCards = player.getHandCards();
-        for(int i = 0; i< selectedCards.length; i++){
-            if(selectedCards[i] == true){
-                for(int j = 0; j < game.getFilings().size(); j++){
-                    if(game.getFilings().get(j).getPlayerId() == moveToplayer.getId()){
-                        game.playCard(player, handCards.get(i).getId(),game.getFilings().get(j).getId(),true); // fälle low true und low false
+        for (int i = 0; i < selectedCards.length; i++) {
+            if (selectedCards[i] == true) {
+                for (int j = 0; j < game.getFilings().size(); j++) {
+                    if (game.getFilings().get(j).getPlayerId() == moveToplayer.getId()) {
+                        game.playCard(player, handCards.get(i).getId(), game.getFilings().get(j).getId(), true); // fälle
+                                                                                                                 // low
+                                                                                                                 // true
+                                                                                                                 // und
+                                                                                                                 // low
+                                                                                                                 // false
                     }
                 }
             }
             break;
         }
 
-        //game.playCard(player, handCards.get(0).getId(),game.getFilings().);
-        /**if (Rulenum == 1) {
-            for(int i = 0; i < selectedCards.length; i++){
-                if(selectedCards[i] == true){
-
-                    if(i>4){
-                        stapelCards_Opponent[i-5].setImage(CardtoImage(handCards.get(i)));
-                        stapelCards_Opponent[i-5].setVisible(true);
-                    }else {
-                        stapelCards_Opponent[i].setImage(CardtoImage(handCards.get(i)));
-                        stapelCards_Opponent[i].setVisible(true);
-                    }
-                    renderHandCards();
-                }
-            }
-
-        } else if (Rulenum == 2) {
-            for(int i = 0; i < selectedCards.length; i++){
-                if(selectedCards[i] == true){
-                    if(i < 5) {
-                        stapelCards_Opponent[i + 5].setImage(CardtoImage(handCards.get(i)));
-                        stapelCards_Opponent[i + 5].setVisible(true);
-                    }else {
-                        stapelCards_Opponent[i].setImage(CardtoImage(handCards.get(i)));
-                        stapelCards_Opponent[i].setVisible(true);
-                    }
-                    renderHandCards();
-                }
-            }
-
-        } else if (Rulenum == 0) { // for phase mit keine zweite Rule
-            for(int i = 0; i < selectedCards.length; i++){
-                if(selectedCards[i] == true){
-                    stapelCards_Opponent[i].setImage(CardtoImage(handCards.get(i)));
-                    stapelCards_Opponent[i].setVisible(true);
-                    renderHandCards();
-                }
-            }
-        }**/
+        // game.playCard(player, handCards.get(0).getId(),game.getFilings().);
+        /**
+         * if (Rulenum == 1) {
+         * for(int i = 0; i < selectedCards.length; i++){
+         * if(selectedCards[i] == true){
+         * 
+         * if(i>4){
+         * stapelCards_Opponent[i-5].setImage(CardtoImage(handCards.get(i)));
+         * stapelCards_Opponent[i-5].setVisible(true);
+         * }else {
+         * stapelCards_Opponent[i].setImage(CardtoImage(handCards.get(i)));
+         * stapelCards_Opponent[i].setVisible(true);
+         * }
+         * renderHandCards();
+         * }
+         * }
+         * 
+         * } else if (Rulenum == 2) {
+         * for(int i = 0; i < selectedCards.length; i++){
+         * if(selectedCards[i] == true){
+         * if(i < 5) {
+         * stapelCards_Opponent[i + 5].setImage(CardtoImage(handCards.get(i)));
+         * stapelCards_Opponent[i + 5].setVisible(true);
+         * }else {
+         * stapelCards_Opponent[i].setImage(CardtoImage(handCards.get(i)));
+         * stapelCards_Opponent[i].setVisible(true);
+         * }
+         * renderHandCards();
+         * }
+         * }
+         * 
+         * } else if (Rulenum == 0) { // for phase mit keine zweite Rule
+         * for(int i = 0; i < selectedCards.length; i++){
+         * if(selectedCards[i] == true){
+         * stapelCards_Opponent[i].setImage(CardtoImage(handCards.get(i)));
+         * stapelCards_Opponent[i].setVisible(true);
+         * renderHandCards();
+         * }
+         * }
+         * }
+         **/
     }
-
-
-
 
     /**
      * Methode to draw a card from the stack
      */
-     public void drawCard(ActionEvent event) throws RemoteException {
+    public void drawCard(ActionEvent event) throws RemoteException {
 
-             System.out.println("drawCard");
+        System.out.println("drawCard");
 
-             Player player = game.getAllPlayers()[game.getCurrentPlayer()];
-             System.out.println(player.getHandCards());
-             this.game.drawCard(player, true);
-             //update Gui
-             renderHandCards();
-             System.out.println("HandsCards "+player.getHandCards());
+        Player player = game.getAllPlayers()[game.getCurrentPlayer()];
+        System.out.println(player.getHandCards());
+        this.game.drawCard(player, true);
+        // update Gui
+        renderHandCards();
+        System.out.println("HandsCards " + player.getHandCards());
     }
 
     /**
      * Method to draw a card from the open stack
+     * 
      * @param event
      */
     public void drawOpenStackCard(ActionEvent event) throws RemoteException {
-        try{
+        try {
             Player player = game.getAllPlayers()[game.getCurrentPlayer()];
             this.game.drawCard(game.getAllPlayers()[game.getCurrentPlayer()], false);
-            //update GUI
+            // update GUI
             renderHandCards();
-            if(game.getOpenStack().size() == 0){
+            if (game.getOpenStack().size() == 0) {
                 imagekarte_Uebersichtskarte.setVisible(false);
-            }else{
-                Card firstCard =  game.getOpenStack().peek();
+            } else {
+                Card firstCard = game.getOpenStack().peek();
                 imagekarte_Uebersichtskarte.setImage(CardtoImage(firstCard));
                 imagekarte_Uebersichtskarte.setVisible(true);
-            };
+            }
+            ;
 
-            System.out.println("HandsCards "+player.getHandCards());
-        }
-        catch(Exception e){
+            System.out.println("HandsCards " + player.getHandCards());
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Method to end the turn of the current player with all actions that results from it
+     * Method to end the turn of the current player with all actions that results
+     * from it
+     * 
      * @param event
      */
     public void zug_beenden(ActionEvent event) throws RemoteException {
-        //game.goToNextPlayer();
+        // game.goToNextPlayer();
         playerBoxs[game.getCurrentPlayer()].setStroke(Paint.valueOf("#4fd42"));
         // other Actions
+
+        // if current player is bot, play bot turn
+        if (game.getAllPlayers()[game.getCurrentPlayer()].isBot()) {
+            game.playBotTurn();
+        }
+        // restructure to while-loop, end turn while bots are playing
+    }
+
+    public void addBot(ActionEvent event) throws RemoteException {
+        get_game().addBot();
+        get_lobby().addBot();
     }
 
     /**
      * Method to ensure the validity of a phase
+     * 
      * @param event
      */
     public void bestätigt_Phase(ActionEvent event) {
@@ -463,17 +524,18 @@ public class GameFieldController implements Initializable {
 
     /**
      * Method to move a card to the overview stack
+     * 
      * @param event
      */
     public void moveToOpenStack(ActionEvent event) throws RemoteException {
         Player player = game.getAllPlayers()[game.getCurrentPlayer()];
         List<Card> handCards = player.getHandCards();
-        for(int i = 0; i < selectedCards.length; i++){
-            if(selectedCards[i] == true){
+        for (int i = 0; i < selectedCards.length; i++) {
+            if (selectedCards[i] == true) {
                 Card selectedCard = handCards.get(i);
-                game.throwCard(player, selectedCard.getId(),player.getId());
-                //update Gui
-                Card firstCard =  game.getOpenStack().peek();
+                game.throwCard(player, selectedCard.getId(), player.getId());
+                // update Gui
+                Card firstCard = game.getOpenStack().peek();
                 imagekarte_Uebersichtskarte.setImage(CardtoImage(firstCard));
                 imagekarte_Uebersichtskarte.setVisible(true);
                 renderHandCards();
@@ -483,29 +545,27 @@ public class GameFieldController implements Initializable {
         }
     }
 
-
-
     /**
      * Method to move a card to the opponent stack
+     * 
      * @param event
      */
     public void moveToOpponent(ActionEvent event) {
     }
 
-
-    //hilfe methode render the handCards images when changes occur
+    // hilfe methode render the handCards images when changes occur
 
     private void renderHandCards() throws RemoteException {
         List<Card> handCards = game.getAllPlayers()[game.getCurrentPlayer()].getHandCards();
-        for(int i = 0; i < handCards.size(); i++){
+        for (int i = 0; i < handCards.size(); i++) {
             handkarte_CurrentPlayer[i].setImage(CardtoImage(handCards.get(i)));
             handkarte_CurrentPlayer[i].setVisible(true);
         }
     }
 
-
     /**
      * give the image Object of a given Card
+     * 
      * @param card
      * @return
      */
@@ -538,13 +598,12 @@ public class GameFieldController implements Initializable {
             case PINK -> "4";
             case BLUE -> "5";
         };
-        String ergebnis = "file:./src/Graphics/playingCards/" + "card" + wert + "Color" + farbeNum +"Repeat0.png";
+        String ergebnis = "file:./src/Graphics/playingCards/" + "card" + wert + "Color" + farbeNum + "Repeat0.png";
         System.out.println(ergebnis);
         return new Image(ergebnis);
     }
 
-
-    public void start_Game(ActionEvent event) throws IOException,RemoteException{
+    public void start_Game(ActionEvent event) throws IOException, RemoteException {
 
         Registry registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
         System.out.println("Connected to Server");
@@ -555,18 +614,18 @@ public class GameFieldController implements Initializable {
             lobby.startGame();
             game = get_game();
 
-            //update the GUI after the game has started
+            // update the GUI after the game has started
 
             // set the cards of the player
-            for(int i = 0; i < game.getAllPlayers()[game.getCurrentPlayer()].getHandCards().size() ; i++){
+            for (int i = 0; i < game.getAllPlayers()[game.getCurrentPlayer()].getHandCards().size(); i++) {
                 List<Card> handCards = game.getAllPlayers()[game.getCurrentPlayer()].getHandCards();
                 System.out.println(handCards);
                 handkarte_CurrentPlayer[i].setImage(CardtoImage(handCards.get(i)));
                 handkarte_CurrentPlayer[i].setVisible(true);
             }
 
-            //set the cards of the opponent and current player to invisible
-            for(int i = 0; i < stapelCards_CurrentPlayer.length; i++){
+            // set the cards of the opponent and current player to invisible
+            for (int i = 0; i < stapelCards_CurrentPlayer.length; i++) {
                 stapelCards_CurrentPlayer[i].setVisible(false);
                 cards_opp1[i].setVisible(false);
                 cards_opp2[i].setVisible(false);
@@ -575,36 +634,36 @@ public class GameFieldController implements Initializable {
                 cards_opp4[i].setVisible(false);
                 cards_opp5[i].setVisible(false);
             }
-            //set the Openstack card
+            // set the Openstack card
             imagekarte_Uebersichtskarte.setImage(CardtoImage(game.getOpenStack().get(0)));
             imagekarte_Uebersichtskarte.setVisible(true);
-            //set the number of Box for player
-            /**for(int i = 0; i < playerBoxs.length; i++){
-                playerBoxs[i].setVisible(false);
-            }
-            for(int i = 0; i < game.getAllPlayers().length ; i++){
-                playerBoxs[i].setVisible(true);
-            }**/
-            //set the first (current) player Box to blue
+            // set the number of Box for player
+            /**
+             * for(int i = 0; i < playerBoxs.length; i++){
+             * playerBoxs[i].setVisible(false);
+             * }
+             * for(int i = 0; i < game.getAllPlayers().length ; i++){
+             * playerBoxs[i].setVisible(true);
+             * }
+             **/
+            // set the first (current) player Box to blue
             playerBoxs[game.getCurrentPlayer()].setStroke(Paint.valueOf("#4fd423"));
-
 
             System.out.println("Game started");
             System.out.println("openStackCard " + game.getOpenStack());
             System.out.println("hiidenstackfirstCard " + game.getHiddenStack().peek());
-            System.out.println("playerName " + game.getAllPlayers()[game.getCurrentPlayer()].getName()+ " playerID " + game.getAllPlayers()[game.getCurrentPlayer()].getId());
+            System.out.println("playerName " + game.getAllPlayers()[game.getCurrentPlayer()].getName() + " playerID "
+                    + game.getAllPlayers()[game.getCurrentPlayer()].getId());
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }        
+        }
 
     }
 
-
-
-
     /**
      * Methode zum Starten des Chats
+     * 
      * @param event
      * @throws IOException
      */
@@ -615,7 +674,7 @@ public class GameFieldController implements Initializable {
         controller.get_lobby(lobby);
         controller.get_identity(identity);
         TextArea chatField = controller.getChat_ausgabe();
-        Runnable refresh = new LobbyChatRefresh(chatField,lobby);
+        Runnable refresh = new LobbyChatRefresh(chatField, lobby);
         Thread chatrefresh = new Thread(refresh);
         chatrefresh.start();
 
@@ -625,13 +684,11 @@ public class GameFieldController implements Initializable {
         stage.setTitle("Chatroom");
 
         stage.setOnCloseRequest(e -> {
-            //TODO: disconnect user
+            // TODO: disconnect user
         });
 
         stage.show();
 
-
     }
-
 
 }

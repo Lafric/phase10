@@ -44,6 +44,10 @@ public class BestenlisteController {
         tabelle_bestenliste.setItems(getPlayerData());
     }
 
+    
+    /** 
+     * @return ObservableList<UserData>
+     */
     private ObservableList<UserData> getPlayerData() {
         ObservableList<UserData> data = FXCollections.observableArrayList();
 

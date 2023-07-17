@@ -22,6 +22,11 @@ public class LobbyImpl extends UnicastRemoteObject implements Lobby {
 
     private ArrayList<Message> messages = new ArrayList<Message>();
 
+    
+    /** 
+     * @return Player[]
+     * @throws RemoteException
+     */
     public Player[] create_Playerlist() throws RemoteException {
 
         Player[] playerarray = new Player[playerlist.size()];
@@ -38,7 +43,6 @@ public class LobbyImpl extends UnicastRemoteObject implements Lobby {
     protected LobbyImpl(String LobbyName) throws RemoteException {
         this.LobbyName = LobbyName;
         this.currentplayerCount = 0;
-
     }
 
     public void startGame() throws RemoteException {

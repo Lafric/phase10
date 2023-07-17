@@ -13,6 +13,10 @@ public abstract class Filing implements Serializable{
     private final int playerId;
     private final boolean unreal;// Indicates if the Card is real or only part of a rule
 
+    
+    /** 
+     * @return int
+     */
     public int getId() {
         return id;
     }

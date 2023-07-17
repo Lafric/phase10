@@ -17,6 +17,10 @@ public class Card implements Serializable{
         this.type = type;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getId() {
         return id;
     }

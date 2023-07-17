@@ -26,6 +26,7 @@ import Communication.RMIServer;
 import Communication.ServerFuncs;
 import Communication.ServerFuncsImpl;
 import Model.DatabaseProvider;
+import Model.Game;
 import Model.Identity;
 import Model.UserData;
 
@@ -74,6 +75,10 @@ public class MenuController {
         System.out.println("Chatrefresh started");
     }
 
+    
+    /** 
+     * @param identity
+     */
     @FXML
     public void changeNameLabel(Identity identity) {
         this.identity = identity;
@@ -187,6 +192,10 @@ public class MenuController {
         String[] lobbyNameList = lobbyString.split("\t\t");
         String lobbyName = lobbyNameList[0];
 
+        ArrayList<Identity> playerlist = new ArrayList<Identity>();
+        int playercount = 0;
+        int maxplayers = 0;
+
         try {
             Registry registry = LocateRegistry.getRegistry("185.162.248.237", 1099);
 
@@ -194,6 +203,9 @@ public class MenuController {
             System.out.println("Found Lobby");
 
             lobby.joinLobby(identity);
+            playerlist = lobby.getPlayerList();
+            playercount = lobby.getCurrentPlayerCount();
+            maxplayers = lobby.getMaxPlayerCount();
 
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -206,6 +218,23 @@ public class MenuController {
         controller.give_lobby(lobbyName);
         controller.get_identity(identity);
         System.out.println("Joined: " + lobbyName);
+
+        Label[] playerLabelList = {controller.label_Gegenspieler1Name, 
+                                    controller.label_Gegenspieler2,
+                                    controller.label_Gegenspieler3,
+                                    controller.label_Gegenspieler4,
+                                    controller.label_Client,
+                                    controller.label_Gegenspieler5};
+
+        // update labels to contain player names
+
+        // create array containing all player labels
+        for (int i = 0; i < playercount; i++) {
+            playerLabelList[i].setText(playerlist.get(0).getUsername());
+        }
+        for (int i = playercount; i < maxplayers; i++) {
+            playerLabelList[i].setText("[LEER]");
+        }
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root));

@@ -16,6 +16,11 @@ public class PasswordLöschenController {
     public Button button_abbrechen_acc_loeschen;
     public PasswordField textfeld_passwort1;
 
+    
+    /** 
+     * @param event
+     * @throws IOException
+     */
     public void accLoeschenOk(ActionEvent event) throws IOException {
         // Todo: close the Menu Stage
         // password stimmen

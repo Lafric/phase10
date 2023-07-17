@@ -14,6 +14,10 @@ public class PhaseRule implements Serializable{
     public PhaseRule(Filing[] rules){
         this.rules = rules;
     }
+    
+    /** 
+     * @return Filing[]
+     */
     public Filing[] getPhaseRules(){
         return this.rules;
     }

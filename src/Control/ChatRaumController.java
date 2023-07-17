@@ -25,6 +25,10 @@ public class ChatRaumController {
     public String lobby;
     public Identity identity;
 
+    
+    /** 
+     * @param keyEvent
+     */
     public void sendeNachricht_raumChat(KeyEvent keyEvent) {
     }
 

@@ -6,11 +6,13 @@ import java.sql.*;
 
 public class DatabaseProvider {
 
-    private final String dbUrl = "jdbc:postgresql://185.162.248.237:5432/postgres";
-    // private final String dbUrl = "jdbc:postgresql://localhost/phase10";
-    private final String dbUser = "postgres";
-    private final String dbPassword = "apfel"; // TODO: change to your password
-    // private final String dbPassword = "giba"; // TODO: change to your password
+    private String dbUser = "postgres";
+
+    private String dbUrl = "jdbc:postgresql://185.162.248.237:5432/postgres";
+    private String dbPassword = "apfel"; // TODO: change to your password
+
+    // private String dbUrl = "jdbc:postgresql://localhost/phase10";
+    // private String dbPassword = "giba"; // TODO: change to your password
 
     public boolean useDummy = false;
     public HashMap<String, String> dummyUserData = new HashMap<String, String>();
@@ -23,6 +25,15 @@ public class DatabaseProvider {
         this.useDummy = false;
     }
 
+    public DatabaseProvider(String dbUrl, String dbPassword) {
+        this.dbUrl = dbUrl;
+        this.dbPassword = dbPassword;
+    }
+
+    
+    /** 
+     * @return Connection
+     */
     private Connection connect() {
         try {
             // Load the PostgreSQL JDBC driver

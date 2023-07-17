@@ -25,6 +25,10 @@ public class ServerFuncsImpl extends UnicastRemoteObject implements ServerFuncs 
         super();
     }
 
+    
+    /** 
+     * @return int
+     */
     public int get_LobbyCount(){
         return lobbycount; 
     }

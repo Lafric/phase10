@@ -25,6 +25,14 @@ public class MessageService {
         }
     }
 
+    
+    /** 
+     * @param identity
+     * @param nachricht
+     * @param registryName
+     * @return Message
+     * @throws Exception
+     */
     public Message sendeNachricht(Identity identity, String nachricht,String registryName) throws Exception {
         // create new timestamp with current time
         Timestamp timestamp = Timestamp.from(Instant.now());

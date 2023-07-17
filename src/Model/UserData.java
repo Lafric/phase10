@@ -18,6 +18,10 @@ public class UserData {
         }
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getNutzername() {
         return nutzername;
     }

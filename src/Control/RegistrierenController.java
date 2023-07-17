@@ -23,6 +23,10 @@ public class RegistrierenController {
     public TextField nutzername;
     private DatabaseProvider databaseProvider;
 
+    
+    /** 
+     * @param databaseProvider
+     */
     public void setParams(DatabaseProvider databaseProvider) {
         this.databaseProvider = databaseProvider;
     }

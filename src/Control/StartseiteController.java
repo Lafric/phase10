@@ -44,6 +44,11 @@ public class StartseiteController {
         this.databaseProvider = databaseProvider;
     }
 
+    
+    /** 
+     * @param event
+     * @throws IOException
+     */
     public void AnmeldenGotoMenu(ActionEvent event) throws IOException {
         // perform something with server or Database zum Anmeldung/Verbindung
 

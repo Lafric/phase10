@@ -432,6 +432,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                         System.out.println("current player before" +  player.getName() + " " + player.getId());
 
                         player.removeCard(cards[j]);
+                        this.allPlayer[currentPlayer] = player;
                         System.out.println("length CARD after mit this " + this.allPlayer[currentPlayer].getHandCards().size());
                         System.out.println("current player mit this" +  this.allPlayer[currentPlayer].getName() + " " + player.getId());
                         System.out.println("length CARD after" + player.getHandCards().size());

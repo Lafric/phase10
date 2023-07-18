@@ -275,6 +275,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      *            is the player to be skipped, in case a skip card is played
      */
     public void throwCard(Player player, int cardId, int playerId) throws RemoteException {
+
         if (allPlayer[this.currentPlayer].getId() == player.getId() && !this.isGameOver) {
             if (this.playerOverloadIndicator[currentPlayer]) {
                 // Set Overload
@@ -286,7 +287,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                         System.out.println("before laycard " + this.allPlayer[this.currentPlayer].getHandCards());
                         player.getHandCards().remove(card);
                         this.allPlayer[currentPlayer] = player;
-                        System.out.println("before laycard " + this.allPlayer[this.currentPlayer].getHandCards());
+                        System.out.println("after laycard " + this.allPlayer[this.currentPlayer].getHandCards());
                         this.openStack.push(card);
                         if (card.getType() == CardType.SKIP) {
                             this.skipCounter[getPlayerIndexById(playerId)]++;
@@ -339,6 +340,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      *            the start or end.
      */
     public void playCard(Player player, int cardId, int filingId, boolean low) throws RemoteException {
+        System.out.println("playCard called"  + player.getName() + " " + cardId + " " + filingId + " " + low);
         Card cardInFocus = null;
         if (this.allPlayer[currentPlayer].getId() == player.getId() && !isGameOver) {
             if (this.playerOverloadIndicator[currentPlayer]) {

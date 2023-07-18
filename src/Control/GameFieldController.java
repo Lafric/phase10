@@ -300,7 +300,7 @@ public class GameFieldController implements Initializable {
     }
 
     public void moveToOpponentBox(Player moveToplayer, boolean low) throws RemoteException {
-
+        System.out.println("move to opponent box");
         Player player = game.getAllPlayers()[game.getCurrentPlayer()];
         List<Card> handCards = player.getHandCards();
 

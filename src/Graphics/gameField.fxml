@@ -30,58 +30,7 @@
                         <Label fx:id="opp5_cards1" layoutX="544.0" layoutY="500.0" text="0 - 10" />
                         <Label layoutX="796.0" layoutY="440.0" text="Phase Rule 2: " />
                         <Label fx:id="opp5_cards2" layoutX="796.0" layoutY="500.0" text="0 - 10" />
-                        <!-- Karte von 2 bis 5 für die phase Rule Nr 1-->
-                        <ImageView fx:id="imgkarteSpieler5_1" fitHeight="50" fitWidth="75" layoutX="544.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler5_2" fitHeight="50" fitWidth="75" layoutX="586.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler5_3" fitHeight="50" fitWidth="75" layoutX="628.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler5_4" fitHeight="50" fitWidth="75" layoutX="670.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler5_5" fitHeight="50" fitWidth="75" layoutX="712.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <!-- Karte von 6 bis 10 für die phase Rule Nr 2-->
-                        <ImageView fx:id="imgkarteSpieler5_6" fitHeight="50" fitWidth="75" layoutX="796.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler5_7" fitHeight="50" fitWidth="75" layoutX="838.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler5_8" fitHeight="50" fitWidth="75" layoutX="880.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler5_9" fitHeight="50" fitWidth="75" layoutX="922.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler5_10" fitHeight="50" fitWidth="75" layoutX="964.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
+
                         <!--Spieler 4-->
                         <Rectangle fx:id="kasten_Gegenspieler4" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="530.0" layoutY="198.0" stroke="black" strokeType="INSIDE" width="500.0" />
                         <Label fx:id="label_Gegenspieler4" layoutX="544.0" layoutY="210.0" text="[LEER 4]" />
@@ -93,58 +42,7 @@
                         <Label fx:id="opp4_cards1" layoutX="544.0" layoutY="330.0" text="0 - 10" />
                         <Label layoutX="796.0" layoutY="270.0" text="Phase Rule 2: " />
                         <Label fx:id="opp4_cards2" layoutX="796.0" layoutY="330.0" text="0 - 10" />
-                        <!-- Karte von 2 bis 5 für die phase Rule Nr 1-->
-                        <ImageView fx:id="imgkarteSpieler4_1" fitHeight="50" fitWidth="75" layoutX="544.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler4_2" fitHeight="50" fitWidth="75" layoutX="586.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler4_3" fitHeight="50" fitWidth="75" layoutX="628.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler4_4" fitHeight="50" fitWidth="75" layoutX="670.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler4_5" fitHeight="50" fitWidth="75" layoutX="712.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <!-- Karte von 6 bis 10 für die phase Rule Nr 2-->
-                        <ImageView fx:id="imgkarteSpieler4_6" fitHeight="50" fitWidth="75" layoutX="796.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler4_7" fitHeight="50" fitWidth="75" layoutX="838.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler4_8" fitHeight="50" fitWidth="75" layoutX="880.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler4_9" fitHeight="50" fitWidth="75" layoutX="922.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler4_10" fitHeight="50" fitWidth="75" layoutX="964.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
+
                         <!--Spieler 3-->
                         <Rectangle fx:id="kasten_Gegenspieler3" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="27.0" layoutY="198.0" stroke="black" strokeType="INSIDE" width="500.0" />
                         <Label fx:id="label_Gegenspieler3" layoutX="44.0" layoutY="210.0" text="[LEER 3]" />
@@ -156,57 +54,7 @@
                         <Label fx:id="opp3_cards1" layoutX="44.0" layoutY="330.0" text="0 - 10" />
                         <Label layoutX="296.0" layoutY="270.0" text="Phase Rule 2: " />
                         <Label fx:id="opp3_cards2" layoutX="296.0" layoutY="330.0" text="0 - 10" />
-                        <ImageView fx:id="imgkarteSpieler3_1" fitHeight="50" fitWidth="75" layoutX="44.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler3_2" fitHeight="50" fitWidth="75" layoutX="86.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler3_3" fitHeight="50" fitWidth="75" layoutX="128.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler3_4" fitHeight="50" fitWidth="75" layoutX="170.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler3_5" fitHeight="50" fitWidth="75" layoutX="212.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                          <!-- Karte von 6 bis 10 für die phase Rule Nr 2-->
-                        <ImageView fx:id="imgkarteSpieler3_6" fitHeight="50" fitWidth="75" layoutX="296.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler3_7" fitHeight="50" fitWidth="75" layoutX="338.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler3_8" fitHeight="50" fitWidth="75" layoutX="380.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler3_9" fitHeight="50" fitWidth="75" layoutX="422.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler3_10" fitHeight="50" fitWidth="75" layoutX="464.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
+
                         <!--Spieler 2-->
                         <Rectangle fx:id="kasten_Gegenspieler2" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="530.0" layoutY="28.0" stroke="black" strokeType="INSIDE" width="500.0" />
                         <Label fx:id="label_Gegenspieler2" layoutX="544.0" layoutY="40.0" text="[LEER 2]" />
@@ -218,57 +66,7 @@
                         <Label fx:id="opp2_cards1" layoutX="544.0" layoutY="160.0" text="0 - 10" />
                         <Label layoutX="796.0" layoutY="100.0" text="Phase Rule 2: " />
                         <Label fx:id="opp2_cards2" layoutX="796.0" layoutY="160.0" text="0 - 10" />
-                        <ImageView fx:id="imgkarteSpieler2_1" fitHeight="50" fitWidth="75" layoutX="544.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler2_2" fitHeight="50" fitWidth="75" layoutX="586.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler2_3" fitHeight="50" fitWidth="75" layoutX="628.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler2_4" fitHeight="50" fitWidth="75" layoutX="670.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler2_5" fitHeight="50" fitWidth="75" layoutX="712.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <!-- Karte von 6 bis 10 für die phase Rule Nr 2-->
-                        <ImageView fx:id="imgkarteSpieler2_6" fitHeight="50" fitWidth="75" layoutX="796.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler2_7" fitHeight="50" fitWidth="75" layoutX="838.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler2_8" fitHeight="50" fitWidth="75" layoutX="880.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler2_9" fitHeight="50" fitWidth="75" layoutX="922.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler2_10" fitHeight="50" fitWidth="75" layoutX="964.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
+
 
                         <!--Spieler 1-->
                         <Rectangle fx:id="kasten_Gegenspieler1" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="27.0" layoutY="28.0" stroke="black" strokeType="INSIDE" width="500.0" />
@@ -281,58 +79,7 @@
                         <Label fx:id="opp1_cards1" layoutX="44.0" layoutY="160.0" text="0 - 10" />
                         <Label layoutX="296.0" layoutY="100.0" text="Phase Rule 2: " />
                         <Label fx:id="opp1_cards2" layoutX="296.0" layoutY="160.0" text="0 - 10" />
-                        <!-- Karte von 1 bis 5 für die phase Rule Nr 1-->
-                        <ImageView fx:id="imgkarteSpieler1_1" fitHeight="50" fitWidth="75" layoutX="44.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler1_2" fitHeight="50" fitWidth="75" layoutX="86.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler1_3" fitHeight="50" fitWidth="75" layoutX="128.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler1_4" fitHeight="50" fitWidth="75" layoutX="170.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler1_5" fitHeight="50" fitWidth="75" layoutX="212.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <!-- Karte von 6 bis 10 für die phase Rule Nr 2-->
-                        <ImageView fx:id="imgkarteSpieler1_6" fitHeight="50" fitWidth="75" layoutX="296.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler1_7" fitHeight="50" fitWidth="75" layoutX="338.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler1_8" fitHeight="50" fitWidth="75" layoutX="380.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler1_9" fitHeight="50" fitWidth="75" layoutX="422.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpieler1_10" fitHeight="50" fitWidth="75" layoutX="464.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
+
 
                         <!--Aktuelle Spieler-->
                         <Rectangle fx:id="kasten_Client" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="27.0" layoutY="368.0" stroke="black" strokeType="INSIDE" width="500.0" />
@@ -345,58 +92,6 @@
                         <Label fx:id="client_cards1" layoutX="44.0" layoutY="500.0" text="0 - 10" />
                         <Label layoutX="296.0" layoutY="440.0" text="Phase Rule 2: " />
                         <Label fx:id="client_cards2" layoutX="296.0"  layoutY="500.0" text="0 - 10: " />
-                        <!-- Karte von 2 bis 5 für die phase Rule Nr 1-->
-                        <ImageView fx:id="imgkarteSpielerClient_1" fitHeight="50" fitWidth="75" layoutX="44.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpielerClient_2" fitHeight="50" fitWidth="75" layoutX="86.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpielerClient_3" fitHeight="50" fitWidth="75" layoutX="128.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpielerClient_4" fitHeight="50" fitWidth="75" layoutX="170.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpielerClient_5" fitHeight="50" fitWidth="75" layoutX="212.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <!-- Karte von 6 bis 10 für die phase Rule Nr 2-->
-                        <ImageView fx:id="imgkarteSpielerClient_6" fitHeight="50" fitWidth="75" layoutX="296.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpielerClient_7" fitHeight="50" fitWidth="75" layoutX="338.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpielerClient_8" fitHeight="50" fitWidth="75" layoutX="380.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpielerClient_9" fitHeight="50" fitWidth="75" layoutX="422.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="imgkarteSpielerClient_10" fitHeight="50" fitWidth="75" layoutX="464.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@playingCards/card1Color5Repeat0.png" />
-                            </image>
-                        </ImageView>
 
                         <Button fx:id="bot_hinzufügen" layoutX="1112.0" layoutY="516.0" mnemonicParsing="false" onAction="#addBot" text="Bot hinzufügen" />
 

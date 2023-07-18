@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class PasswordLöschenController {
+public class PasswordLoeschenController {
     public Button button_betaetigen_acc_loeschen;
     public Button button_abbrechen_acc_loeschen;
     public PasswordField textfeld_passwort1;

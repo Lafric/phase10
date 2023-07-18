@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.sql.*;
 
+/**
+ * This class handles the database
+ */
 public class DatabaseProvider {
 
     private String dbUser = "postgres";
@@ -17,14 +20,26 @@ public class DatabaseProvider {
     public boolean useDummy = false;
     public HashMap<String, String> dummyUserData = new HashMap<String, String>();
 
+    /**
+     * Constructor with additional option
+     * @param useDummy indicates the use od a dummy
+     */
     public DatabaseProvider(boolean useDummy) {
         this.useDummy = useDummy;
     }
 
+    /**
+     * Constructor which sets all options to default
+     */
     public DatabaseProvider() {
         this.useDummy = false;
     }
 
+    /**
+     * Constructor with more parameters
+     * @param dbUrl given url
+     * @param dbPassword given password
+     */
     public DatabaseProvider(String dbUrl, String dbPassword) {
         this.dbUrl = dbUrl;
         this.dbPassword = dbPassword;
@@ -59,10 +74,20 @@ public class DatabaseProvider {
         }
     }
 
+    /**
+     * Method to add user
+     * @param name of the user
+     * @param pw password of the user
+     */
     private void addUserDummy(String name, String pw) {
         this.dummyUserData.put(name, pw);
     }
 
+    /**
+     * Method to add a user
+     * @param name username
+     * @param pw user password
+     */
     public void addUser(String name, String pw) {
         if (this.useDummy) {
             this.addUserDummy(name, pw);
@@ -84,6 +109,12 @@ public class DatabaseProvider {
         }
     }
 
+    /**
+     * Checker for dummy user
+     * @param name username
+     * @param pw user password
+     * @return indicator for checkingresult
+     */
     private boolean checkUserDummy(String name, String pw) {
         if (this.dummyUserData.containsKey(name)) {
             if (Objects.equals(this.dummyUserData.get(name), pw)) {
@@ -93,6 +124,12 @@ public class DatabaseProvider {
         return false;
     }
 
+    /**
+     * Mehtod to check User
+     * @param name username
+     * @param pw userpassword
+     * @return indicator of checking result
+     */
     public boolean checkUser(String name, String pw) {
         if (this.useDummy) {
             return this.checkUserDummy(name, pw);
@@ -113,6 +150,11 @@ public class DatabaseProvider {
         }
     }
 
+    /**
+     * Method to change dummy user name
+     * @param currentUsername current name
+     * @param newUsername new name
+     */
     private void changeUsernameDummy(String currentUsername, String newUsername) {
         if (this.dummyUserData.containsKey(currentUsername)) {
             this.dummyUserData.put(newUsername, this.dummyUserData.get(currentUsername));
@@ -120,6 +162,11 @@ public class DatabaseProvider {
         this.dummyUserData.remove(currentUsername);
     }
 
+    /**
+     * Method to change user name
+     * @param currentUsername current user name
+     * @param newUsername new user name
+     */
     public void changeUsername(String currentUsername, String newUsername) {
         if (this.useDummy) {
             this.changeUsernameDummy(currentUsername, newUsername);
@@ -144,6 +191,12 @@ public class DatabaseProvider {
         }
     }
 
+    /**
+     * Mthod to change dummy passwort
+     * @param name dummy name
+     * @param currentPassword current password
+     * @param newPassword new password
+     */
     private void changePasswordDummy(String name, String currentPassword, String newPassword) {
         if (this.checkUser(name, currentPassword)) {
             this.dummyUserData.put(name, newPassword);
@@ -151,6 +204,12 @@ public class DatabaseProvider {
         this.dummyUserData.remove(name, currentPassword);
     }
 
+    /**
+     * method to change password
+     * @param name username
+     * @param currentPassword current password
+     * @param newPassword the new tob password
+     */
     public void changePassword(String name, String currentPassword, String newPassword) {
         if (this.useDummy) {
             this.changePasswordDummy(name, currentPassword, newPassword);
@@ -179,12 +238,22 @@ public class DatabaseProvider {
         }
     }
 
+    /**
+     * Method to delete dummy user
+     * @param name name of dummy
+     * @param password password of dummy
+     */
     private void deleteUserDummy(String name, String password) {
         if (this.checkUser(name, password)) {
             this.dummyUserData.remove(name, password);
         }
     }
 
+    /**
+     * Method to delete user
+     * @param name user name
+     * @param password user password
+     */
     public void deleteUser(String name, String password) {
         if (this.useDummy) {
             this.deleteUserDummy(name, password);
@@ -213,6 +282,10 @@ public class DatabaseProvider {
         }
     }
 
+    /**
+     * method to increase amount of played games
+     * @param username name of the user
+     */
     public void incrementGamesPlayed(String username) {
         if (this.useDummy) {
             return;
@@ -236,6 +309,10 @@ public class DatabaseProvider {
         }
     }
 
+    /**
+     * method to increase the amount of won games
+     * @param username name of the user
+     */
     public void incrementGamesWon(String username) {
         if (this.useDummy) {
             return;
@@ -259,6 +336,10 @@ public class DatabaseProvider {
         }
     }
 
+    /**
+     * Method to obtain user data
+     * @return the user data
+     */
     public UserData[] getUserData() {
         if (this.useDummy) {
             UserData dummyUser = new UserData("test", 1, 2);

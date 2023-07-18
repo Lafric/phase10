@@ -69,12 +69,12 @@ public class GameFieldController implements Initializable {
     public Button launchchat;
     public Button karte_ziehen;
     public Button zug_beenden;
-    public Button phase_bestätigen;
+    public Button phase_bestaetigen;
     public Button Karte_spielen;
     public String lobby;
     public Identity identity;
     public String gameName;
-    public Button bot_hinzufügen;
+    public Button bot_hinzufuegen;
     public Pane pane_kartenSpieler;
     public CheckBox checkBox_1;
     public CheckBox checkBox_2;

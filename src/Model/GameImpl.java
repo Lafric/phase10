@@ -23,28 +23,48 @@ public class GameImpl extends UnicastRemoteObject implements Game {
 
     private final int[] skipCounter; // counts how many skips are currently on each player
 
-    
-    /** 
-     * @return List<Filing>
+
+    /**
+     * The getter for all Filings
+     * @return all Filings
      * @throws RemoteException
      */
     public List<Filing> getFilings() throws RemoteException {
         return filings;
     }
 
+    /**
+     * getter for phase rules
+     * @return the pahse rules
+     * @throws RemoteException in case of server problems
+     */
     public PhaseRule[] getPhaseRules() throws RemoteException {
         return phaseRules;
     }
 
+    /**
+     * getter for open stack
+     * @return the open stack
+     * @throws RemoteException
+     */
     public Stack<Card> getOpenStack() throws RemoteException {
         return openStack;
     }
 
+    /**
+     * getter for hidden stack
+     * @return the hidden stack
+     * @throws RemoteException
+     */
     @Override
     public Stack<Card> getHiddenStack() throws RemoteException {
         return hiddenStack;
     }
 
+    /**
+     * method to add a bot
+     * @throws RemoteException
+     */
     public void addBot() throws RemoteException {
         Player[] newPlayer = new Player[this.allPlayer.length + 1];
         for (int i = 0; i < this.allPlayer.length; i++) {
@@ -54,6 +74,12 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         this.allPlayer = newPlayer;
     }
 
+    /***
+     * Constructor
+     * @param allPlayer the player to play
+     * @param phaseRules the rules
+     * @throws RemoteException
+     */
     public GameImpl(Player[] allPlayer, PhaseRule[] phaseRules) throws RemoteException {
         this.allPlayer = allPlayer;
         // Reset Players
@@ -186,6 +212,11 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         return this.currentPlayer;
     }
 
+    /**
+     * getter for the players
+     * @return all players
+     * @throws RemoteException
+     */
     public Player[] getAllPlayers() throws RemoteException {
         return this.allPlayer;
     }
@@ -501,7 +532,6 @@ public class GameImpl extends UnicastRemoteObject implements Game {
     /**
      * This method performs one turn automatically for a bot
      * This method assumes the current player is a bot
-     * @return void
      */
     public void playBotTurn() throws RemoteException {
         // Assume current player is a bot

@@ -284,7 +284,8 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                 for (Card card : player.getHandCards()) {
                     if (card.getId() == cardId) {
                         System.out.println("before laycard " + this.allPlayer[this.currentPlayer].getHandCards());
-                        this.allPlayer[this.currentPlayer].getHandCards().remove(card);
+                        player.getHandCards().remove(card);
+                        this.allPlayer[currentPlayer] = player;
                         System.out.println("before laycard " + this.allPlayer[this.currentPlayer].getHandCards());
                         this.openStack.push(card);
                         if (card.getType() == CardType.SKIP) {

@@ -559,10 +559,10 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         }
     
         // Finally, discard the first card in hand
-        if (bot.getHandCards().size() > 0) {
-            Card discardCard = bot.getHandCards().get(0);
-            throwCard(bot, discardCard.getId(), -1);
-        }
+        // if (bot.getHandCards().size() > 0) {
+        //     Card discardCard = bot.getHandCards().get(0);
+        //     throwCard(bot, discardCard.getId(), -1);
+        // }
 
         // end turn
         goToNextPlayer();

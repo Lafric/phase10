@@ -283,7 +283,9 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                 // Check if card is on player hands
                 for (Card card : player.getHandCards()) {
                     if (card.getId() == cardId) {
+                        System.out.println("before laycard " + this.allPlayer[this.currentPlayer].getHandCards());
                         this.allPlayer[this.currentPlayer].getHandCards().remove(card);
+                        System.out.println("before laycard " + this.allPlayer[this.currentPlayer].getHandCards());
                         this.openStack.push(card);
                         if (card.getType() == CardType.SKIP) {
                             this.skipCounter[getPlayerIndexById(playerId)]++;
@@ -464,6 +466,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
 
                         player.removeCard(cards[j]);
                         this.allPlayer[currentPlayer] = player;
+
                         System.out.println("length CARD after mit this " + this.allPlayer[currentPlayer].getHandCards().size());
                         System.out.println("current player mit this" +  this.allPlayer[currentPlayer].getName() + " " + player.getId());
                         System.out.println("length CARD after" + player.getHandCards().size());

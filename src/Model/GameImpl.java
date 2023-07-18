@@ -419,7 +419,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                     }
                 }
                 // Check if filing exists
-                Filing filing = rule.createMatchingFiling(id, cards);
+                Filing filing = rule.createMatchingFiling(id, cards,player.getId());
                 if (filing != null) {
                     this.filings.add(filing);
                     System.out.println("filings " + this.filings.size());

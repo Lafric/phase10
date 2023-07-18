@@ -11,13 +11,20 @@ public class Street extends Filing implements Serializable{
     private CardType start;
     private CardType end;
 
+    public Street(int id, CardType start, CardType end,int playerId) {
+        super(id,playerId);
+        this.start = start;
+        this.end = end;
+    }
+    /**
+     * Another constructor for street rules
+     */
     public Street(int id, CardType start, CardType end) {
         super(id);
         this.start = start;
         this.end = end;
     }
 
-    
     /** 
      * @return CardType
      */

@@ -11,13 +11,21 @@ public class Tuplet extends Filing implements Serializable{
     private int amount;
     private CardType type;
 
+    public Tuplet(int id, CardType type, int amount,int playerId) {
+        super(id,playerId);
+        this.type = type;
+        this.amount = amount;
+    }
+
+    /**
+     * another constructor for use is rule
+     */
     public Tuplet(int id, CardType type, int amount) {
         super(id);
         this.type = type;
         this.amount = amount;
     }
 
-    
     /** 
      * @return int
      */

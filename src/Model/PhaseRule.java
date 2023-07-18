@@ -35,13 +35,13 @@ public class PhaseRule implements Serializable{
      * @param cards are the cards to be checked
      * @return is null if no rule is fulfilled or a filing which is fulfilled
      */
-    public Filing createMatchingFiling(int id, Card[] cards){
+    public Filing createMatchingFiling(int id, Card[] cards, int playerId){
         for(int j = 0; j < cards.length;j++){
             if(cards[j].getType()==CardType.JOKER){
                 for(int k = 0; k< 12;k++){
                     Card tmp = cards[j];
                     cards[j] = new Card(cards[j].getId(),CardColor.BLUE,CardType.getForNumber(k+1));
-                    Filing fill = createMatchingFiling(id,cards);
+                    Filing fill = createMatchingFiling(id,cards,playerId);
                     cards[j] = tmp;
                     if(fill != null){
                         return fill;
@@ -61,7 +61,7 @@ public class PhaseRule implements Serializable{
                 }
                 if(fitting && cards.length>=rule.getAmount()){
                     System.err.println("Found Tuple");
-                    return new Tuplet(id, rule.getType(),cards.length);
+                    return new Tuplet(id, rule.getType(),cards.length,playerId);
                 }
             } else if(this.rules[i] instanceof Street){
                 Street street = (Street) rules[i];
@@ -82,7 +82,7 @@ public class PhaseRule implements Serializable{
                     }
                     if (sorted) {
                         System.out.println("Found Street");
-                        return new Street(id, CardType.getForNumber(values[0]), CardType.getForNumber(values[values.length - 1]));
+                        return new Street(id, CardType.getForNumber(values[0]), CardType.getForNumber(values[values.length - 1]),playerId);
                     }
                 }
             }

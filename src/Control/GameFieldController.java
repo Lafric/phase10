@@ -409,7 +409,7 @@ public class GameFieldController implements Initializable {
 
     public void addBot(ActionEvent event) throws RemoteException {
         get_lobby().addBot();
-        get_game().addBot();
+        //get_game().addBot();
     }
 
 

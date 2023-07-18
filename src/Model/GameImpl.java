@@ -29,7 +29,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * @return all Filings
      * @throws RemoteException
      */
-    public List<Filing> getFilings() throws RemoteException {
+    public synchronized List<Filing> getFilings() throws RemoteException {
         return filings;
     }
 
@@ -38,7 +38,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * @return the pahse rules
      * @throws RemoteException in case of server problems
      */
-    public PhaseRule[] getPhaseRules() throws RemoteException {
+    public synchronized PhaseRule[] getPhaseRules() throws RemoteException {
         return phaseRules;
     }
 
@@ -47,7 +47,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * @return the open stack
      * @throws RemoteException
      */
-    public Stack<Card> getOpenStack() throws RemoteException {
+    public synchronized Stack<Card> getOpenStack() throws RemoteException {
         return openStack;
     }
 
@@ -57,7 +57,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * @throws RemoteException
      */
     @Override
-    public Stack<Card> getHiddenStack() throws RemoteException {
+    public synchronized Stack<Card> getHiddenStack() throws RemoteException {
         return hiddenStack;
     }
 
@@ -65,7 +65,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * method to add a bot
      * @throws RemoteException
      */
-    public void addBot() throws RemoteException {
+    public synchronized void addBot() throws RemoteException {
         Player[] newPlayer = new Player[this.allPlayer.length + 1];
         for (int i = 0; i < this.allPlayer.length; i++) {
             newPlayer[i] = this.allPlayer[i];
@@ -108,7 +108,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
     /**
      * This method picks the next active player.
      */
-    public void goToNextPlayer() throws RemoteException {
+    public synchronized void goToNextPlayer() throws RemoteException {
         if (this.currentPlayer == this.allPlayer.length - 1) {
             this.currentPlayer = 0;
         } else {
@@ -124,7 +124,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
     /**
      * The method initializeCards is shuffling and redistributing of the cards.
      */
-    private void initializeCards() throws RemoteException {
+    private synchronized void initializeCards() throws RemoteException {
         // Setup array and counter
         int id = 0;
         hiddenStack = new Stack<>();
@@ -208,7 +208,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * 
      * @return is the currently active player.
      */
-    public int getCurrentPlayer() throws RemoteException {
+    public synchronized int getCurrentPlayer() throws RemoteException {
         return this.currentPlayer;
     }
 
@@ -217,7 +217,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * @return all players
      * @throws RemoteException
      */
-    public Player[] getAllPlayers() throws RemoteException {
+    public synchronized Player[] getAllPlayers() throws RemoteException {
         return this.allPlayer;
     }
 
@@ -229,7 +229,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * @param hiddenStackIndicator
      *            if the card is taken from the hidden or open stack
      */
-    public void drawCard(Player player, boolean hiddenStackIndicator) throws RemoteException {
+    public synchronized void drawCard(Player player, boolean hiddenStackIndicator) throws RemoteException {
         System.out.println("drawCard called");
         if (allPlayer[this.currentPlayer].getId() == player.getId() && !isGameOver) {
             if (!this.playerOverloadIndicator[currentPlayer]) {
@@ -274,8 +274,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * @param playerId
      *            is the player to be skipped, in case a skip card is played
      */
-    public void throwCard(Player player, int cardId, int playerId) throws RemoteException {
-
+    public synchronized void throwCard(Player player, int cardId, int playerId) throws RemoteException {
         if (allPlayer[this.currentPlayer].getId() == player.getId() && !this.isGameOver) {
             if (this.playerOverloadIndicator[currentPlayer]) {
                 // Set Overload
@@ -287,7 +286,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                         System.out.println("before laycard " + this.allPlayer[this.currentPlayer].getHandCards());
                         player.getHandCards().remove(card);
                         this.allPlayer[currentPlayer] = player;
-                        System.out.println("after laycard " + this.allPlayer[this.currentPlayer].getHandCards());
+                        System.out.println("before laycard " + this.allPlayer[this.currentPlayer].getHandCards());
                         this.openStack.push(card);
                         if (card.getType() == CardType.SKIP) {
                             this.skipCounter[getPlayerIndexById(playerId)]++;
@@ -317,7 +316,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      *            of the player
      * @return the index in array
      */
-    private int getPlayerIndexById(int id) throws RemoteException {
+    private synchronized int getPlayerIndexById(int id) throws RemoteException {
         for (int i = 0; i < this.allPlayer.length; i++) {
             if (this.allPlayer[i].getId() == id) {
                 return i;
@@ -339,8 +338,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      *            indicates, in the case of a street, if the card should added at
      *            the start or end.
      */
-    public void playCard(Player player, int cardId, int filingId, boolean low) throws RemoteException {
-        System.out.println("playCard called"  + player.getName() + " " + cardId + " " + filingId + " " + low);
+    public synchronized void playCard(Player player, int cardId, int filingId, boolean low) throws RemoteException {
         Card cardInFocus = null;
         if (this.allPlayer[currentPlayer].getId() == player.getId() && !isGameOver) {
             if (this.playerOverloadIndicator[currentPlayer]) {
@@ -416,7 +414,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * @param cardIds
      *            the id numbers of the cards to put down.
      */
-    public void layCards(Player player, int[] cardIds) throws RemoteException {
+    public synchronized void layCards(Player player, int[] cardIds) throws RemoteException {
         if (player.getId() == this.allPlayer[currentPlayer].getId() && !this.isGameOver) {
             // Get Rule for Phase
             PhaseRule rule = this.phaseRules[player.getPhase()];
@@ -496,7 +494,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * @param player
      *            to check
      */
-    private void checkForPhaseIncrease(Player player) throws RemoteException {
+    private synchronized void checkForPhaseIncrease(Player player) throws RemoteException {
         if (player.getHandCards().size() <= 0) {
             player.increasePhase();
             if (player.getPhase() == 10) {
@@ -510,7 +508,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
     /**
      * This method put the game into the next round. So cards are new distributed.
      */
-    public void goToNextRound() throws RemoteException {
+    public synchronized void goToNextRound() throws RemoteException {
         // Save Players Points and remove cards
         for (int i = 0; i < this.allPlayer.length; i++) {
             this.allPlayer[i].increasePointsByHandCards();
@@ -531,26 +529,51 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * 
      * @return true or false depending on if game is over
      */
-    public boolean isGameOver() throws RemoteException {
+    public synchronized boolean isGameOver() throws RemoteException {
         return this.isGameOver;
+    }
+
+    /**
+     * This method generates all card combinations for a given list of hand cards
+     * @return all combinations of hand cards
+     */
+    private static List<List<Card>> generateCombinations(Card[] cards) {
+        List<List<Card>> combinations = new ArrayList<>();
+        int n = cards.length;
+    
+        for (int i = 0; i < (1 << n); i++) {
+            List<Card> combo = new ArrayList<>();
+            for (int j = 0; j < n; j++) {
+                if ((i & (1 << j)) > 0)
+                    combo.add(cards[j]);
+            }
+            combinations.add(combo);
+        }
+        return combinations;
     }
 
     /**
      * This method performs one turn automatically for a bot
      * This method assumes the current player is a bot
      */
-    public void playBotTurn() throws RemoteException {
+    public synchronized void playBotTurn() throws RemoteException {
         // Assume current player is a bot
         Player bot = this.allPlayer[this.currentPlayer];
     
         // Bot draws a card from the hidden stack
         drawCard(bot, true);
     
-        // Try to lay down phase if possible
-        // Here we will just make a bot try to lay down phase with all cards in its hand
-        int[] cardIds = bot.getHandCards().stream().mapToInt(Card::getId).toArray();
-        layCards(bot, cardIds);
-    
+        // Now we make the bot try to lay a down phase if possible
+        //int[] cardIds = bot.getHandCards().stream().mapToInt(Card::getId).toArray();
+        Card[] cards = bot.getHandCards().toArray(new Card[bot.getHandCards().size()]);
+
+        // try to lay any combination of hand cards
+        List<List<Card>> cardCombinations = generateCombinations(cards);
+        // iterate over all combinations, try each one
+        for (List<Card> cardCombination : cardCombinations) {
+            layCards(bot, cardCombination.stream().mapToInt(Card::getId).toArray());
+        }
+
         // Try to play a card on existing filings
         for (Card card : bot.getHandCards()) {
             for (Filing filing : this.filings) {
@@ -567,10 +590,15 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         // Finally, discard the first card in hand
         // if (bot.getHandCards().size() > 0) {
         //     Card discardCard = bot.getHandCards().get(0);
-        //     throwCard(bot, discardCard.getId(), -1);
+        //     throwCard(bot, discardCard.getId(), bot.getId());
         // }
 
         // end turn
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         goToNextPlayer();
     }
 }

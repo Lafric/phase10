@@ -401,7 +401,8 @@ public class GameFieldController implements Initializable {
         // other Actions
 
         // if current player is bot, play bot turn
-        if (game.getAllPlayers()[game.getCurrentPlayer()].isBot()) {
+        if (game.getAllPlayers()[game.getCurrentPlayer()].getName().equals("Bot")) {
+            System.out.println("BOT TURNNNNNNNN");
             game.playBotTurn();
         }
         // restructure to while-loop, end turn while bots are playing
@@ -566,6 +567,13 @@ public class GameFieldController implements Initializable {
                                 System.out.println(game.getAllPlayers()[i].getId());
                                 System.out.println(game.getAllPlayers()[i].getName());
                                 identity.getUsername();
+                            }
+
+                            // if bot, make bot move
+                            if (game.getAllPlayers()[game.getCurrentPlayer()].getName().equals("Bot")) {
+                                System.out.println(game.getAllPlayers()[game.getCurrentPlayer()].getName());
+                                System.out.println("BOT TURNNNNNNNN");
+                                game.playBotTurn();
                             }
 
                         } catch (RemoteException e) {

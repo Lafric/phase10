@@ -28,7 +28,7 @@
                                 <Button fx:id="button_abmelden" mnemonicParsing="false" onAction="#abmelden" text="Abmelden" />
                                 <Button fx:id="button_AccountDel" mnemonicParsing="false" onAction="#delAccount" text="Account löschen" />
                                 <Button mnemonicParsing="false" onAction="#showBestenliste" text="Bestenliste" />
-                                <Button mnemonicParsing="false" onAction="#showBestenliste" prefWidth="232.0" text="SpielRegeln" />
+                                <!-- <Button mnemonicParsing="false" onAction="#showBestenliste" prefWidth="232.0" text="SpielRegeln" /> -->
                             </buttons>
                         </ButtonBar>
                   <Label id="nameLabel" fx:id="nameLabel" layoutX="22.0" layoutY="27.0" text="Label" textAlignment="CENTER" />

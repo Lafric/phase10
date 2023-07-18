@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import Model.DatabaseProvider;
+
 public class PasswordLoeschenController {
     public Button button_betaetigen_acc_loeschen;
     public Button button_abbrechen_acc_loeschen;
@@ -24,7 +26,7 @@ public class PasswordLoeschenController {
     public void accLoeschenOk(ActionEvent event) throws IOException {
         // Todo: close the Menu Stage
         // password stimmen
-        if (textfeld_passwort1.getText().equals("dump")) {
+        if (textfeld_passwort1.getText().equals("abcc")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/startseite.fxml"));
             Parent root = loader.load();
 
@@ -42,6 +44,10 @@ public class PasswordLoeschenController {
             stage.show();
             Stage start = (Stage) button_betaetigen_acc_loeschen.getScene().getWindow();
             start.close();
+
+            // close menu stage
+            Stage menu = (Stage) button_betaetigen_acc_loeschen.getScene().getWindow();
+            menu.close();
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Fehler");

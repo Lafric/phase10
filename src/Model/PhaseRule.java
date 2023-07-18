@@ -61,7 +61,7 @@ public class PhaseRule implements Serializable{
                 }
                 if(fitting && cards.length>=rule.getAmount()){
                     System.err.println("Found Tuple");
-                    return new Tuplet(id, rule.getType(),cards.length,playerId);
+                    return new Tuplet(id, cards[0].getType(),cards.length,playerId);
                 }
             } else if(this.rules[i] instanceof Street){
                 Street street = (Street) rules[i];

@@ -43,7 +43,7 @@ public class GameFieldController implements Initializable {
     public ImageView imagekarte_H11;
     public ImageView imagekarte_Uebersichtskarte;
     public Rectangle kasten_Gegenspieler1;
-    public Label label_Gegenspieler1Name;
+    public Label label_Gegenspieler1;
     public Label label_Gegenspieler1Handkarten;
     public Label label_Gegenspieler1Punkte;
     public Rectangle kasten_Gegenspieler2;
@@ -99,8 +99,11 @@ public class GameFieldController implements Initializable {
     private Card[] cards = new Card[] { new Card(0, CardColor.YELLOW, CardType.ONE),
             new Card(0, CardColor.GREEN, CardType.ONE), new Card(0, CardColor.RED, CardType.ONE) };
     private Game game;
+    private Label[] playerName;
+    private Label[] punkte;
+    private Label[] handkarte_Nummer;
 
-    
+
     /** 
      * @param url
      * @param resourceBundle
@@ -114,46 +117,27 @@ public class GameFieldController implements Initializable {
                 kasten_Gegenspieler3, kasten_Gegenspieler4, kasten_Gegenspieler5 };
         this.checkBoxes = new CheckBox[] { checkBox_1, checkBox_2, checkBox_3, checkBox_4, checkBox_5, checkBox_6,
                 checkBox_7, checkBox_8, checkBox_9, checkBox_10, checkBox_11 };
+        this.playerName = new Label[] { label_Client, label_Gegenspieler1, label_Gegenspieler2, label_Gegenspieler3,
+                label_Gegenspieler4, label_Gegenspieler5 };
+        this.punkte = new Label[] { label_ClientPunkte, label_Gegenspieler1Punkte, label_Gegenspieler2Punkte,
+                label_Gegenspieler3Punkte, label_Gegenspieler4Punkte, label_Gegenspieler5Punkte };
+        this.handkarte_Nummer = new Label[] { label_ClientHandkarten, label_Gegenspieler1Handkarten,
+                label_Gegenspieler2Handkarten, label_Gegenspieler3Handkarten, label_Gegenspieler4Handkarten,
+                label_Gegenspieler5Handkarten };
 
-        /**
-         * try {
-         * movetoOpenStack(new Card(0, CardColor.RED, CardType.TWO));
-         * } catch (RemoteException e) {
-         * e.printStackTrace();
-         * } // to delete
-         **/
-        System.out.println("Controller initialized!");
-
-
+        //image not visible by initialization
         imagekarte_Uebersichtskarte.setVisible(false);
         for (int i = 0; i < handkarte_CurrentPlayer.length; i++) {
             handkarte_CurrentPlayer[i].setVisible(false);
         }
         // set the values of dropdown Zielstapel
-        dropdown_Zielstapel_StapelBewegen.getItems().addAll("Mein Stapel", "Mein Stapel Rule 1", "Mein Stapel Rule 2",
-                "Uebersichtskarte", "Spieler 1 Rule 1", "Spieler 1 Rule 2", "Spieler 2 Rule 1", "Spieler 2 Rule 2",
-                "Spieler 3 Rule 1", "Spieler 3 Rule 2", "Spieler 4 Rule 1", "Spieler 4 Rule 2", "Spieler 5 Rule 1",
-                "Spieler 5 Rule 2");
+
 
         //set the labels as invisible by initialization
-        // label_Gegenspieler1Name.setVisible(false);
-        label_Gegenspieler1Handkarten.setVisible(false);
-        label_Gegenspieler1Punkte.setVisible(false);
-        // label_Gegenspieler2.setVisible(false);
-        label_Gegenspieler2Handkarten.setVisible(false);
-        label_Gegenspieler2Punkte.setVisible(false);
-        // label_Gegenspieler3.setVisible(false);
-        label_Gegenspieler3Handkarten.setVisible(false);
-        label_Gegenspieler3Punkte.setVisible(false);
-        // label_Gegenspieler4.setVisible(false);
-        label_Gegenspieler4Handkarten.setVisible(false);
-        label_Gegenspieler4Punkte.setVisible(false);
-        // label_Gegenspieler5.setVisible(false);
-        label_Gegenspieler5Handkarten.setVisible(false);
-        label_Gegenspieler5Punkte.setVisible(false);
-        // label_Client.setVisible(false);
-        label_ClientHandkarten.setVisible(false);
-        label_ClientPunkte.setVisible(false);
+        for(int i = 0; i < punkte.length; i++){
+            punkte[i].setVisible(false);
+            handkarte_CurrentPlayer[i].setVisible(false);
+        }
 
         for(int i = 0; i < playerBoxs.length; i++){
             playerBoxs[i].setVisible(false);
@@ -163,88 +147,11 @@ public class GameFieldController implements Initializable {
         selected_cards();
 
 
-
-
         System.out.println("Controller initialized!");
 
     }
 
-    public void playerBox(int number_of_players){
-        for(int i = 0; i < number_of_players; i++){
-            playerBoxs[i].setVisible(true);
-        }
 
-        if(number_of_players == 1){
-            label_Client.setVisible(true);
-            label_ClientHandkarten.setVisible(true);
-            label_ClientPunkte.setVisible(true);
-        }else if(number_of_players == 2){
-            label_Client.setVisible(true);
-            label_ClientHandkarten.setVisible(true);
-            label_ClientPunkte.setVisible(true);
-            label_Gegenspieler1Name.setVisible(true);
-            label_Gegenspieler1Handkarten.setVisible(true);
-            label_Gegenspieler1Punkte.setVisible(true);
-        }else if(number_of_players == 3){
-            label_Client.setVisible(true);
-            label_ClientHandkarten.setVisible(true);
-            label_ClientPunkte.setVisible(true);
-            label_Gegenspieler1Name.setVisible(true);
-            label_Gegenspieler1Handkarten.setVisible(true);
-            label_Gegenspieler1Punkte.setVisible(true);
-            label_Gegenspieler2.setVisible(true);
-            label_Gegenspieler2Handkarten.setVisible(true);
-            label_Gegenspieler2Punkte.setVisible(true);
-        }else if(number_of_players == 4){
-            label_Client.setVisible(true);
-            label_ClientHandkarten.setVisible(true);
-            label_ClientPunkte.setVisible(true);
-            label_Gegenspieler1Name.setVisible(true);
-            label_Gegenspieler1Handkarten.setVisible(true);
-            label_Gegenspieler1Punkte.setVisible(true);
-            label_Gegenspieler2.setVisible(true);
-            label_Gegenspieler2Handkarten.setVisible(true);
-            label_Gegenspieler2Punkte.setVisible(true);
-            label_Gegenspieler3.setVisible(true);
-            label_Gegenspieler3Handkarten.setVisible(true);
-            label_Gegenspieler3Punkte.setVisible(true);
-        }else if(number_of_players == 5){
-            label_Client.setVisible(true);
-            label_ClientHandkarten.setVisible(true);
-            label_ClientPunkte.setVisible(true);
-            label_Gegenspieler1Name.setVisible(true);
-            label_Gegenspieler1Handkarten.setVisible(true);
-            label_Gegenspieler1Punkte.setVisible(true);
-            label_Gegenspieler2.setVisible(true);
-            label_Gegenspieler2Handkarten.setVisible(true);
-            label_Gegenspieler2Punkte.setVisible(true);
-            label_Gegenspieler3.setVisible(true);
-            label_Gegenspieler3Handkarten.setVisible(true);
-            label_Gegenspieler3Punkte.setVisible(true);
-            label_Gegenspieler4.setVisible(true);
-            label_Gegenspieler4Handkarten.setVisible(true);
-            label_Gegenspieler4Punkte.setVisible(true);
-        }else if (number_of_players == 6 ){
-            label_Client.setVisible(true);
-            label_ClientHandkarten.setVisible(true);
-            label_ClientPunkte.setVisible(true);
-            label_Gegenspieler1Name.setVisible(true);
-            label_Gegenspieler1Handkarten.setVisible(true);
-            label_Gegenspieler1Punkte.setVisible(true);
-            label_Gegenspieler2.setVisible(true);
-            label_Gegenspieler2Handkarten.setVisible(true);
-            label_Gegenspieler2Punkte.setVisible(true);
-            label_Gegenspieler3.setVisible(true);
-            label_Gegenspieler3Handkarten.setVisible(true);
-            label_Gegenspieler3Punkte.setVisible(true);
-            label_Gegenspieler4.setVisible(true);
-            label_Gegenspieler4Handkarten.setVisible(true);
-            label_Gegenspieler4Punkte.setVisible(true);
-            label_Gegenspieler5.setVisible(true);
-            label_Gegenspieler5Handkarten.setVisible(true);
-            label_Gegenspieler5Punkte.setVisible(true);
-        }
-    }
 
     public void selected_cards() {
         for (int i = 0; i < handkarte_CurrentPlayer.length; i++) {
@@ -388,7 +295,7 @@ public class GameFieldController implements Initializable {
 
 
 
-        if (Rulenum == 1) {
+       /** if (Rulenum == 1) {
             for (int i = 0; i < selectedCards.length; i++) {
                 if (selectedCards[i] == true) {
 
@@ -420,7 +327,7 @@ public class GameFieldController implements Initializable {
                     renderHandCards();
                 }
             }
-        }
+        }**/
     }
 
     public void moveToOpponentBox(int Rulenum, Player moveToplayer, boolean low) throws RemoteException {
@@ -451,7 +358,7 @@ public class GameFieldController implements Initializable {
         System.out.println(player.getHandCards());
         this.game.drawCard(player, true);
         // update Gui
-        renderHandCards();
+        //renderHandCards();
         System.out.println("HandsCards " + player.getHandCards());
     }
 
@@ -465,7 +372,7 @@ public class GameFieldController implements Initializable {
             Player player = game.getAllPlayers()[game.getCurrentPlayer()];
             this.game.drawCard(game.getAllPlayers()[game.getCurrentPlayer()], false);
             // update GUI
-            renderHandCards();
+            //renderHandCards();
             if (game.getOpenStack().size() == 0) {
                 imagekarte_Uebersichtskarte.setVisible(false);
             } else {
@@ -473,7 +380,6 @@ public class GameFieldController implements Initializable {
                 imagekarte_Uebersichtskarte.setImage(CardtoImage(firstCard));
                 imagekarte_Uebersichtskarte.setVisible(true);
             }
-            ;
 
             System.out.println("HandsCards " + player.getHandCards());
         } catch (Exception e) {
@@ -488,8 +394,10 @@ public class GameFieldController implements Initializable {
      * @param event
      */
     public void zug_beenden(ActionEvent event) throws RemoteException {
-        // game.goToNextPlayer();
-        playerBoxs[game.getCurrentPlayer()].setStroke(Paint.valueOf("#4fd42"));
+        System.out.println("zug_beenden");
+        System.out.println(game.getCurrentPlayer());
+        game.goToNextPlayer();
+        System.out.println("current player after" +  game.getCurrentPlayer() + " " + game.getAllPlayers()[game.getCurrentPlayer()].getId());
         // other Actions
 
         // if current player is bot, play bot turn
@@ -504,6 +412,7 @@ public class GameFieldController implements Initializable {
         get_game().addBot();
     }
 
+
     /**
      * Method to ensure the validity of a phase
      * 
@@ -511,6 +420,7 @@ public class GameFieldController implements Initializable {
      */
     public void bestätigt_Phase(ActionEvent event) {
     }
+
 
     /**
      * Method to move a card to the overview stack
@@ -528,29 +438,62 @@ public class GameFieldController implements Initializable {
                 Card firstCard = game.getOpenStack().peek();
                 imagekarte_Uebersichtskarte.setImage(CardtoImage(firstCard));
                 imagekarte_Uebersichtskarte.setVisible(true);
-                renderHandCards();
+                //renderHandCards();
                 System.out.println("openStackCard new " + game.getOpenStack().peek());
                 break;
             }
         }
     }
 
+    public void updateOpenStack() throws RemoteException {
+        if (game.getOpenStack().size() == 0) {
+            imagekarte_Uebersichtskarte.setVisible(false);
+        } else {
+            Card firstCard = game.getOpenStack().peek();
+            imagekarte_Uebersichtskarte.setImage(CardtoImage(firstCard));
+            imagekarte_Uebersichtskarte.setVisible(true);
+        }
+    }
+
+    public void updatePunkte() throws RemoteException {
+        for(int i = 0; i < game.getAllPlayers().length; i++){
+            punkte[i].setText(Integer.toString(game.getAllPlayers()[i].getPoints()));
+        }
+    }
+
+    public void updateHandKarteNummer() throws RemoteException {
+        for(int i = 0; i < game.getAllPlayers().length; i++){
+            handkarte_Nummer[i].setText(Integer.toString(game.getAllPlayers()[i].getHandCards().size()));
+        }
+    }
+
+    public void updateSpieler() throws RemoteException {
+        for(int i = 0; i < game.getAllPlayers().length; i++){
+            playerName[i].setText(game.getAllPlayers()[i].getName());
+            playerBoxs[i].setVisible(true);
+            playerBoxs[i].setStroke(Paint.valueOf("black"));
+        }
+        playerBoxs[game.getCurrentPlayer()].setStroke(Paint.valueOf("#4fd423"));
+    }
+
+
+
 
     // hilfe methode render the handCards images when changes occur
 
-    private void renderHandCards() throws RemoteException {
-        List<Card> handCards = game.getAllPlayers()[game.getCurrentPlayer()].getHandCards();
-        System.out.println("handCards "+handCards.size());
-        for(int i = 0; i < handkarte_CurrentPlayer.length; i++){
-            handkarte_CurrentPlayer[i].setVisible(false);
-        }
-        for(int i = 0; i < handCards.size(); i++){
-            handkarte_CurrentPlayer[i].setImage(CardtoImage(handCards.get(i)));
-            handkarte_CurrentPlayer[i].setVisible(true);
-        }
-        for (int j = 0; j < game.getFilings().size(); j++) {
-            if (game.getFilings().get(j).getPlayerId() == game.getAllPlayers()[game.getCurrentPlayer()].getId()) {
-                System.out.println("Filing " + game.getFilings().get(j));
+    private void renderHandCards(Identity identity) throws RemoteException {
+        System.out.println("renderHandCards");
+        for(int i = 0; i < game.getAllPlayers().length; i++){
+            if(game.getAllPlayers()[i].getName().equals(identity.getUsername())){
+                List<Card> handCards = game.getAllPlayers()[i].getHandCards();
+                System.out.println("handCards "+handCards.size() + "from" + game.getAllPlayers()[i].getName());
+                for(int j = 0; j < handkarte_CurrentPlayer.length; j++){
+                    handkarte_CurrentPlayer[j].setVisible(false);
+                }
+                for(int j = 0; j < handCards.size(); j++){
+                    handkarte_CurrentPlayer[j].setImage(CardtoImage(handCards.get(j)));
+                    handkarte_CurrentPlayer[j].setVisible(true);
+                }
             }
         }
     }
@@ -608,113 +551,40 @@ public class GameFieldController implements Initializable {
             //to update automatically
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
-                int a = 1;
                 @Override
                 public void run() {
 
-
-
-
-
                     Platform.runLater(() -> {
                         try {
-                            int number_of_players = game.getAllPlayers().length;
-                            if(number_of_players == 1){
-                                label_ClientHandkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()].getHandCards().size()));
-                                label_ClientPunkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()].getPoints()));
-                            }else if(number_of_players == 2){
-                                label_ClientHandkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()].getHandCards().size()));
-                                label_ClientPunkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()].getPoints()));
-                                label_Gegenspieler1Handkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+1].getHandCards().size()));
-                                label_Gegenspieler1Punkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+1].getPoints()));
-                            }else if(number_of_players == 3){
-                                label_ClientHandkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()].getHandCards().size()));
-                                label_ClientPunkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()].getPoints()));
-                                label_Gegenspieler1Handkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+1].getHandCards().size()));
-                                label_Gegenspieler1Punkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+1].getPoints()));
-                                label_Gegenspieler2Handkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+2].getHandCards().size()));
-                                label_Gegenspieler2Punkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+2].getPoints()));
-                            }else if(number_of_players == 4){
-                                label_ClientHandkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()].getHandCards().size()));
-                                label_ClientPunkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()].getPoints()));
-                                label_Gegenspieler1Handkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+1].getHandCards().size()));
-                                label_Gegenspieler1Punkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+1].getPoints()));
-                                label_Gegenspieler2Handkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+2].getHandCards().size()));
-                                label_Gegenspieler2Punkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+2].getPoints()));
-                                label_Gegenspieler3Handkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+3].getHandCards().size()));
-                                label_Gegenspieler3Punkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+3].getPoints()));
-                            }else if(number_of_players == 5){
-                                label_ClientHandkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()].getHandCards().size()));
-                                label_ClientPunkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()].getPoints()));
-                                label_Gegenspieler1Handkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+1].getHandCards().size()));
-                                label_Gegenspieler1Punkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+1].getPoints()));
-                                label_Gegenspieler2Handkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+2].getHandCards().size()));
-                                label_Gegenspieler2Punkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+2].getPoints()));
-                                label_Gegenspieler3Handkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+3].getHandCards().size()));
-                                label_Gegenspieler3Punkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+3].getPoints()));
-                                label_Gegenspieler4Handkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+4].getPoints()));
-                                label_Gegenspieler4Punkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+4].getPoints()));
-                            }else if(number_of_players == 6){
-                                label_ClientHandkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()].getHandCards().size()));
-                                label_ClientPunkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()].getPoints()));
-                                label_Gegenspieler1Handkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+1].getHandCards().size()));
-                                label_Gegenspieler1Punkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+1].getPoints()));
-                                label_Gegenspieler2Handkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+2].getHandCards().size()));
-                                label_Gegenspieler2Punkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+2].getPoints()));
-                                label_Gegenspieler3Handkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+3].getHandCards().size()));
-                                label_Gegenspieler3Punkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+3].getPoints()));
-                                label_Gegenspieler4Handkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+4].getPoints()));
-                                label_Gegenspieler4Punkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+4].getPoints()));
-                                label_Gegenspieler5Handkarten.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+5].getPoints()));
-                                label_Gegenspieler5Punkte.setText(Integer.toString(game.getAllPlayers()[game.getCurrentPlayer()+5].getPoints()));
+                            renderHandCards(identity);
+                            updateOpenStack();
+                            updateSpieler();
+                            updatePunkte();
+                            updateHandKarteNummer();
+                            for(int i = 0; i < game.getAllPlayers().length; i++){
+                                System.out.println(game.getAllPlayers().length);
+                                System.out.println(game.getAllPlayers()[i].getId());
+                                System.out.println(game.getAllPlayers()[i].getName());
+                                identity.getUsername();
                             }
-                            renderHandCards();
+
                         } catch (RemoteException e) {
                             e.printStackTrace();
                         }
                     } );
 
                     System.out.println("Timer is running!");
+
                 }
             }, 0, 1000);
 
         //update the GUI after the game has started
 
-            // set the cards of the player
-            for (int i = 0; i < game.getAllPlayers()[game.getCurrentPlayer()].getHandCards().size(); i++) {
-                List<Card> handCards = game.getAllPlayers()[game.getCurrentPlayer()].getHandCards();
-                System.out.println(handCards);
-                handkarte_CurrentPlayer[i].setImage(CardtoImage(handCards.get(i)));
-                handkarte_CurrentPlayer[i].setVisible(true);
-            }
+            dropdown_Zielstapel_StapelBewegen.getItems().addAll("Mein Stapel", "Mein Stapel Rule 1", "Mein Stapel Rule 2",
+                    "Uebersichtskarte", "Spieler 1 Rule 1", "Spieler 1 Rule 2", "Spieler 2 Rule 1", "Spieler 2 Rule 2",
+                    "Spieler 3 Rule 1", "Spieler 3 Rule 2", "Spieler 4 Rule 1", "Spieler 4 Rule 2", "Spieler 5 Rule 1",
+                    "Spieler 5 Rule 2");
 
-            // set the Openstack card
-            imagekarte_Uebersichtskarte.setImage(CardtoImage(game.getOpenStack().get(0)));
-            imagekarte_Uebersichtskarte.setVisible(true);
-            // set the number of Box for player
-            /**
-             * for(int i = 0; i < playerBoxs.length; i++){
-             * playerBoxs[i].setVisible(false);
-             * }
-             * for(int i = 0; i < game.getAllPlayers().length ; i++){
-             * playerBoxs[i].setVisible(true);
-             * }
-             **/
-            // set the first (current) player Box to blue
-            playerBoxs[game.getCurrentPlayer()].setStroke(Paint.valueOf("#4fd423"));
-
-            //set the name of the player
-            label_Client.setText(game.getAllPlayers()[game.getCurrentPlayer()].getName());
-            label_Gegenspieler1Name.setText(game.getAllPlayers()[game.getCurrentPlayer()+1].getName());
-            label_Gegenspieler2.setText(game.getAllPlayers()[game.getCurrentPlayer()+2].getName());
-            label_Gegenspieler3.setText(game.getAllPlayers()[game.getCurrentPlayer()+3].getName());
-            label_Gegenspieler4.setText(game.getAllPlayers()[game.getCurrentPlayer()+4].getName());
-            label_Gegenspieler5.setText(game.getAllPlayers()[game.getCurrentPlayer()+5].getName());
-            //set the Openstack card
-            imagekarte_Uebersichtskarte.setImage(CardtoImage(game.getOpenStack().get(0)));
-            imagekarte_Uebersichtskarte.setVisible(true);
-            //set the number of Box for player
-            playerBox(game.getAllPlayers().length);
 
 
 

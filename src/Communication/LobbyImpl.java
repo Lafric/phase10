@@ -108,7 +108,7 @@ public class LobbyImpl extends UnicastRemoteObject implements Lobby {
     public void addBot() throws RemoteException {
         if (currentplayerCount < maxPlayerCount) { // same player *could* still join twice, maybe fix later
             this.currentplayerCount += 1;
-            this.playerlist.add(new Identity("Bot"));
+            this.playerlist.add(new Identity("Bot #" + currentplayerCount));
 
         } else {
             // TODO implement error message in GUI

@@ -393,7 +393,7 @@ public class GameFieldController implements Initializable {
         // other Actions
 
         // if current player is bot, play bot turn
-        if (game.getAllPlayers()[game.getCurrentPlayer()].getName().equals("Bot")) {
+        if (game.getAllPlayers()[game.getCurrentPlayer()].getName().startsWith("Bot")) {
             System.out.println("BOT TURNNNNNNNN");
             game.playBotTurn();
         }
@@ -572,7 +572,7 @@ public class GameFieldController implements Initializable {
                             }
 
                             // if bot, make bot move
-                            if (game.getAllPlayers()[game.getCurrentPlayer()].getName().equals("Bot")) {
+                            if (game.getAllPlayers()[game.getCurrentPlayer()].getName().startsWith("Bot")) {
                                 System.out.println(game.getAllPlayers()[game.getCurrentPlayer()].getName());
                                 System.out.println("BOT TURNNNNNNNN");
                                 game.playBotTurn();

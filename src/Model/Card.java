@@ -11,6 +11,12 @@ public class Card implements Serializable{
     private final CardColor color;
     private final CardType type;
 
+    /**
+     * Constructor
+     * @param id of the card
+     * @param color the card color
+     * @param type the card type
+     */
     public Card(int id, CardColor color, CardType type) {
         this.id = id;
         this.color = color;
@@ -25,13 +31,26 @@ public class Card implements Serializable{
         return id;
     }
 
+    /**
+     * getter for Color
+     * @return the color
+     */
     public CardColor getColor(){
         return this.color;
     }
 
+    /**
+     * getter for Card type
+     * @return the card type
+     */
     public CardType getType() {
         return this.type;
     }
+
+    /**
+     * textual description of one card
+     * @return String of card content
+     */
     public String toString(){
         return ""+this.color.toString() + "-" + this.type.getNumber()+"-id:"+this.id;
     }

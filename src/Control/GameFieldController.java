@@ -69,12 +69,12 @@ public class GameFieldController implements Initializable {
     public Button launchchat;
     public Button karte_ziehen;
     public Button zug_beenden;
-    public Button phase_bestätigen;
+    public Button phase_bestaetigen;
     public Button Karte_spielen;
     public String lobby;
     public Identity identity;
     public String gameName;
-    public Button bot_hinzufügen;
+    public Button bot_hinzufuegen;
     public Pane pane_kartenSpieler;
     public CheckBox checkBox_1;
     public CheckBox checkBox_2;
@@ -401,7 +401,8 @@ public class GameFieldController implements Initializable {
         // other Actions
 
         // if current player is bot, play bot turn
-        if (game.getAllPlayers()[game.getCurrentPlayer()].isBot()) {
+        if (game.getAllPlayers()[game.getCurrentPlayer()].getName().equals("Bot")) {
+            System.out.println("BOT TURNNNNNNNN");
             game.playBotTurn();
         }
         // restructure to while-loop, end turn while bots are playing
@@ -409,7 +410,7 @@ public class GameFieldController implements Initializable {
 
     public void addBot(ActionEvent event) throws RemoteException {
         get_lobby().addBot();
-        get_game().addBot();
+        //get_game().addBot();
     }
 
 
@@ -566,6 +567,13 @@ public class GameFieldController implements Initializable {
                                 System.out.println(game.getAllPlayers()[i].getId());
                                 System.out.println(game.getAllPlayers()[i].getName());
                                 identity.getUsername();
+                            }
+
+                            // if bot, make bot move
+                            if (game.getAllPlayers()[game.getCurrentPlayer()].getName().equals("Bot")) {
+                                System.out.println(game.getAllPlayers()[game.getCurrentPlayer()].getName());
+                                System.out.println("BOT TURNNNNNNNN");
+                                game.playBotTurn();
                             }
 
                         } catch (RemoteException e) {

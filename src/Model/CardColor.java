@@ -11,7 +11,7 @@ public enum CardColor implements java.io.Serializable{
     /**
      * This method return a color for each integer
      * @param num given integer to convert to color
-     * @return
+     * @return the color
      */
     public static CardColor numToCol(int num){
         switch (num){

@@ -219,7 +219,7 @@ public class MenuController {
         controller.get_identity(identity);
         System.out.println("Joined: " + lobbyName);
 
-        Label[] playerLabelList = {controller.label_Gegenspieler1Name, 
+        Label[] playerLabelList = {controller.label_Gegenspieler1, 
                                     controller.label_Gegenspieler2,
                                     controller.label_Gegenspieler3,
                                     controller.label_Gegenspieler4,

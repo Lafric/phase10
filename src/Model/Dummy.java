@@ -2,9 +2,13 @@ package Model;
 
 import java.io.Serializable;
 
+/**
+ * Dummy Class to easy in cooperate methods
+ */
 public class Dummy implements Serializable{
     
-    /** 
+    /**
+     * rule creating is happening inside this method
      * @return PhaseRule[]
      */
     public PhaseRule[] createRules(){

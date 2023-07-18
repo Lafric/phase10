@@ -621,10 +621,21 @@ public class GameFieldController implements Initializable {
 
         //update the GUI after the game has started
 
-            dropdown_Zielstapel_StapelBewegen.getItems().addAll("Uebersichtskarte", "Mein Stapel", "Spieler 1", "Spieler 2", "Spieler 3", "Spieler 4", "Spieler 5");
+            Player[] players = game.getAllPlayers();
+            ArrayList<String> playerNames = new ArrayList<String>();
+            for (Player p : players) {
+                playerNames.add(p.getName());
+            }
+            for (int i = playerNames.size(); i < 6; i++) {
+                playerNames.add(" [LEER" + i + "]");
+            }
 
-
-
+            dropdown_Zielstapel_StapelBewegen.getItems().addAll("Uebersichtskarte", "Mein Stapel",
+            "Spieler 1 " + playerNames.get(0),
+            "Spieler 2 " + playerNames.get(1),
+            "Spieler 3 " + playerNames.get(2),
+            "Spieler 4 " + playerNames.get(3),
+            "Spieler 5 " + playerNames.get(4));
 
             System.out.println("Game started");
             System.out.println("openStackCard " + game.getOpenStack());

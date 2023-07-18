@@ -534,6 +534,25 @@ public class GameImpl extends UnicastRemoteObject implements Game {
     }
 
     /**
+     * This method generates all card combinations for a given list of hand cards
+     * @return all combinations of hand cards
+     */
+    private static List<List<Card>> generateCombinations(Card[] cards) {
+        List<List<Card>> combinations = new ArrayList<>();
+        int n = cards.length;
+    
+        for (int i = 0; i < (1 << n); i++) {
+            List<Card> combo = new ArrayList<>();
+            for (int j = 0; j < n; j++) {
+                if ((i & (1 << j)) > 0)
+                    combo.add(cards[j]);
+            }
+            combinations.add(combo);
+        }
+        return combinations;
+    }
+
+    /**
      * This method performs one turn automatically for a bot
      * This method assumes the current player is a bot
      */
@@ -544,13 +563,18 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         // Bot draws a card from the hidden stack
         drawCard(bot, true);
     
-        // Try to lay down phase if possible
-        // Here we will just make a bot try to lay down phase with all cards in its hand
-        int[] cardIds = bot.getHandCards().stream().mapToInt(Card::getId).toArray();
-        layCards(bot, cardIds);
-    
-        // Try to play a card on existing filings
+        // Now we make the bot try to lay a down phase if possible
+        //int[] cardIds = bot.getHandCards().stream().mapToInt(Card::getId).toArray();
+        Card[] cards = bot.getHandCards().toArray(new Card[bot.getHandCards().size()]);
 
+        // try to lay any combination of hand cards
+        List<List<Card>> cardCombinations = generateCombinations(cards);
+        // iterate over all combinations, try each one
+        for (List<Card> cardCombination : cardCombinations) {
+            layCards(bot, cardCombination.stream().mapToInt(Card::getId).toArray());
+        }
+
+        // Try to play a card on existing filings
         for (Card card : bot.getHandCards()) {
             for (Filing filing : this.filings) {
                 // The first playable card is played

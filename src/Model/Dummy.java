@@ -13,7 +13,7 @@ public class Dummy implements Serializable{
      */
     public PhaseRule[] createRules(){
         PhaseRule[] rules = new PhaseRule[10];
-        rules[0] = new PhaseRule(new Street(2000,CardType.ONE, CardType.THREE),new Tuplet(2001,CardType.ONE,2));
+        rules[0] = new PhaseRule(new Tuplet(2000,CardType.ONE, 3),new Tuplet(2001,CardType.ONE,3));
         rules[1] = new PhaseRule(new Street(2002,CardType.ONE, CardType.FOUR),new Tuplet(2003,CardType.THREE,3));
         rules[2] = new PhaseRule(new Street(2004,CardType.ONE, CardType.FOUR),new Tuplet(2005,CardType.FOUR,4));
         rules[3] = new PhaseRule(new Filing[]{new Street(2006,CardType.ONE, CardType.SEVEN)});

@@ -243,9 +243,7 @@ public class GameFieldController implements Initializable {
     public void layCard(ActionEvent event) throws RemoteException, InterruptedException {
         System.out.println("layCard");
         System.out.println(game.getAllPlayers()[game.getCurrentPlayer()].getName().equals(dropdown_Zielstapel_StapelBewegen.getValue()));
-        if(dropdown_Zielstapel_StapelBewegen.getValue() == "Uebersichtskarte"){
-            moveToOpenStack(event);
-        } else if (game.getAllPlayers()[game.getCurrentPlayer()].getName().equals(dropdown_Zielstapel_StapelBewegen.getValue())) {
+        if (game.getAllPlayers()[game.getCurrentPlayer()].getName().equals(dropdown_Zielstapel_StapelBewegen.getValue())) {
             moveToCurrentPlayerBox();
         }
     }
@@ -262,6 +260,12 @@ public class GameFieldController implements Initializable {
                     moveToOpponentBox(game.getAllPlayers()[i], false);
                 }
             }
+        }
+    }
+
+    public void layCard_ablage(ActionEvent event) throws RemoteException {
+        if(dropdown_Zielstapel_StapelBewegen.getValue() == "Uebersichtskarte"){
+            moveToOpenStack(event);
         }
     }
 

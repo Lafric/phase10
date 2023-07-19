@@ -116,6 +116,7 @@ public class GameFieldController implements Initializable {
     private Label[] punkte;
     private Label[] handkarte_Nummer;
     private Label[][] stapelKarten;
+    private DatabaseProvider databaseProvider;
 
 
     /** 
@@ -166,6 +167,16 @@ public class GameFieldController implements Initializable {
 
         System.out.println("Controller initialized!");
 
+    }
+
+    /**
+     * to set up the LoginManager parameters such as DatabaseProvider and more
+     *
+     * @param databaseProvider
+     *            is the database provider to use
+     */
+    public void setParams(DatabaseProvider databaseProvider) {
+        this.databaseProvider = databaseProvider;
     }
 
 
@@ -292,7 +303,7 @@ public class GameFieldController implements Initializable {
                     }
                 }
             }
-            break;
+            //break;
         }
     }
 
@@ -545,6 +556,24 @@ public class GameFieldController implements Initializable {
                                 System.out.println(game.getAllPlayers()[game.getCurrentPlayer()].getName());
                                 System.out.println("BOT TURNNNNNNNN");
                                 game.playBotTurn();
+                            }
+
+                            if(game.isGameOver()){
+                                String sieger = "";
+                                for (int i = 0; i < game.getAllPlayers().length; i++) {
+                                    if(game.getAllPlayers()[i].getPhase() >= 10){
+                                        sieger = game.getAllPlayers()[i].getName();
+                                    }
+
+                                    //Gewinner Speichern
+                                    databaseProvider.incrementGamesPlayed(sieger);
+                                    databaseProvider.incrementGamesWon(sieger);
+                                }
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Game Over");
+                                alert.setHeaderText("Die Runde ist vorbei");
+                                alert.setContentText("Der Sieger ist: " + sieger);
+                                alert.showAndWait();
                             }
 
                         } catch (RemoteException e) {

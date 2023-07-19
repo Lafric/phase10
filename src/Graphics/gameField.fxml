@@ -92,7 +92,7 @@
                         <Label layoutX="44.0" layoutY="440.0" text="Phase Rule 1: " />
                         <Label fx:id="client_cards1" layoutX="44.0" layoutY="500.0" text="0 - 10" />
                         <Label layoutX="296.0" layoutY="440.0" text="Phase Rule 2: " />
-                        <Label fx:id="client_cards2" layoutX="296.0"  layoutY="500.0" text="0 - 10: " />
+                        <Label fx:id="client_cards2" layoutX="296.0"  layoutY="500.0" text="0 - 10" />
 
                         <Button fx:id="bot_hinzufügen" layoutX="1112.0" layoutY="516.0" mnemonicParsing="false" onAction="#addBot" text="Bot hinzufügen" />
 
@@ -103,10 +103,9 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                     <children>
                         <Label layoutX="36.0" layoutY="14.0" text="Handkarten" />
-                        <ComboBox fx:id="dropdown_KarteWaehlen_karteSpielen" layoutX="146.0" layoutY="10.0" prefWidth="150.0" promptText="Karte auswählen" />
                         <ComboBox fx:id="dropdown_Zielstapel_StapelBewegen" layoutX="325.0" layoutY="10.0" prefWidth="150.0" promptText="Zielstapel wählen" />
-                        <Button fx:id="Karte_spielen" layoutX="537.0" layoutY="10.0" mnemonicParsing="false" onAction="#layCard" text="Karte spielen " />
-                        <Button fx:id="Karte_spielen1" layoutX="680.0" layoutY="10.0" mnemonicParsing="false" onAction="#layCardOpp" text="Karte spielen 1" />
+                        <Button fx:id="Karte_spielen" layoutX="537.0" layoutY="10.0" mnemonicParsing="false" onAction="#layCard" text="New Stapel" />
+                        <Button fx:id="Karte_spielen1" layoutX="680.0" layoutY="10.0" mnemonicParsing="false" onAction="#layCardOpp" text="Add Stapel" />
                         <Button fx:id="phase_bestätigen" layoutX="780.0" layoutY="10.0" mnemonicParsing="false" onAction="#bestätigt_Phase" text="Phase bestätigen" />
                         <Button fx:id="zug_beenden" layoutX="900.0" layoutY="10.0" mnemonicParsing="false" onAction="#zug_beenden" text="Zug beenden" />
                        <!--<Pane fx:id="pane_kartenSpieler" prefHeight="150.0"  prefWidth="100.0" layoutX="14.0" layoutY="57.0">-->
@@ -166,7 +165,7 @@
                                 <Image url="@playingCards/card1Color5Repeat0.png" />
                             </image>
                         </ImageView>
-                        <Button fx:id="draw_openStack" layoutX="980.0" layoutY="10.0" mnemonicParsing="false" onAction="#drawOpenStackCard" text="Uebersichtkarte" />
+                        <Button fx:id="draw_openStack" layoutX="990.0" layoutY="10.0" mnemonicParsing="false" onAction="#drawOpenStackCard" text="Uebersichtkarte" />
                         <ImageView fx:id="imagekarte_Uebersichtskarte" fitHeight="100.0" fitWidth="150.0" layoutX="980.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@playingCards/card1Color5Repeat0.png" />

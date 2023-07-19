@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Graphics.PhaseRegeln"
+            prefHeight="400.0" prefWidth="600.0">
+    <Label text="Hier sind die Spielregeln von Phase 10 in kompakter Form als Stichpunkte:" wrapText="true" />
+    <Label text="- Phase 10 ist ein Kartenspiel, bei dem das Ziel darin besteht, bestimmte Phasen zu erfüllen und als erster Spieler alle Phasen erfolgreich abzuschließen." wrapText="true" />
+    <Label text="- Das Spiel wird mit einem speziellen Kartendeck gespielt, das Zahlenkarten und Aktionskarten enthält." wrapText="true" />
+    <Label text="- Jeder Spieler erhält zu Beginn des Spiels eine bestimmte Anzahl von Karten." wrapText="true" />
+    <Label text="- In jeder Runde besteht das Ziel darin, die Phase zu erfüllen, die aktuell gespielt wird. Eine Phase besteht aus einer Kombination von Sets (gleiche Zahlen) und Runs (aufeinanderfolgende Zahlen)." wrapText="true" />
+    <Label text="- Um eine Phase abzuschließen, muss ein Spieler alle Karten seiner Hand ausspielen." wrapText="true" />
+    <Label text="- Zu Beginn seines Zuges zieht der Spieler eine Karte vom Stapel oder nimmt die oberste Karte vom Ablagestapel." wrapText="true" />
+    <Label text="- Anschließend kann der Spieler Sets oder Runs bilden und seine Karten ausspielen. Er kann auch Karten an bestehende Sets oder Runs anlegen, die von anderen Spielern gelegt wurden." wrapText="true" />
+    <Label text="- Nach dem Ausspielen seiner Karten beendet der Spieler seinen Zug, indem er eine Karte auf den Ablagestapel ablegt." wrapText="true" />
+    <Label text="- Das Spiel enthält auch Aktionskarten, die den Spielverlauf beeinflussen können, z.B. Aussetzen, Farbwechsel, Karten tauschen usw." wrapText="true" />
+    <Label text="- Nachdem ein Spieler seine Phase erfüllt hat, kann er in den folgenden Runden versuchen, seine übrigen Karten loszuwerden, indem er sie ausspielt oder an bestehende Sets oder Runs anlegt." wrapText="true" />
+    <Label text="- Das Spiel endet, wenn ein Spieler seine aktuelle Phase erfüllt und alle übrigen Karten losgeworden ist." wrapText="true" />
+    <Label text="- Die anderen Spieler erhalten Punkte basierend auf den Karten, die sie noch in ihrer Hand haben." wrapText="true" />
+
+    <Label text="- Wenn zwei oder mehr Spieler am Ende des Spiels die gleiche Punktzahl haben, gewinnt derjenige, der nach mehreren Runden die wenigsten Punkte gesammelt hat." wrapText="true" />
+    <Label text="- Der Gewinner des Spiels ist derjenige, " wrapText="true" />
+
+    <Label text="Hier sind die 10 Phasenregeln von Phase 10:" wrapText="true" />
+    <Label text="Phase 1: 2 Sätze mit je 3 Karten" wrapText="true" />
+    <Label text="Phase 2: 1 Satz mit 3 und 1 Drilling mit 3 Karten" wrapText="true" />
+    <Label text="Phase 3: 1 Drilling mit 4 und 1 Vierling mit 4 Karten" wrapText="true" />
+    <Label text="Phase 4: 1 Satz mit 4 und 1 Run mit 4 Karten" wrapText="true" />
+    <Label text="Phase 5: 1 Run mit 4 und 1 Run mit 7 Karten" wrapText="true" />
+    <Label text="Phase 6: 1 Run mit 8 Karten" wrapText="true" />
+    <Label text="Phase 7: 1 Run mit 9 Karten" wrapText="true" />
+    <Label text="Phase 8: 2 Sätze mit je 4 Karten" wrapText="true" />
+    <Label text="Phase 9: 1 Satz mit 5 und 1 Run mit 5 Karten" wrapText="true" />
+    <Label text="Phase 10: 1 Satz mit 5 und 1 Run mit 5 Karten" wrapText="true" />
+
+</VBox>

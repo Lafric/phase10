@@ -69,7 +69,8 @@
 
 
                         <!--Spieler 1-->
-                        <Label fx:id="label_SpielerName" layoutX="27.0" layoutY="10.0" text="[LEER 1]" />
+                        <Label fx:id="label_SpielerName" layoutX="27.0" layoutY="28.0" text="[LEER 1]" />
+                        <Button fx:id="Spiel_regeln" layoutX="1112.0" layoutY="10.0" mnemonicParsing="false" onAction="#spielRegel_Anzeigen" text="Spiel Regeln" />
                         <Rectangle fx:id="kasten_Gegenspieler1" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="27.0" layoutY="28.0" stroke="black" strokeType="INSIDE" width="500.0" />
                         <Label fx:id="label_Gegenspieler1" layoutX="44.0" layoutY="40.0" text="[LEER 1]" />
                         <Label  layoutX="44.0" layoutY="60.0" text="Anzahl Handkarten" />

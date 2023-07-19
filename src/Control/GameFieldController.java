@@ -639,4 +639,20 @@ public class GameFieldController implements Initializable {
 
     }
 
+    public void spielRegel_Anzeigen(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Graphics/phaseRegeln.fxml"));
+        Parent root = loader.load();
+
+
+        // TODO next scene öffnen
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Chatroom");
+
+        stage.setOnCloseRequest(e -> {
+            // TODO: disconnect user
+        });
+
+        stage.show();
+    }
 }

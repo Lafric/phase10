@@ -363,18 +363,30 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                                 Street street = (Street) filing;
                                 if (street.getStart().getNumber() - 1 == cardInFocus.getType().getNumber() && low) {
                                     street.lowerStart();
-                                    this.allPlayer[currentPlayer].getHandCards().remove(cardInFocus);
+                                    System.out.println("Handkart before this " +  this.allPlayer[currentPlayer].getHandCards());
+                                    //this.allPlayer[currentPlayer].getHandCards().remove(cardInFocus);
+                                    player.removeCard(cardInFocus);
+                                    this.allPlayer[currentPlayer] = player;
+                                    System.out.println("handkert after " + this.allPlayer[currentPlayer].getHandCards());
                                 } else if (street.getEnd().getNumber() + 1 == cardInFocus.getType().getNumber()
                                         && !low) {
                                     street.increaseEnd();
-                                    this.allPlayer[currentPlayer].getHandCards().remove(cardInFocus);
+                                    System.out.println("Handkart before this " +  this.allPlayer[currentPlayer].getHandCards());
+                                    //this.allPlayer[currentPlayer].getHandCards().remove(cardInFocus);
+                                    player.removeCard(cardInFocus);
+                                    this.allPlayer[currentPlayer] = player;
+                                    System.out.println("handkert after " + this.allPlayer[currentPlayer].getHandCards());
                                 } else if (cardInFocus.getType() == CardType.JOKER) {
                                     if (low) {
                                         street.lowerStart();
                                     } else {
                                         street.increaseEnd();
                                     }
-                                    this.allPlayer[currentPlayer].getHandCards().remove(cardInFocus);
+                                    System.out.println("Handkart before this " +  this.allPlayer[currentPlayer].getHandCards());
+                                    //this.allPlayer[currentPlayer].getHandCards().remove(cardInFocus);
+                                    player.removeCard(cardInFocus);
+                                    this.allPlayer[currentPlayer] = player;
+                                    System.out.println("handkert after " + this.allPlayer[currentPlayer].getHandCards());
                                 } else {
                                     System.out.println("CARD DOES NOT MATCH THE Specified FILING (Position)");
                                 }
@@ -385,12 +397,13 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                                     tuplet.increaseAmount();
 
                                     System.out.println("Handkart before this " +  this.allPlayer[currentPlayer].getHandCards());
-                                    this.allPlayer[currentPlayer].getHandCards().remove(cardInFocus);
+                                    //this.allPlayer[currentPlayer].getHandCards().remove(cardInFocus);
+                                    player.removeCard(cardInFocus);
+                                    this.allPlayer[currentPlayer] = player;
                                     System.out.println("handkert after " + this.allPlayer[currentPlayer].getHandCards());
 
 
-                                    //player.removeCard(cardInFocus);
-                                    //this.allPlayer[currentPlayer] = player;
+
                                 } else {
                                     System.out.println("CARD DOES NOT MATCH THE Specified FILING (Position)");
                                 }

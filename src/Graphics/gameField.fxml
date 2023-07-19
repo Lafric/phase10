@@ -188,7 +188,7 @@
                         <Button fx:id="launchchat" layoutX="1100.0" layoutY="97.0" mnemonicParsing="false" onAction="#LaunchChat" text="Chat" />
                         <Button fx:id="start_Game" layoutX="1100.0" layoutY="137.0" mnemonicParsing="false" onAction="#start_Game" text="Spiel starten" />
                         <CheckBox fx:id="checkBox_Low" layoutX="1100.0" layoutY="177.0" />
-                        <Label layoutX="1120.0" layoutY="177.0" text="wo willst du die Karte im Reihe legen ? klicke für am Anfang" />
+                        <Label layoutX="1120.0" layoutY="177.0" text="Karte oben anlegen?"/>
                     </children>
                 </AnchorPane>
             </items>

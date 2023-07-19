@@ -344,6 +344,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         if (this.allPlayer[currentPlayer].getId() == player.getId() && !isGameOver) {
             if (this.playerOverloadIndicator[currentPlayer]) {
                 // Check if card is on player hands
+                System.err.println("start checking");
                 boolean inHand = false;
                 for (Card card : player.getHandCards()) {
                     if (card.getId() == cardId) {

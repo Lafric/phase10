@@ -353,6 +353,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                     }
                 }
                 if (inHand) {
+                    System.out.println("card in hand");
                     // Check if filing is on the table
                     boolean onTable = false;
                     for (Filing filing : this.filings) {
@@ -382,7 +383,14 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                                 if (tuplet.getType() == cardInFocus.getType()
                                         || cardInFocus.getType() == CardType.JOKER) {
                                     tuplet.increaseAmount();
+
+                                    System.out.println("Handkart before this " +  this.allPlayer[currentPlayer].getHandCards());
                                     this.allPlayer[currentPlayer].getHandCards().remove(cardInFocus);
+                                    System.out.println("handkert after " + this.allPlayer[currentPlayer].getHandCards());
+
+
+                                    //player.removeCard(cardInFocus);
+                                    //this.allPlayer[currentPlayer] = player;
                                 } else {
                                     System.out.println("CARD DOES NOT MATCH THE Specified FILING (Position)");
                                 }

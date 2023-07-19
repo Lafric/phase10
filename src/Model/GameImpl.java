@@ -339,6 +339,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      *            the start or end.
      */
     public synchronized void playCard(Player player, int cardId, int filingId, boolean low) throws RemoteException {
+        System.out.println("playCard called" + cardId + " " + filingId + " " + low);
         Card cardInFocus = null;
         if (this.allPlayer[currentPlayer].getId() == player.getId() && !isGameOver) {
             if (this.playerOverloadIndicator[currentPlayer]) {

@@ -230,9 +230,11 @@ public class GameFieldController implements Initializable {
      * @param event
      */
     public void layCard(ActionEvent event) throws RemoteException, InterruptedException {
+        System.out.println("layCard");
+        System.out.println(game.getAllPlayers()[game.getCurrentPlayer()].getName().equals(dropdown_Zielstapel_StapelBewegen.getValue()));
         if(dropdown_Zielstapel_StapelBewegen.getValue() == "Uebersichtskarte"){
             moveToOpenStack(event);
-        } else if (game.getAllPlayers()[game.getCurrentPlayer()].equals(dropdown_Zielstapel_StapelBewegen.getValue())) {
+        } else if (game.getAllPlayers()[game.getCurrentPlayer()].getName().equals(dropdown_Zielstapel_StapelBewegen.getValue())) {
             moveToCurrentPlayerBox();
         }
     }
@@ -241,7 +243,7 @@ public class GameFieldController implements Initializable {
         System.out.println("layCardOpp");
         for(int i = 0; i < game.getAllPlayers().length; i++){
             System.out.println("überprüft" + game.getAllPlayers()[i]);
-            if(game.getAllPlayers()[i].equals(dropdown_Zielstapel_StapelBewegen.getValue())){
+            if(game.getAllPlayers()[i].getName().equals(dropdown_Zielstapel_StapelBewegen.getValue())){
                 System.out.println("richtig bei" + game.getAllPlayers()[i]);
                 if(checkBox_Low.isSelected()){
                     moveToOpponentBox(game.getAllPlayers()[i], true);
@@ -282,8 +284,10 @@ public class GameFieldController implements Initializable {
 
         for (int i = 0; i < selectedCards.length; i++) {
             if (selectedCards[i] == true) {
+                System.out.println("handkarte" +  handCards.get(i).toString());
                 for (int j = 0; j < game.getFilings().size(); j++) {
                     if (game.getFilings().get(j).getPlayerId() == moveToplayer.getId()) {
+                        System.err.println("move to player gefunden");
                         game.playCard(player, handCards.get(i).getId(), game.getFilings().get(j).getId(), low);
                     }
                 }
@@ -429,24 +433,19 @@ public class GameFieldController implements Initializable {
 
     public void updatePlayerCardNumber() throws RemoteException {
         for (int i = 0; i < game.getAllPlayers().length; i++) {
-            System.out.println("1" + game.getAllPlayers()[i].getId());
+            //System.out.println("1" + game.getAllPlayers()[i].getId());
             for (int j = 0; j < game.getFilings().size(); j++) {
-                System.out.println("1" + game.getFilings().get(j).getPlayerId());
+               // System.out.println("1" + game.getFilings().get(j).getPlayerId());
                 if (game.getFilings().get(j).getPlayerId() == game.getAllPlayers()[i].getId()) {
-                    System.out.println("if");
                     List<Filing> arr = new ArrayList<>();
                     arr.add(game.getFilings().get(j));
                     for(int k = 0; k < arr.size(); k++){
                         if(game.getFilings().get(j) instanceof Tuplet){
-                            System.out.println("if2");
                             Tuplet t = (Tuplet) arr.get(k);
                             stapelKarten[i][k].setText(Integer.toString(t.getType().getNumber()));
-                            System.out.println("number of cards in tuplet: " + t.getType());
                         }else {
-                            System.out.println("else");
                             Street s = (Street) arr.get(k);
                             stapelKarten[i][k].setText(s.getStart().getNumber()  + "-" + s.getEnd().getNumber());
-                            System.out.println("number of cards in Street: " + s.getStart().getNumber()  + "-" + s.getEnd().getNumber());
                         }
                     }
                 }
@@ -460,11 +459,11 @@ public class GameFieldController implements Initializable {
     // hilfe methode render the handCards images when changes occur
 
     private void updateRenderHandCards(Identity identity) throws RemoteException {
-        System.out.println("renderHandCards");
+       // System.out.println("renderHandCards");
         for(int i = 0; i < game.getAllPlayers().length; i++){
             if(game.getAllPlayers()[i].getName().equals(identity.getUsername())){
                 List<Card> handCards = game.getAllPlayers()[i].getHandCards();
-                System.out.println("handCards "+handCards.size() + "from" + game.getAllPlayers()[i].getName());
+                //System.out.println("handCards "+handCards.size() + "from" + game.getAllPlayers()[i].getName());
                 for(int j = 0; j < handkarte_CurrentPlayer.length; j++){
                     handkarte_CurrentPlayer[j].setVisible(false);
                 }
@@ -553,7 +552,7 @@ public class GameFieldController implements Initializable {
                         }
                     } );
 
-                    System.out.println("Timer is running!");
+                    //System.out.println("Timer is running!");
 
                 }
             }, 0, 2000);

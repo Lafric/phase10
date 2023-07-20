@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
+<?import javafx.scene.layout.Pane?>
 <AnchorPane minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.GameFieldController">
     <children>
        <SplitPane dividerPositions="0.7203525641025641" layoutX="295.0" layoutY="386.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -20,80 +21,108 @@
 
 
                         <!--Spieler 5-->
-                        <Rectangle fx:id="kasten_Gegenspieler5" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="530.0" layoutY="368.0" stroke="black" strokeType="INSIDE" width="500.0" />
-                        <Label fx:id="label_Gegenspieler5" layoutX="544.0" layoutY="380.0" text="[LEER 6]" />
-                        <Label  layoutX="544.0" layoutY="400.0" text="Anzahl Handkarten" />
-                        <Label fx:id="label_Gegenspieler5Handkarten" layoutX="664.0" layoutY="400.0" text="0" />
-                        <Label layoutX="544.0" layoutY="420.0" text="Punkte" />
-                        <Label fx:id="label_Gegenspieler5Punkte" layoutX="600.0" layoutY="420.0" text="0" />
-                        <Label layoutX="544.0" layoutY="440.0" text="Phase Rule 1: " />
-                        <Label fx:id="opp5_cards1" layoutX="544.0" layoutY="500.0" text="0 - 10" />
-                        <Label layoutX="796.0" layoutY="440.0" text="Phase Rule 2: " />
-                        <Label fx:id="opp5_cards2" layoutX="796.0" layoutY="500.0" text="0 - 10" />
+                        <Pane fx:id="pane_Sp5">
+                            <Rectangle fx:id="kasten_Gegenspieler5" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="530.0" layoutY="368.0" stroke="black" strokeType="INSIDE" width="500.0" />
+                            <Label fx:id="label_Gegenspieler5" layoutX="544.0" layoutY="380.0" text="[LEER 6]" />
+                            <Label  layoutX="544.0" layoutY="400.0" text="Anzahl Handkarten" />
+                            <Label fx:id="label_Gegenspieler5Handkarten" layoutX="664.0" layoutY="400.0" text="0" />
+                            <Label layoutX="544.0" layoutY="420.0" text="Punkte" />
+                            <Label fx:id="label_Gegenspieler5Punkte" layoutX="600.0" layoutY="420.0" text="0" />
+                            <Label  layoutX="544.0" layoutY="440.0" text="Du befindest dich in Phase" />
+                            <Label fx:id="phaseNum5" layoutX="700.0" layoutY="440.0" text="0" />
+                            <Label layoutX="544.0" layoutY="460.0" text="Phase Rule 1: " />
+                            <Label fx:id="opp5_cards1" layoutX="544.0" layoutY="500.0" text="" />
+                            <Label layoutX="796.0" layoutY="460.0" text="Phase Rule 2: " />
+                            <Label fx:id="opp5_cards2" layoutX="796.0" layoutY="500.0" text="" />
+                        </Pane>
+
 
                         <!--Spieler 4-->
-                        <Rectangle fx:id="kasten_Gegenspieler4" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="530.0" layoutY="198.0" stroke="black" strokeType="INSIDE" width="500.0" />
-                        <Label fx:id="label_Gegenspieler4" layoutX="544.0" layoutY="210.0" text="[LEER 4]" />
-                        <Label  layoutX="544.0" layoutY="230.0" text="Anzahl Handkarten" />
-                        <Label fx:id="label_Gegenspieler4Handkarten" layoutX="664.0" layoutY="230.0" text="0" />
-                        <Label layoutX="544.0" layoutY="250.0" text="Punkte" />
-                        <Label fx:id="label_Gegenspieler4Punkte" layoutX="600.0" layoutY="250.0" text="0" />
-                        <Label layoutX="544.0" layoutY="270.0" text="Phase Rule 1: " />
-                        <Label fx:id="opp4_cards1" layoutX="544.0" layoutY="330.0" text="0 - 10" />
-                        <Label layoutX="796.0" layoutY="270.0" text="Phase Rule 2: " />
-                        <Label fx:id="opp4_cards2" layoutX="796.0" layoutY="330.0" text="0 - 10" />
+                        <Pane fx:id="pane_Sp4">
+                            <Rectangle fx:id="kasten_Gegenspieler4" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="530.0" layoutY="198.0" stroke="black" strokeType="INSIDE" width="500.0" />
+                            <Label fx:id="label_Gegenspieler4" layoutX="544.0" layoutY="210.0" text="[LEER 4]" />
+                            <Label  layoutX="544.0" layoutY="230.0" text="Anzahl Handkarten" />
+                            <Label fx:id="label_Gegenspieler4Handkarten" layoutX="664.0" layoutY="230.0" text="0" />
+                            <Label layoutX="544.0" layoutY="250.0" text="Punkte" />
+                            <Label fx:id="label_Gegenspieler4Punkte" layoutX="600.0" layoutY="250.0" text="0" />
+                            <Label  layoutX="544.0" layoutY="270.0" text="Du befindest dich in Phase" />
+                            <Label fx:id="phaseNum4" layoutX="700.0" layoutY="270.0" text="0" />
+                            <Label layoutX="544.0" layoutY="290.0" text="Phase Rule 1: " />
+                            <Label fx:id="opp4_cards1" layoutX="544.0" layoutY="330.0" text="" />
+                            <Label layoutX="796.0" layoutY="290.0" text="Phase Rule 2: " />
+                            <Label fx:id="opp4_cards2" layoutX="796.0" layoutY="330.0" text="" />
+                        </Pane>
+
 
                         <!--Spieler 3-->
-                        <Rectangle fx:id="kasten_Gegenspieler3" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="27.0" layoutY="198.0" stroke="black" strokeType="INSIDE" width="500.0" />
-                        <Label fx:id="label_Gegenspieler3" layoutX="44.0" layoutY="210.0" text="[LEER 3]" />
-                        <Label  layoutX="44.0" layoutY="230.0" text="Anzahl Handkarten" />
-                        <Label fx:id="label_Gegenspieler3Handkarten" layoutX="160.0" layoutY="230.0" text="0" />
-                        <Label layoutX="44.0" layoutY="250.0" text="Punkte"/>
-                        <Label fx:id="label_Gegenspieler3Punkte" layoutX="100.0" layoutY="250.0" text="0" />
-                        <Label layoutX="44.0" layoutY="270.0" text="Phase Rule 1: " />
-                        <Label fx:id="opp3_cards1" layoutX="44.0" layoutY="330.0" text="0 - 10" />
-                        <Label layoutX="296.0" layoutY="270.0" text="Phase Rule 2: " />
-                        <Label fx:id="opp3_cards2" layoutX="296.0" layoutY="330.0" text="0 - 10" />
+                        <Pane fx:id="pane_Sp3">
+                            <Rectangle fx:id="kasten_Gegenspieler3" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="27.0" layoutY="198.0" stroke="black" strokeType="INSIDE" width="500.0" />
+                            <Label fx:id="label_Gegenspieler3" layoutX="44.0" layoutY="210.0" text="[LEER 3]" />
+                            <Label  layoutX="44.0" layoutY="230.0" text="Anzahl Handkarten" />
+                            <Label fx:id="label_Gegenspieler3Handkarten" layoutX="160.0" layoutY="230.0" text="0" />
+                            <Label layoutX="44.0" layoutY="250.0" text="Punkte"/>
+                            <Label fx:id="label_Gegenspieler3Punkte" layoutX="100.0" layoutY="250.0" text="0" />
+                            <Label  layoutX="44.0" layoutY="270.0" text="Du befindest dich in Phase" />
+                            <Label fx:id="phaseNum3" layoutX="200.0" layoutY="270.0" text="0" />
+                            <Label layoutX="44.0" layoutY="290.0" text="Phase Rule 1: " />
+                            <Label fx:id="opp3_cards1" layoutX="44.0" layoutY="330.0" text="" />
+                            <Label layoutX="296.0" layoutY="290.0" text="Phase Rule 2: " />
+                            <Label fx:id="opp3_cards2" layoutX="296.0" layoutY="330.0" text="" />
+                        </Pane>
+
 
                         <!--Spieler 2-->
-                        <Rectangle fx:id="kasten_Gegenspieler2" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="530.0" layoutY="28.0" stroke="black" strokeType="INSIDE" width="500.0" />
-                        <Label fx:id="label_Gegenspieler2" layoutX="544.0" layoutY="40.0" text="[LEER 2]" />
-                        <Label  layoutX="544.0" layoutY="60.0" text="Anzahl Handkarten" />
-                        <Label fx:id="label_Gegenspieler2Handkarten" layoutX="664.0" layoutY="60.0" text="0" />
-                        <Label layoutX="544.0" layoutY="80.0" text="Punkte" />
-                        <Label fx:id="label_Gegenspieler2Punkte" layoutX="600.0" layoutY="80.0" text="0" />
-                        <Label layoutX="544.0" layoutY="100.0" text="Phase Rule 1: " />
-                        <Label fx:id="opp2_cards1" layoutX="544.0" layoutY="160.0" text="0 - 10" />
-                        <Label layoutX="796.0" layoutY="100.0" text="Phase Rule 2: " />
-                        <Label fx:id="opp2_cards2" layoutX="796.0" layoutY="160.0" text="0 - 10" />
-
+                        <Pane fx:id="pane_Sp2">
+                            <Rectangle fx:id="kasten_Gegenspieler2" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="530.0" layoutY="28.0" stroke="black" strokeType="INSIDE" width="500.0" />
+                            <Label fx:id="label_Gegenspieler2" layoutX="544.0" layoutY="40.0" text="[LEER 2]" />
+                            <Label  layoutX="544.0" layoutY="60.0" text="Anzahl Handkarten" />
+                            <Label fx:id="label_Gegenspieler2Handkarten" layoutX="664.0" layoutY="60.0" text="0" />
+                            <Label layoutX="544.0" layoutY="80.0" text="Punkte" />
+                            <Label fx:id="label_Gegenspieler2Punkte" layoutX="600.0" layoutY="80.0" text="0" />
+                            <Label  layoutX="544.0" layoutY="100.0" text="Du befindest dich in Phase" />
+                            <Label fx:id="phaseNum2" layoutX="700.0" layoutY="100.0" text="0" />
+                            <Label layoutX="544.0" layoutY="120.0" text="Phase Rule 1: " />
+                            <Label fx:id="opp2_cards1" layoutX="544.0" layoutY="160.0" text="" />
+                            <Label layoutX="796.0" layoutY="120.0" text="Phase Rule 2: " />
+                            <Label fx:id="opp2_cards2" layoutX="796.0" layoutY="160.0" text="" />
+                        </Pane>
 
                         <!--Spieler 1-->
-                        <Label fx:id="label_SpielerName" layoutX="27.0" layoutY="28.0" text="[LEER 1]" />
-                        <Button fx:id="Spiel_regeln" layoutX="1112.0" layoutY="10.0" mnemonicParsing="false" onAction="#spielRegel_Anzeigen" text="Spiel Regeln" />
-                        <Rectangle fx:id="kasten_Gegenspieler1" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="27.0" layoutY="28.0" stroke="black" strokeType="INSIDE" width="500.0" />
-                        <Label fx:id="label_Gegenspieler1" layoutX="44.0" layoutY="40.0" text="[LEER 1]" />
-                        <Label  layoutX="44.0" layoutY="60.0" text="Anzahl Handkarten" />
-                        <Label fx:id="label_Gegenspieler1Handkarten" layoutX="160.0" layoutY="60.0" text="0" />
-                        <Label layoutX="44.0" layoutY="80.0" text="Punkte" />
-                        <Label fx:id="label_Gegenspieler1Punkte" layoutX="100.0" layoutY="80.0" text="0" />
-                        <Label layoutX="44.0" layoutY="100.0" text="Phase Rule 1: " />
-                        <Label fx:id="opp1_cards1" layoutX="44.0" layoutY="160.0" text="0 - 10" />
-                        <Label layoutX="296.0" layoutY="100.0" text="Phase Rule 2: " />
-                        <Label fx:id="opp1_cards2" layoutX="296.0" layoutY="160.0" text="0 - 10" />
+                        <Label fx:id="label_SpielerName" layoutX="27.0" layoutY="10.0" text="[LEER 1]" />
+                        <Button fx:id="Spiel_regeln" layoutX="1112.0" layoutY="28.0" mnemonicParsing="false" onAction="#spielRegel_Anzeigen" text="Spiel Regeln" />
+                        <Pane fx:id="pane_Sp1">
+                            <Rectangle fx:id="kasten_Gegenspieler1" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="27.0" layoutY="28.0" stroke="black" strokeType="INSIDE" width="500.0" />
+                            <Label fx:id="label_Gegenspieler1" layoutX="44.0" layoutY="40.0" text="[LEER 1]" />
+                            <Label  layoutX="44.0" layoutY="60.0" text="Anzahl Handkarten" />
+                            <Label fx:id="label_Gegenspieler1Handkarten" layoutX="160.0" layoutY="60.0" text="0" />
+                            <Label layoutX="44.0" layoutY="80.0" text="Punkte" />
+                            <Label fx:id="label_Gegenspieler1Punkte" layoutX="100.0" layoutY="80.0" text="0" />
+                            <Label  layoutX="44.0" layoutY="100.0" text="Du befindest dich in Phase" />
+                            <Label fx:id="phaseNum1" layoutX="200.0" layoutY="100.0" text="0" />
+                            <Label layoutX="44.0" layoutY="120.0" text="Phase Rule 1: " />
+                            <Label fx:id="opp1_cards1" layoutX="44.0" layoutY="160.0" text="" />
+                            <Label layoutX="296.0" layoutY="120.0" text="Phase Rule 2: " />
+                            <Label fx:id="opp1_cards2" layoutX="296.0" layoutY="160.0" text="" />
+                        </Pane>
+
 
 
                         <!--Aktuelle Spieler-->
-                        <Rectangle fx:id="kasten_Client" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="27.0" layoutY="368.0" stroke="black" strokeType="INSIDE" width="500.0" />
-                        <Label fx:id="label_Client" layoutX="44.0" layoutY="380.0" text="[LEER 5]" />
-                        <Label  layoutX="44.0" layoutY="400.0" text="Anzahl Handkarten" />
-                        <Label fx:id="label_ClientHandkarten" layoutX="160.0" layoutY="400.0" text="0" />
-                        <Label layoutX="44.0" layoutY="420.0" text="Punkte" />
-                        <Label fx:id="label_ClientPunkte" layoutX="100.0" layoutY="420.0" text="0" />
-                        <Label layoutX="44.0" layoutY="440.0" text="Phase Rule 1: " />
-                        <Label fx:id="client_cards1" layoutX="44.0" layoutY="500.0" text="0 - 10" />
-                        <Label layoutX="296.0" layoutY="440.0" text="Phase Rule 2: " />
-                        <Label fx:id="client_cards2" layoutX="296.0"  layoutY="500.0" text="0 - 10" />
+                        <Pane fx:id="pane_Sp0">
+                            <Rectangle fx:id="kasten_Client" arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="160.0" layoutX="27.0" layoutY="368.0" stroke="black" strokeType="INSIDE" width="500.0" />
+                            <Label fx:id="label_Client" layoutX="44.0" layoutY="380.0" text="[LEER 5]" />
+                            <Label  layoutX="44.0" layoutY="400.0" text="Anzahl Handkarten" />
+                            <Label fx:id="label_ClientHandkarten" layoutX="160.0" layoutY="400.0" text="0" />
+                            <Label layoutX="44.0" layoutY="420.0" text="Punkte" />
+                            <Label fx:id="label_ClientPunkte" layoutX="100.0" layoutY="420.0" text="0" />
+                            <Label  layoutX="44.0" layoutY="440.0" text="Du befindest dich in Phase" />
+                            <Label fx:id="phaseNum0" layoutX="200.0" layoutY="440.0" text="0" />
+                            <Label layoutX="44.0" layoutY="460.0" text="Phase Rule 1: " />
+                            <Label fx:id="client_cards1" layoutX="44.0" layoutY="500.0" text="" />
+                            <Label layoutX="296.0" layoutY="460.0" text="Phase Rule 2: " />
+                            <Label fx:id="client_cards2" layoutX="296.0"  layoutY="500.0" text="" />
+                        </Pane>
+
 
                         <Button fx:id="bot_hinzufügen" layoutX="1112.0" layoutY="516.0" mnemonicParsing="false" onAction="#addBot" text="Bot hinzufügen" />
                         <!--<Button fx:id="Phase Rule" layoutX="1112.0" layoutY=".0" mnemonicParsing="false" onAction="#addBot" text="Phase Rule" />-->
@@ -105,7 +134,7 @@
                     <children>
                         <Label layoutX="36.0" layoutY="14.0" text="Handkarten" />
                         <ComboBox fx:id="dropdown_Zielstapel_StapelBewegen" layoutX="120.0" layoutY="10.0"   prefWidth="150.0" promptText="Zielstapel wählen" />
-                        <Button fx:id="zumAblage_spielen" layoutX="300.0" layoutY="10.0" mnemonicParsing="false" onAction="#layCard_ablage" text="Auf Uebersichtskarte legen " />
+                        <Button fx:id="zumAblage_spielen" layoutX="300.0" layoutY="10.0" mnemonicParsing="false" onAction="#moveToOpenStack" text="Auf Uebersichtskarte legen " />
                         <Button fx:id="Karte_spielen" layoutX="497.0" layoutY="10.0" mnemonicParsing="false" onAction="#layCard" text="Neue Phase legen" />
                         <Button fx:id="Karte_spielen1" layoutX="640.0" layoutY="10.0" mnemonicParsing="false" onAction="#layCardOpp" text="Karte in Phase ergänzen" />
                         <Button fx:id="zug_beenden" layoutX="800.0" layoutY="10.0" mnemonicParsing="false" onAction="#zug_beenden" text="Zug beenden" />

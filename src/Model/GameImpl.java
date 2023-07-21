@@ -109,15 +109,17 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * This method picks the next active player.
      */
     public synchronized void goToNextPlayer() throws RemoteException {
-        if (this.currentPlayer == this.allPlayer.length - 1) {
-            this.currentPlayer = 0;
-        } else {
-            this.currentPlayer++;
-        }
-        // Check if Player gets skipped
-        if (this.skipCounter[currentPlayer] > 0) {
-            this.skipCounter[currentPlayer]--;
-            this.goToNextPlayer();
+        if(!this.playerOverloadIndicator[this.currentPlayer]) {
+            if (this.currentPlayer == this.allPlayer.length - 1) {
+                this.currentPlayer = 0;
+            } else {
+                this.currentPlayer++;
+            }
+            // Check if Player gets skipped
+            if (this.skipCounter[currentPlayer] > 0) {
+                this.skipCounter[currentPlayer]--;
+                this.goToNextPlayer();
+            }
         }
     }
 

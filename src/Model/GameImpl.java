@@ -596,7 +596,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         List<List<Card>> cardCombinations = generateCombinations(cards);
         // iterate over all combinations, try each one
         for (List<Card> cardCombination : cardCombinations) {
-            PhaseRule currRule = phaseRules[bot.getPhase()];
+            PhaseRule currRule = phaseRules[bot.getPhase() + 1];
             Filing filing = currRule.createMatchingFiling(-999, cardCombination.toArray(new Card[0]), bot.getId());
             if (filing != null) {
                 layCards(bot, cardCombination.stream().mapToInt(Card::getId).toArray());

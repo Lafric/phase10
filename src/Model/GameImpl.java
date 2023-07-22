@@ -442,7 +442,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
     public synchronized void layCards(Player player, int[] cardIds) throws RemoteException {
         if (player.getId() == this.allPlayer[currentPlayer].getId() && !this.isGameOver) {
             // Get Rule for Phase
-            PhaseRule rule = this.phaseRules[player.getPhase() - 1];
+            PhaseRule rule = this.phaseRules[player.getPhase()];
             // Check if player has reached maximum number of own filings
             int counter = 0;
             for (Filing fill : this.filings) {
@@ -596,7 +596,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         List<List<Card>> cardCombinations = generateCombinations(cards);
         // iterate over all combinations, try each one
         for (List<Card> cardCombination : cardCombinations) {
-            PhaseRule currRule = phaseRules[bot.getPhase() - 1];
+            PhaseRule currRule = phaseRules[bot.getPhase()];
             Filing filing = currRule.createMatchingFiling(-999, cardCombination.toArray(new Card[0]), bot.getId());
             if (filing != null) {
                 layCards(bot, cardCombination.stream().mapToInt(Card::getId).toArray());

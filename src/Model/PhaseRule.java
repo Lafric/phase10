@@ -66,7 +66,7 @@ public class PhaseRule implements Serializable{
             } else if(this.rules[i] instanceof Street){
                 Street street = (Street) rules[i];
                 // Check if minimum length is fulfilled
-                if(street.getEnd().getNumber()-street.getStart().getNumber() <= cards.length) {
+                if(street.getEnd().getNumber()-street.getStart().getNumber()+1 <= cards.length) {
                     // Order values
                     int[] values = new int[cards.length];
                     for (int j = 0; j < values.length; j++) {

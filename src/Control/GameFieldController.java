@@ -410,6 +410,7 @@ public class GameFieldController implements Initializable {
         if (game.getAllPlayers()[game.getCurrentPlayer()].getName().startsWith("Bot")) {
             System.out.println("BOT TURNNNNNNNN");
             game.playBotTurn();
+            // game.goToNextPlayer();
         }
         // restructure to while-loop, end turn while bots are playing
     }

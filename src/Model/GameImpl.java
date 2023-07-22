@@ -109,7 +109,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
      * This method picks the next active player.
      */
     public synchronized void goToNextPlayer() throws RemoteException {
-        if(!this.playerOverloadIndicator[this.currentPlayer]) {
+        //if(!this.playerOverloadIndicator[this.currentPlayer]) {
             if (this.currentPlayer == this.allPlayer.length - 1) {
                 this.currentPlayer = 0;
             } else {
@@ -121,7 +121,7 @@ public class GameImpl extends UnicastRemoteObject implements Game {
                 this.goToNextPlayer();
             }
         }
-    }
+    //}
 
     /**
      * The method initializeCards is shuffling and redistributing of the cards.
@@ -613,10 +613,10 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         }
     
         // Finally, discard the first card in hand
-        // if (bot.getHandCards().size() > 0) {
-        //     Card discardCard = bot.getHandCards().get(0);
-        //     throwCard(bot, discardCard.getId(), bot.getId());
-        // }
+        if (bot.getHandCards().size() > 0) {
+            Card discardCard = bot.getHandCards().get(0);
+            throwCard(bot, discardCard.getId(), bot.getId());
+        }
 
         // end turn
         try {

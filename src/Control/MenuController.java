@@ -154,6 +154,8 @@ public class MenuController {
         Parent root1 = loader.load();
 
         // Todo: controller of Account-löschen
+        PasswordLoeschenController delAccController = loader.getController();
+        delAccController.setParams(identity, new DatabaseProvider(false));
 
         // next scene Password löschen
         Stage stage = new Stage();

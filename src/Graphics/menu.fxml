@@ -26,6 +26,7 @@
                                 <Button fx:id="botEntfernenButton" mnemonicParsing="false" text="Bot entfernen" visible="false" />
                                 <Button fx:id="raumErstellenButton" mnemonicParsing="false" onAction="#create_lobby_button" text="Raum erstellen" />
                                 <Button fx:id="button_abmelden" mnemonicParsing="false" onAction="#abmelden" text="Abmelden" />
+                                <Button fx:id="button_AccountDel" mnemonicParsing="false" onAction="#delAccount" text="Account löschen" />
                                 <Button mnemonicParsing="false" onAction="#showBestenliste" text="Bestenliste" />
                                 <!-- <Button mnemonicParsing="false" onAction="#showBestenliste" prefWidth="232.0" text="SpielRegeln" /> -->
                             </buttons>

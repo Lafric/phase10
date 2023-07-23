@@ -38,7 +38,7 @@ public class ChatRaumController {
         MessageService messageService = new MessageService();
 
         raumChat_eingabe.setOnKeyPressed(event -> {
-            if(event.getCode().toString().equals("ENTER")){
+            if(event.getCode().toString().equals("ENTER") && !raumChat_eingabe.getText().equals("")){
                 try {
                     messageService.sendLobbyMessage(identity,raumChat_eingabe.getText(), lobby);
                 } catch (Exception e) {

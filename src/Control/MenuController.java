@@ -241,16 +241,18 @@ public class MenuController {
 
     public void sendeNachricht() {
         String nachricht = globalChat_eingabe.getText();
-        try {
-            Message latestMessage = messageService.sendeNachricht(identity, nachricht, "serverfunc");
-            globalChat_ausgabe.appendText(
-                    latestMessage.sender + " | " + latestMessage.date.toString() + " | " + latestMessage.content
-                            + "\n");
-            globalChat_eingabe.clear();
-            System.out.println("Message sent " + latestMessage.content);
-        } catch (Exception e) {
-            System.err.println("Client exception: " + e.toString());
-            e.printStackTrace();
+        if (!nachricht.equals("")){
+            try {
+                Message latestMessage = messageService.sendeNachricht(identity, nachricht, "serverfunc");
+                globalChat_ausgabe.appendText(
+                        latestMessage.sender + " | " + latestMessage.date.toString() + " | " + latestMessage.content
+                                + "\n");
+                globalChat_eingabe.clear();
+                System.out.println("Message sent " + latestMessage.content);
+            } catch (Exception e) {
+                System.err.println("Client exception: " + e.toString());
+                e.printStackTrace();
+            }
         }
     }
 

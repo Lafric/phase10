@@ -1,0 +1,33 @@
+Systemtests aus Pflichtenheft, Blatt 2:
+
+TF10 : Spieler anmelden :
+	1. Daten richtig eingegeben und Übergang in nächsten Screen : Funktioniert
+	2. Benutzername oder Passwort falsch und Fehlermeldung wird ausgegeben : Funktioniert
+	3. Benutzer ist nicht registriert und Fehlermeldung wird ausgegeben : Funktioniert
+
+TF20 : Spieler Löschen :
+	1. Löschprozess wird von User abgebrochen und man wird zurück auf vorherigen Screen geworfen : Funktioniert
+	2. Passwort ist bei der Bestätigung falsch und Fehlermeldung wird ausgegeben : Funktioniert
+	3. Spieler bestätigt Löschprozess richtig und wird aus Datenbank gelöscht : Funktioniert
+
+TF30 : Spieler registrieren :
+	1. Registrierung mit korrekt eingegebenen Daten : Funktioniert
+	2. Wiederholtes Passwort stimmt nicht und Fehlermeldung wird ausgegeben : Funktioniert
+	3. Benutzername ist bereits registriert und Fehlermeldung wird ausgegeben : Funktioniert
+	4. Benutzer bricht den Prozess ab und landet wieder auf Anmeldescreen : Funktioniert
+
+TF40 : Raum erstellen :
+	1. Spieler bricht Erstellungs-Prozess ab und wird zurück in Lobby bewegt : Passt, da Erstellungs-Prozess nur noch das Drücken eines Knopfes ist und somit nicht schiefgehen kann und man sich bereits im Lobbyscreen befindet
+	2. Spieler erstellt Raum erfolgreich : Funktioniert
+
+TF50 : Chat nutzen :
+	1. Eingegebener Text wird inklusive Spielername gesendet und für alle sichtbar : Funktioniert
+	2. Eine leere Eingabe wird nicht gesendet : Funktioniert
+
+TF60 : Testen der Bestenliste :
+	1. Bestenliste wird erfolgreich nach abruf angezeigt und sortiert : Funktioniert
+
+TF70 : Spiel Starten :
+	1. Alle anwesenden Spieler werden in den Spielraum bewegt und das Spiel wird korrekt initialisiert : Funktioniert
+
+getestet am 18.07 von Julien

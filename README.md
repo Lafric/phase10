@@ -2,7 +2,7 @@
 # Setup
 Zum Ausführen der client.jar wird eine aktuelle java version und javafx benötigt.
 Ist beides vorhanden kann sie wie folgt ausgeführt werden :
-`java --enable-preview -jar --module-path "<absolute path to javafx sdk lib on local machine>" --add-modules javafx.controls,javafx.fxml phase10.jar`
+`java --enable-preview -jar --module-path "<absolute path to javafx sdk lib on local machine>" --add-modules javafx.controls,javafx.fxml client.jar`
 
 
 
@@ -15,12 +15,13 @@ Ist beides vorhanden kann sie wie folgt ausgeführt werden :
 
 # Main Menu
 Alle Buttons erklärt :
-* "Raum erstellen" : erstellt eine leere Raum dem Spieler beitreten können.
-*  "Beitreten" : tritt dem, zuvor mit Linksklick aus der Liste gewählen, Raum bei.
+* "Raum erstellen" : erstellt einen leere Raum dem Spieler beitreten können.
+*  "Beitreten" : tritt dem, zuvor mit Linksklick aus der Liste gewählten, Raum bei.
 * "⟳" : refreshed die Liste aller Räume.
 *  "Abmelden" : meldet den User ab und schließt das Main Menu.
 * " Bestenliste" : Öffnet ein neues Fenster mit einer Tabelle der aktuellen Bestenliste.
 * " Absenden" : sendet den links daneben eingegebenen Text in den Globalen Chat.
+* " Account löschen" wirft den User in ein Fenster in dem er nach erneuter Eingabe des Passworts, seinen Account löschen kann.
 
 # Spielfeld
 ### Erklärung einer einzelnen Spieler-Übersicht :
@@ -29,7 +30,7 @@ Alle Buttons erklärt :
 * Phase Rule 2 : analog zu Phase Rule 1.
 
 ### Erklärung der Interaktionsmöglichkeiten im Spiel
-* "Zielstapel wählen ▽" :  Wählt aus, an welche Person eine oder mehere Karten angelelegt werden. Besonders ist hier der Punkt "Uebersichtskarte" welchen man auswählt, wenn man eine Karte auf den offenen Stapel legen möchte.
+* "Zielstapel wählen ▽" :  Wählt aus, an welche Person eine oder mehrere Karten angelegt werden.
 * "Auf Uebersichtskarte legen" : Legt eine ausgewählte Karte auf den offenen Stapel.
 * "Neue Phase legen" : Legt ausgewählte Karten also ein Set oder eine Straße hin. Vorher muss man sich allerdings selbst in "Zielstapel wählen" auswählen.
 * "Karte in Phase ergänzen" : Legt ausgewählte Karten an ein bereits existierendes Set oder eine bereits existierende Straße an.

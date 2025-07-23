@@ -1,4 +1,4 @@
-
+# Eine Java implementierung der Spielkarte phase10
 # Setup
 Zum Ausführen der client.jar wird eine aktuelle java version und javafx benötigt.
 Ist beides vorhanden kann sie wie folgt ausgeführt werden :
